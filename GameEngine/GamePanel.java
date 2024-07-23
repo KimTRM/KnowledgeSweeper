@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements Runnable
 
     private GameStateManager gsm;
 
-    private MouseHandler mouse = new MouseHandler();
+    protected MouseHandler mouse = new MouseHandler();
     private KeyHandler key;
     private final AnimatedBackground background = new AnimatedBackground(this);
 
@@ -145,8 +145,19 @@ public class GamePanel extends JPanel implements Runnable
         }
     }
 
+    public int getMX()
+    {
+        return mouse.getX();
+    }
+
+    public int getMY()
+    {
+        return mouse.getY();
+    }
+
     public void Update(double delta)
     {
+//        System.out.println(getMX() + " " + getMY());
         background.Update();
         gsm.Update(delta);
     }

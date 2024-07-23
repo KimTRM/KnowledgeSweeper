@@ -11,6 +11,7 @@ public class StartingState extends State {
         super(gameStateManager, assetManager);
     }
 
+    boolean Exit;
     @Override
     public void update(double delta)
     {
@@ -18,7 +19,7 @@ public class StartingState extends State {
         int ExtButtonY = 400;
         int sbuttonWidth = 220;
         int sbuttonHeight = 220;
-//        assetManager.inButtonCollision(ExtButtonX, ExtButtonY, sbuttonWidth, sbuttonHeight);
+        Exit = assetManager.inButtonCollision(ExtButtonX, ExtButtonY, sbuttonWidth, sbuttonHeight);
     }
 
     @Override
@@ -35,8 +36,12 @@ public class StartingState extends State {
         // --- RIGHT CLICK ---
         if (mouse.getButton() == 3)
         {
-            assetManager.playSE(2);
-            System.out.println("Right Clicked");
+            if (Exit)
+            {
+                assetManager.playSE(2);
+                System.out.println("Right Clicked");
+            }
+
         }
     }
 

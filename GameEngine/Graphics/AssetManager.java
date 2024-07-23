@@ -1,6 +1,7 @@
 package GameEngine.Graphics;
 
 import GameEngine.GamePanel;
+import GameEngine.Util.MouseHandler;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
@@ -212,34 +213,34 @@ public class AssetManager {
         g.drawRect(x2 - width2/2, y2 - height2 /2, width2, height2);
     }
 
-//    public boolean inButtonCollision(int x, int y, int width, int height)
-//    {
-//        int mx = gamePanel.
-//
-//
-//        System.out.println(mx + " " + my);
-//
-//        int x2 = x + 110;
-//        int y2 = y + 115;
-//        int width2 = width - 50;
-//        int height2 = height - 138;
-//
-//        if (mx >= x2 - width2/2 && mx < x2 + width2/2 && my >= y2 - height2 /2 && my < y2 + height2 /2)
-//        {
-//            System.out.println("Collision");
-//            return true;
-//        }
-//        return false;
-//    }
-
-    public void TextBox(int x, int y, int width, int height, Graphics2D g)
+    public boolean inButtonCollision(int x, int y, int width, int height)
     {
-        g.drawImage(TextBox, x, y, width, height, null);
+        int mx = gamePanel.getMX();
+        int my = gamePanel.getMY();
+
+        int x2 = x + 110;
+        int y2 = y + 115;
+        int width2 = width - 50;
+        int height2 = height - 138;
+
+        if (mx >= x2 - width2 / 2 && mx < x2 + width2 / 2 && my >= y2 - height2 / 2 && my < y2 + height2 / 2)
+        {
+            System.out.println("Collision");
+            return true;
+        }
+        return false;
     }
 
     public void Start(int x, int y, int width, int height, Graphics2D g)
     {
         g.drawImage(Start, x, y, width, height, null);
     }
+
+    public void TextBox(int x, int y, int width, int height, Graphics2D g)
+    {
+        g.drawImage(TextBox, x, y, width, height, null);
+    }
+
+
 
 }
