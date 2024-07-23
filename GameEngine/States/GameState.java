@@ -1,6 +1,32 @@
 package GameEngine.States;
 
-public abstract class GameState
-{
+import GameEngine.Graphics.AssetManager;
+import GameEngine.Util.KeyHandler;
+import GameEngine.Util.MouseHandler;
 
+import java.awt.*;
+
+public class GameState extends State {
+    public GameState(GameStateManager gameStateManager, AssetManager assetManager)
+    {
+        super(gameStateManager, assetManager);
+    }
+
+    @Override
+    public void update(double delta)
+    {
+
+    }
+
+    @Override
+    public void input(MouseHandler mouse, KeyHandler key)
+    {
+
+    }
+
+    @Override
+    public void render(Graphics2D g)
+    {
+
+    }
 }
