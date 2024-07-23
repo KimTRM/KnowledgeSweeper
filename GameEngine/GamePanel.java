@@ -111,7 +111,6 @@ public class GamePanel extends JPanel implements Runnable
             Draw();
             Render();
 
-
             lastRenderTime = now;
             frameCount++;
 
