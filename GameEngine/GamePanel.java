@@ -149,7 +149,6 @@ public class GamePanel extends JPanel implements Runnable
     {
         return mouse.getX();
     }
-
     public int getMY()
     {
         return mouse.getY();
@@ -157,7 +156,6 @@ public class GamePanel extends JPanel implements Runnable
 
     public void Update(double delta)
     {
-//        System.out.println(getMX() + " " + getMY());
         background.Update();
         gsm.Update(delta);
     }

@@ -1,14 +1,15 @@
-package GameEngine.States;
+package GameEngine.States.GameStates;
 
 import GameEngine.Graphics.AssetManager;
+import GameEngine.States.GameStateManager;
+import GameEngine.States.State;
 import GameEngine.Util.KeyHandler;
 import GameEngine.Util.MouseHandler;
 
 import java.awt.*;
 
-public class QuizState extends State
-{
-    public QuizState(GameStateManager gameStateManager, AssetManager assetManager)
+public class LeaderboardState extends State {
+    public LeaderboardState(GameStateManager gameStateManager, AssetManager assetManager)
     {
         super(gameStateManager, assetManager);
     }

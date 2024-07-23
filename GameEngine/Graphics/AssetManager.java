@@ -1,7 +1,6 @@
 package GameEngine.Graphics;
 
 import GameEngine.GamePanel;
-import GameEngine.Util.MouseHandler;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
@@ -22,14 +21,14 @@ public class AssetManager {
             Bomb, CamhiLogo, Button, BackButton, Start,
             TextBox, Restart, Settings, RightArrow, LeftArrow,
 
-            // --- BACKGROUND ---
-            B1,B2,B3,B4, Shade,
+    // --- BACKGROUND ---
+    B1,B2,B3,B4, Shade,
 
-            // --- TEXT IMAGE ---
-            Title, Defeat, Victory,
+    // --- TEXT IMAGE ---
+    Title, Defeat, Victory,
 
-            // --- SPRITES ---
-            Life, NoLife,
+    // --- SPRITES ---
+    Life, NoLife,
             Grass, RevGrass,
             Select, Select1,
             ActiveBlock, DeactBlock;
@@ -202,18 +201,29 @@ public class AssetManager {
     }
 
     // ----- QUICK DRAW -----
-    public void Button(int x, int y, int width, int height, Graphics2D g)
+    public void PrintText (String text, int x, int y, int size, boolean ForceColor, Graphics2D g)
+    {
+        if (ForceColor)
+        {
+            g.setColor(new Color(73, 29, 0));
+        }
+
+        g.setFont(g.getFont().deriveFont(Font.BOLD, size));
+        g.drawString(text, x, y);
+    }
+    public void Button (int x, int y, int width, int height, Graphics2D g)
     {
         g.drawImage(Button, x, y, width, height, null);
-
+    }
+    public void CollisionView (int x, int y, int width, int height, Graphics2D g)
+    {
         int x2 = x + 110;
         int y2 = y + 115;
         int width2 = width - 50;
         int height2 = height - 138;
         g.drawRect(x2 - width2/2, y2 - height2 /2, width2, height2);
     }
-
-    public boolean inButtonCollision(int x, int y, int width, int height)
+    public boolean inButtonCollision (int x, int y, int width, int height, boolean Debug, String Name)
     {
         int mx = gamePanel.getMX();
         int my = gamePanel.getMY();
@@ -223,14 +233,17 @@ public class AssetManager {
         int width2 = width - 50;
         int height2 = height - 138;
 
-        if (mx >= x2 - width2 / 2 && mx < x2 + width2 / 2 && my >= y2 - height2 / 2 && my < y2 + height2 / 2)
+        if(mx >= x2 - width2 / 2 && mx < x2 + width2 / 2 && my >= y2 - height2 / 2 && my < y2 + height2 / 2)
         {
-            System.out.println("Collision");
-            return true;
+            if(Debug)
+            {
+                System.out.println("Inside: " + Name);
+            }
         }
-        return false;
-    }
 
+
+        return mx >= x2 - width2 / 2 && mx < x2 + width2 / 2 && my >= y2 - height2 / 2 && my < y2 + height2 / 2;
+    }
     public void Start(int x, int y, int width, int height, Graphics2D g)
     {
         g.drawImage(Start, x, y, width, height, null);

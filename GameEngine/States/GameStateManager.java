@@ -2,7 +2,7 @@ package GameEngine.States;
 
 import GameEngine.GamePanel;
 import GameEngine.Graphics.AssetManager;
-import GameEngine.Graphics.AssetManager.MusicPlayer;
+import GameEngine.States.GameStates.*;
 import GameEngine.Util.KeyHandler;
 import GameEngine.Util.MouseHandler;
 
