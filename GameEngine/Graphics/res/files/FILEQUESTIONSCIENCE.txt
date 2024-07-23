@@ -1,0 +1,211 @@
+///
+What is the chemical symbol for water?
+H2O
+CO2
+O2
+NaCl
+A
+///
+Which planet is known as the Red Planet?
+Earth
+Jupiter
+Mars
+Venus
+C
+///
+What force keeps objects on the Earth's surface?
+Gravity
+Magnetism
+Friction
+Inertia
+A
+///
+What is the hardest natural substance on Earth?
+Gold
+Diamond
+Iron
+Quartz
+B
+///
+What process do plants use to make their own food?
+Respiration
+Photosynthesis
+Fermentation
+Digestion
+B
+///
+What is the unit of measurement for force?
+Newton
+Watt
+Joule
+Volt
+A
+///
+What part of the atom has a negative charge?
+Proton
+Electron
+Neutron
+Nucleus
+B
+///
+Which animal is known for its ability to change color to match its surroundings?
+Chameleon
+Elaphant
+Tiger
+Giraffe
+A
+///
+What is the main gas that makes up the Earth's atmosphere?
+Oxygen
+Nitrogen
+Carbon dioxide
+Hydrogen
+B
+///
+What is the process by which liquid water becomes water vapor?
+Condensation
+Evaporation
+Sublimation
+Precipitation
+B
+///
+What is the powerhouse of the cell?
+Nucleus
+Mitochondria
+Chloroplast
+Endoplasmic reticulum
+B
+///
+What is the chemical symbol for water?
+H2O
+CO2
+O2
+NaCl
+A
+///
+What is the SI unit of force?
+Newton
+Watt
+Joule
+Ampere
+A
+///
+What is the outermost layer of the Earth called?
+Mantle
+Crust
+Core
+Lithosphere
+B
+///
+What is the closest star to Earth?
+Alpha Centauri
+Proxima Centauri
+Betelgeuse
+Sirius
+B
+///
+Which of the following is the largest organ in the human body?
+Liver
+Brain
+Skin
+Heart
+C
+///
+Which element has the chemical symbol 'Fe'?
+Iron
+Gold
+Silver
+Lead
+A
+///
+What is the SI unit of electric current?
+Ohm
+Volt
+Ampere
+Watt
+C
+///
+What is the process by which rocks are broken down into smaller particles called?
+Erosion
+Weathering
+Sedimentation
+Deposition
+B
+///
+Which planet is known as the Red Planet?
+Venus
+Mars
+Jupiter
+Saturn
+B
+///
+Which of the following is not a mammal?
+Dolphin
+Penguin
+Kangaroo
+Bat
+B
+///
+What is the chemical symbol for gold?
+Au
+Ag
+Fe
+Pb
+A
+///
+What is the acceleration due to gravity on Earth's surface (approximately)?
+9.8 m/s^2
+6.8 m/s^2
+12.8 m/s^2
+5.8 m/s^2
+A
+///
+What is the process by which water vapor turns into liquid water?
+Evaporation
+Condensation
+Precipitation
+Sublimation
+B
+///
+What is the largest moon in the solar system?
+Europa
+Ganymede
+Titan
+Callisto
+B
+///
+Which of the following is not a primary color of light?
+Red
+Green
+Blue
+Yellow
+D
+///
+Which of the following is the most abundant gas in Earth's atmosphere?
+Oxygen
+Nitrogen
+Carbon dioxide
+Argon
+B
+///
+What is the SI unit of frequency?
+Hertz
+Watt
+Newton
+Pascal
+A
+///
+What type of rock is formed by the cooling and solidification of magma or lava?
+Sedimentary
+Metamorphic
+Igneous
+Crystalline
+C
+///
+What is the name of the galaxy that contains our solar system?
+Andromeda
+Milky Way
+Orion
+Triangulum
+B
+///
