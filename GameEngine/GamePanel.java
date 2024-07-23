@@ -1,17 +1,20 @@
 package GameEngine;
 
+import GameEngine.Graphics.AnimatedBackground;
+import GameEngine.Graphics.AssetManager;
 import GameEngine.States.GameStateManager;
 import GameEngine.Util.KeyHandler;
 import GameEngine.Util.MouseHandler;
 
 import javax.swing.JPanel;
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 public class GamePanel extends JPanel implements Runnable
 {
-    public static int Width;
-    public static int Height;
+    public static int Width = 1280;
+    public static int Height = 720;
 
     public static int oldFrameCount;
     public static int oldTickCount;
@@ -22,20 +25,23 @@ public class GamePanel extends JPanel implements Runnable
 
     private GameStateManager gsm;
 
-    private MouseHandler mouse;
+    private MouseHandler mouse = new MouseHandler();
     private KeyHandler key;
+    private final AnimatedBackground background = new AnimatedBackground(this);
 
     private BufferedImage image;
     private Graphics2D g;
 
-
-   public GamePanel(int Width, int Height)
+   public GamePanel()
    {
-       GamePanel.Width = Width;
-       GamePanel.Height = Height;
         setPreferredSize(new Dimension(Width, Height));
+        setBackground(Color.DARK_GRAY);
         setFocusable(true);
         requestFocus();
+
+        addMouseListener(mouse);
+        addMouseMotionListener(mouse);
+        addKeyListener((KeyListener) key);
    }
 
    public void addNotify()
@@ -58,8 +64,7 @@ public class GamePanel extends JPanel implements Runnable
 
        gsm = new GameStateManager();
 
-       mouse = new MouseHandler();
-       key = new KeyHandler();
+       AssetManager assetManager = new AssetManager(this);
    }
 
     @Override
@@ -67,7 +72,7 @@ public class GamePanel extends JPanel implements Runnable
     {
         Initialize();
 
-        final double GAME_HERTZ = 60.0;
+        final double GAME_HERTZ = 64.0;
         final double TBU = 1000000000 / GAME_HERTZ; // Time Before Update
 
         final int MUBR = 3; // Must Update before render
@@ -85,8 +90,8 @@ public class GamePanel extends JPanel implements Runnable
         tickCount = 0;
         oldTickCount = 0;
 
-        while (running) {
-
+        while (running)
+        {
             double now = System.nanoTime();
             int updateCount = 0;
             while (((now - lastUpdateTime) > TBU) && (updateCount < MUBR)) {
@@ -103,8 +108,9 @@ public class GamePanel extends JPanel implements Runnable
             }
 
             Inputs(mouse, key);
-            Render();
             Draw();
+            Render();
+
 
             lastRenderTime = now;
             frameCount++;
@@ -142,6 +148,7 @@ public class GamePanel extends JPanel implements Runnable
 
     public void Update(double delta)
     {
+        background.Update();
         gsm.Update(delta);
     }
 
@@ -153,9 +160,7 @@ public class GamePanel extends JPanel implements Runnable
     public void Render()
     {
         if (g != null) {
-            g.setColor(Color.DARK_GRAY);
-            g.fillRect(0, 0, Width, Height);
-
+            background.Render(g);
             gsm.Render(g);
         }
     }

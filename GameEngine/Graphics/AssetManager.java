@@ -1,5 +1,7 @@
 package GameEngine.Graphics;
 
+import GameEngine.GamePanel;
+
 import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -32,30 +34,26 @@ public class AssetManager {
             ActiveBlock, DeactBlock;
 
     // --- MUSIC PLAYER ---
-    File file[] = new File[10];
+    File[] file = new File[10];
 
     // --- FONT ---
-    Font Pixel;
+    public Font Pixel;
 
-    public AssetManager() {
+    private GamePanel gamePanel;
+    protected MusicPlayer Music = new MusicPlayer();
+    protected MusicPlayer SE = new MusicPlayer();
 
-        // ----- MUSIC FILE -----
-        // --- BACKGROUND MUSIC ---
-        file[0] = new File("GameEngine/Graphics/res/sounds/astral.wav");
-
-        // --- SFX ---
-        file[1] = new File("GameEngine/Graphics/res/sounds/Click.wav");
-        file[2] = new File("GameEngine/Graphics/res/sounds/Correct.wav");
-        file[3] = new File("GameEngine/Graphics/res/sounds/Wrong.wav");
-        file[4] = new File("GameEngine/Graphics/res/sounds/Victory.wav");
-        file[5] = new File("GameEngine/Graphics/res/sounds/Defeat.wav");
-        file[6] = new File("GameEngine/Graphics/res/sounds/Reveal.wav");
+    public AssetManager(GamePanel gamePanel)
+    {
+        this.gamePanel = gamePanel;
 
         getImage();
+        getAudio();
         getFont();
     }
 
-    public void getImage() {
+    public void getImage()
+    {
         try {
             // --- ICON ---
             Bomb = ImageIO.read(getClass().getResourceAsStream("res/icon/Bomb.png"));
@@ -98,10 +96,21 @@ public class AssetManager {
             e.printStackTrace();
         }
     }
+    public void getAudio()
+    {
+        // --- BACKGROUND MUSIC ---
+        file[0] = new File("GameEngine/Graphics/res/sounds/astral.wav");
 
+        // --- SFX ---
+        file[1] = new File("GameEngine/Graphics/res/sounds/Click.wav");
+        file[2] = new File("GameEngine/Graphics/res/sounds/Correct.wav");
+        file[3] = new File("GameEngine/Graphics/res/sounds/Wrong.wav");
+        file[4] = new File("GameEngine/Graphics/res/sounds/Victory.wav");
+        file[5] = new File("GameEngine/Graphics/res/sounds/Defeat.wav");
+        file[6] = new File("GameEngine/Graphics/res/sounds/Reveal.wav");
+    }
     public class MusicPlayer
     {
-
         Clip clip;
         FloatControl fc;
         int volumeScale = 3;
@@ -170,5 +179,67 @@ public class AssetManager {
 
     }
 
+    // ----- MUSIC PLAYER -----
+    public void Music()
+    {
+        playMusic(0);
+    }
+    public void playMusic(int i)
+    {
+        Music.getMusic(i);
+        Music.Start();
+        Music.Loop();
+    }
+    public void playSE(int i)
+    {
+        SE.getMusic(i);
+        SE.Start();
+    }
+    public void stopMusic()
+    {
+        Music.Stop();
+    }
+
+    // ----- QUICK DRAW -----
+    public void Button(int x, int y, int width, int height, Graphics2D g)
+    {
+        g.drawImage(Button, x, y, width, height, null);
+
+        int x2 = x + 110;
+        int y2 = y + 115;
+        int width2 = width - 50;
+        int height2 = height - 138;
+        g.drawRect(x2 - width2/2, y2 - height2 /2, width2, height2);
+    }
+
+//    public boolean inButtonCollision(int x, int y, int width, int height)
+//    {
+//        int mx = gamePanel.
+//
+//
+//        System.out.println(mx + " " + my);
+//
+//        int x2 = x + 110;
+//        int y2 = y + 115;
+//        int width2 = width - 50;
+//        int height2 = height - 138;
+//
+//        if (mx >= x2 - width2/2 && mx < x2 + width2/2 && my >= y2 - height2 /2 && my < y2 + height2 /2)
+//        {
+//            System.out.println("Collision");
+//            return true;
+//        }
+//        return false;
+//    }
+
+    public void TextBox(int x, int y, int width, int height, Graphics2D g)
+    {
+        g.drawImage(TextBox, x, y, width, height, null);
+    }
+
+    public void Start(int x, int y, int width, int height, Graphics2D g)
+    {
+        g.drawImage(Start, x, y, width, height, null);
+    }
 
 }

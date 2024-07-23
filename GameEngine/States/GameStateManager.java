@@ -1,5 +1,6 @@
 package GameEngine.States;
 
+import GameEngine.GamePanel;
 import GameEngine.Graphics.AssetManager;
 import GameEngine.Graphics.AssetManager.MusicPlayer;
 import GameEngine.Util.KeyHandler;
@@ -9,10 +10,8 @@ import java.awt.*;
 
 public class GameStateManager
 {
-    private final State[] states;
-    protected AssetManager assetManager = new AssetManager();
-    protected MusicPlayer Music = assetManager.new MusicPlayer();
-    protected MusicPlayer SE = assetManager.new MusicPlayer();
+    private State[] states;
+    private AssetManager assetManager;
 
     public static final int STARTING = 0;
     public static final int GAMEOPTIONS = 1;
@@ -24,9 +23,10 @@ public class GameStateManager
     public GameStateManager()
     {
         states = new State[6];
-
+        assetManager = new AssetManager(new GamePanel());
         addState(STARTING);
-        Music();
+
+        assetManager.Music();
     }
 
     public void addState(int state)
@@ -97,6 +97,7 @@ public class GameStateManager
 
     public void Render(Graphics2D g)
     {
+        g.setFont(assetManager.Pixel);
         for (int state = 0; state < states.length; state++)
         {
             if (states[state] != null)
@@ -106,25 +107,5 @@ public class GameStateManager
         }
     }
 
-    // ----- MUSIC PLAYER -----
-    public void Music()
-    {
-        playMusic(0);
-    }
-    public void playMusic(int i)
-    {
-        Music.getMusic(i);
-        Music.Start();
-        Music.Loop();
-    }
-    public void playSE(int i)
-    {
-        SE.getMusic(i);
-        SE.Start();
-    }
-    public void stopMusic()
-    {
-        Music.Stop();
-    }
 }
 
