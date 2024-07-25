@@ -1,7 +1,6 @@
 package GameEngine.Util;
 
-import GameEngine.GamePanel;
-import GameEngine.Graphics.AssetManager;
+import GameEngine.States.GameStateManager;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -13,6 +12,13 @@ public class MouseHandler implements MouseMotionListener, MouseListener {
     private static int mouseY = -1;
 
     private static int mouseB = -1;
+
+    GameStateManager gameStateManager;
+    public MouseHandler(GameStateManager gameStateManager)
+    {
+        this.gameStateManager = gameStateManager;
+    }
+
 
     public int getX() {
         return mouseX;
@@ -27,10 +33,9 @@ public class MouseHandler implements MouseMotionListener, MouseListener {
         return mouseB;
     }
 
-
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        gameStateManager.Input();
     }
 
     @Override

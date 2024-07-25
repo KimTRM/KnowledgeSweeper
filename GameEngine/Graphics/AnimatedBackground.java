@@ -1,7 +1,6 @@
 package GameEngine.Graphics;
 
 import GameEngine.GamePanel;
-import GameEngine.Util.MouseHandler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -44,17 +43,17 @@ public class AnimatedBackground
     {
         BufferedImage image = null;
         if(spriteNum == 1) {
-            image = assetManager.B1;
+            image = AssetManager.B1;
         }
         if(spriteNum == 2) {
-            image = assetManager.B2;
+            image = AssetManager.B2;
         }
         if(spriteNum == 3) {
-            image = assetManager.B3;
+            image = AssetManager.B3;
         }
         if(spriteNum == 4) {
-            image = assetManager.B4;
+            image = AssetManager.B4;
         }
-        g.drawImage(image, 0, 0, gamePanel.Width, gamePanel.Height, null);
+        g.drawImage(image, 0, 0, GamePanel.screenWidth, GamePanel.screenHeight, null);
     }
 }

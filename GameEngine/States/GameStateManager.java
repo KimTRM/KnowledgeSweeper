@@ -3,15 +3,14 @@ package GameEngine.States;
 import GameEngine.GamePanel;
 import GameEngine.Graphics.AssetManager;
 import GameEngine.States.GameStates.*;
-import GameEngine.Util.KeyHandler;
-import GameEngine.Util.MouseHandler;
 
 import java.awt.*;
 
 public class GameStateManager
 {
-    private State[] states;
-    private AssetManager assetManager;
+    protected State[] states;
+    protected GamePanel gamePanel;
+    protected AssetManager assetManager;
 
     public static final int STARTING = 0;
     public static final int GAMEOPTIONS = 1;
@@ -20,10 +19,14 @@ public class GameStateManager
     public static final int ENDING = 4;
     public static final int LEADERBOARD = 5;
 
-    public GameStateManager()
+    public static final int MENU = 6;
+    public static final int GMENU = 7;
+
+    public GameStateManager(GamePanel gamePanel)
     {
-        states = new State[6];
-        assetManager = new AssetManager(new GamePanel());
+        states = new State[8];
+        this.gamePanel = gamePanel;
+        assetManager = new AssetManager(gamePanel);
         addState(STARTING);
 
         assetManager.Music();
@@ -39,21 +42,34 @@ public class GameStateManager
             case STARTING:
                 states[STARTING] = new StartingState(this, assetManager);
                 break;
+
             case GAMEOPTIONS:
                 states[GAMEOPTIONS] = new GameOptionsState(this, assetManager);
                 break;
-            case GAME:
-                states[GAME] = new GameState(this, assetManager);
+//
+//            case GAME:
+//                states[GAME] = new GameState(this, assetManager);
+//                break;
+//
+//            case QUIZ:
+//                states[QUIZ] = new QuizState(this, assetManager);
+//                break;
+//
+//            case ENDING:
+//                states[ENDING] = new EndingState(this, assetManager);
+//                break;
+//
+//            case LEADERBOARD:
+//                states[LEADERBOARD] = new LeaderboardState(this, assetManager);
+//                break;
+
+            case MENU:
+                states[MENU] = new MenuState(this, assetManager);
                 break;
-            case QUIZ:
-                states[QUIZ] = new QuizState(this, assetManager);
-                break;
-            case ENDING:
-                states[ENDING] = new EndingState(this, assetManager);
-                break;
-            case LEADERBOARD:
-                states[LEADERBOARD] = new LeaderboardState(this, assetManager);
-                break;
+
+//            case GMENU:
+//                states[GMENU] = new GMenuState(this, assetManager);
+//                break;
         }
     }
 
@@ -73,24 +89,24 @@ public class GameStateManager
         return states[state] != null;
     }
 
-    public void Update(double time)
+    public void Update()
     {
         for (int state = 0; state < states.length; state++)
         {
             if (states[state] != null)
             {
-                states[state].update(time);
+                states[state].update();
             }
         }
     }
 
-    public void Input(MouseHandler mouse, KeyHandler key)
+    public void Input()
     {
         for (int state = 0; state < states.length; state++)
         {
             if (states[state] != null)
             {
-                states[state].input(mouse, key);
+                states[state].input();
             }
         }
     }

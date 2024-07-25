@@ -13,28 +13,35 @@ import java.awt.image.BufferedImage;
 
 public class GamePanel extends JPanel implements Runnable
 {
-    public static int Width = 1280;
-    public static int Height = 720;
+    // ----- SCREEN SETTINGS -----
+    public static int screenWidth = 1280;
+    public static int screenHeight = 720;
 
+    public int screenWidth2 = screenWidth;
+    public int screenHeight2 = screenHeight;
+
+    private Thread thread;
+    private BufferedImage image;
+    public Graphics2D g;
+
+    // ----- FRAME UPDATE SETTINGS -----
     public static int oldFrameCount;
     public static int oldTickCount;
     public static int tickCount;
 
-    private Thread thread;
     private boolean running = false;
 
-    private GameStateManager gsm;
-
-    protected MouseHandler mouse = new MouseHandler();
+    // ----- IMPORTED CLASSES -----
+    protected GameStateManager gsm = new GameStateManager(this);
     private KeyHandler key;
     private final AnimatedBackground background = new AnimatedBackground(this);
+    protected MouseHandler mouse = new MouseHandler(gsm);
+    protected AssetManager assetManager = new AssetManager(this);
 
-    private BufferedImage image;
-    private Graphics2D g;
 
-   public GamePanel()
-   {
-        setPreferredSize(new Dimension(Width, Height));
+    public GamePanel()
+    {
+//        setPreferredSize(new Dimension(screenWidth2, screenHeight2));
         setBackground(Color.DARK_GRAY);
         setFocusable(true);
         requestFocus();
@@ -42,35 +49,59 @@ public class GamePanel extends JPanel implements Runnable
         addMouseListener(mouse);
         addMouseMotionListener(mouse);
         addKeyListener((KeyListener) key);
-   }
+    }
 
-   public void addNotify()
-   {
-       super.addNotify();
+    public int getScreenWidth2()
+    {
+        return screenWidth2;
+    }
+    public int getScreenHeight2()
+    {
+        return screenHeight2;
+    }
 
-       if (thread == null)
-       {
-           thread = new Thread(this, "GameThread");
-           thread.start();
-       }
-   }
+    public void startGameThread()
+    {
+        thread = new Thread(this, "GameThread");
+        thread.start();
 
-   public void Initialize()
-   {
-       running = true;
+        image = new BufferedImage(screenWidth2, screenHeight2, BufferedImage.TYPE_INT_ARGB );
+        g = (Graphics2D)image.getGraphics();
 
-       image = new BufferedImage(Width, Height, BufferedImage.TYPE_INT_RGB);
-       g = (Graphics2D) image.getGraphics();
+        setFullScreen();
+    }
 
-       gsm = new GameStateManager();
+    public void addNotify()
+    {
+        super.addNotify();
 
-       AssetManager assetManager = new AssetManager(this);
-   }
+        if (thread == null)
+        {
+            Initialize();
+        }
+    }
+
+    public void Initialize()
+    {
+        running = true;
+
+    }
+
+    public void setFullScreen()
+    {
+        // <- GETS THE DEVICE SCREEN SIZE ->
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gd = ge.getDefaultScreenDevice();
+        gd.setFullScreenWindow(GameLauncher.window);
+
+        // <- GETS THE FULL SCREEN SIZE (WIDTH & HIEGHT) ->
+        screenWidth2 = GameLauncher.window.getWidth();
+        screenHeight2 = GameLauncher.window.getHeight();
+    }
 
     @Override
     public void run()
     {
-        Initialize();
 
         final double GAME_HERTZ = 64.0;
         final double TBU = 1000000000 / GAME_HERTZ; // Time Before Update
@@ -95,8 +126,7 @@ public class GamePanel extends JPanel implements Runnable
             double now = System.nanoTime();
             int updateCount = 0;
             while (((now - lastUpdateTime) > TBU) && (updateCount < MUBR)) {
-                Update(now);
-                Inputs(mouse, key);
+                Update();
                 lastUpdateTime += TBU;
                 updateCount++;
                 tickCount++;
@@ -107,9 +137,8 @@ public class GamePanel extends JPanel implements Runnable
                 lastUpdateTime = now - TBU;
             }
 
-            Inputs(mouse, key);
-            Draw();
             Render();
+            Draw();
 
             lastRenderTime = now;
             frameCount++;
@@ -153,16 +182,17 @@ public class GamePanel extends JPanel implements Runnable
     {
         return mouse.getY();
     }
-
-    public void Update(double delta)
+    public int getButton()
     {
-        background.Update();
-        gsm.Update(delta);
+        return button;
     }
 
-    public void Inputs(MouseHandler mouse, KeyHandler key)
+    int button;
+    public void Update()
     {
-        gsm.Input(mouse, key);
+        button = mouse.getButton();
+        background.Update();
+        gsm.Update();
     }
 
     public void Render()
@@ -174,9 +204,9 @@ public class GamePanel extends JPanel implements Runnable
     }
     public void Draw()
     {
-        Graphics g2 = getGraphics();
-        g2.drawImage(image, 0, 0, null);
-        g2.dispose();
+        Graphics g = getGraphics();
+        g.drawImage(image, 0, 0, screenWidth2, screenHeight2, null);
+        g.dispose();
     }
 
 }

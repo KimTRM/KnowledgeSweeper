@@ -17,7 +17,7 @@ public abstract class State {
         this.assetManager = assetManager;
     }
 
-    public abstract void update(double delta);
-    public abstract void input(MouseHandler mouse, KeyHandler key);
+    public abstract void update();
+    public abstract void input();
     public abstract void render(Graphics2D g);
 }

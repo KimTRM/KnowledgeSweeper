@@ -39,9 +39,9 @@ public class AssetManager {
     // --- FONT ---
     public Font Pixel;
 
-    private GamePanel gamePanel;
-    protected MusicPlayer Music = new MusicPlayer();
-    protected MusicPlayer SE = new MusicPlayer();
+    protected GamePanel gamePanel;
+    public MusicPlayer Music = new MusicPlayer();
+    public MusicPlayer SE = new MusicPlayer();
 
     public AssetManager(GamePanel gamePanel)
     {
@@ -96,6 +96,7 @@ public class AssetManager {
             e.printStackTrace();
         }
     }
+
     public void getAudio()
     {
         // --- BACKGROUND MUSIC ---
@@ -113,7 +114,7 @@ public class AssetManager {
     {
         Clip clip;
         FloatControl fc;
-        int volumeScale = 3;
+        public int volumeScale = 3;
         float volume;
 
         public void getMusic(int i)
@@ -163,23 +164,8 @@ public class AssetManager {
             fc.setValue(volume);
         }
     }
-    public void getFont()
-    {
 
-        try
-        {
-            InputStream is = getClass().getResourceAsStream("res/font/x12y16pxMaruMonica.ttf");
-            Pixel = Font.createFont(Font.TRUETYPE_FONT, is);
-        }
-        catch (FontFormatException | IOException e)
-        {
-
-            e.printStackTrace();
-        }
-
-    }
-
-    // ----- MUSIC PLAYER -----
+    // ----- MUSIC CONTROLS -----
     public void Music()
     {
         playMusic(0);
@@ -200,8 +186,39 @@ public class AssetManager {
         Music.Stop();
     }
 
-    // ----- QUICK DRAW -----
-    public void PrintText (String text, int x, int y, int size, boolean ForceColor, Graphics2D g)
+    public void getFont()
+    {
+
+        try
+        {
+            InputStream is = getClass().getResourceAsStream("res/font/x12y16pxMaruMonica.ttf");
+            Pixel = Font.createFont(Font.TRUETYPE_FONT, is);
+        }
+        catch (FontFormatException | IOException e)
+        {
+
+            e.printStackTrace();
+        }
+
+    }
+
+    // ----- VARIABLES TO GET -----
+    public int getButton()
+    {
+        return gamePanel.getButton();
+    }
+    public int getScreenWidth()
+    {
+        return gamePanel.getScreenWidth2();
+    }
+    public int getScreenHeight()
+    {
+        return gamePanel.getScreenHeight2();
+    }
+
+
+    // ----- QUICK DRAW (TEXTBOX/BUTTON) -----
+    public void PrintText (String text, int x, int y, int ln, int size, boolean ForceColor, Graphics2D g)
     {
         if (ForceColor)
         {
@@ -209,51 +226,127 @@ public class AssetManager {
         }
 
         g.setFont(g.getFont().deriveFont(Font.BOLD, size));
-        g.drawString(text, x, y);
+        for (String line : text.split("\n"))
+        {
+            g.drawString(line, x, y);
+            y += ln; // Adjust the increment as needed for your line spacing
+        }
     }
+
     public void Button (int x, int y, int width, int height, Graphics2D g)
     {
         g.drawImage(Button, x, y, width, height, null);
     }
-    public void CollisionView (int x, int y, int width, int height, Graphics2D g)
-    {
-        int x2 = x + 110;
-        int y2 = y + 115;
-        int width2 = width - 50;
-        int height2 = height - 138;
-        g.drawRect(x2 - width2/2, y2 - height2 /2, width2, height2);
-    }
-    public boolean inButtonCollision (int x, int y, int width, int height, boolean Debug, String Name)
+    public boolean inButtonCollision (int x, int y, int offSetX, int offSetY, int width, int height, boolean Debug, String Name)
     {
         int mx = gamePanel.getMX();
         int my = gamePanel.getMY();
 
-        int x2 = x + 110;
-        int y2 = y + 115;
-        int width2 = width - 50;
-        int height2 = height - 138;
+        int x2 = x + offSetX;
+        int y2 = y + offSetY;
+        int width2 = width - 10;
+        int height2 = height - 100;
 
-        if(mx >= x2 - width2 / 2 && mx < x2 + width2 / 2 && my >= y2 - height2 / 2 && my < y2 + height2 / 2)
+        boolean collisionShape = mx >= x2 - width2 / 2 && mx < x2 + width2 / 2 && my >= y2 - height2 / 2 && my < y2 + height2 / 2;
+        if(collisionShape)
         {
             if(Debug)
             {
                 System.out.println("Inside: " + Name);
             }
         }
-
-
-        return mx >= x2 - width2 / 2 && mx < x2 + width2 / 2 && my >= y2 - height2 / 2 && my < y2 + height2 / 2;
+        return collisionShape;
     }
+
     public void Start(int x, int y, int width, int height, Graphics2D g)
     {
         g.drawImage(Start, x, y, width, height, null);
+    }
+    public boolean StartCollision(int x, int y, int width, int height, boolean Debug, String Name)
+    {
+        int mx = gamePanel.getMX();
+        int my = gamePanel.getMY();
+
+        int x2 = x + 210;
+        int y2 = y + 215;
+        int width2 = width - 20;
+        int height2 = height - 100;
+
+        boolean collisionShape = mx >= x2 - width2 / 2 && mx < x2 + width2 / 2 && my >= y2 - height2 / 2 && my < y2 + height2 / 2;
+        if(collisionShape)
+        {
+            if(Debug)
+            {
+                System.out.println("Inside: " + Name);
+            }
+        }
+        return collisionShape;
     }
 
     public void TextBox(int x, int y, int width, int height, Graphics2D g)
     {
         g.drawImage(TextBox, x, y, width, height, null);
     }
+    public boolean TextBoxCollision(int x, int y, int offSetX, int offSetY, int width, int height, boolean Debug, String Name) 
+    {
+        int mx = gamePanel.getMX();
+        int my = gamePanel.getMY();
 
+        int x2 = x + offSetX;
+        int y2 = y + offSetY;
+        int width2 = width - 10;
+        int height2 = height - 100;
+
+        boolean collisionShape = mx >= x2 - width2 / 2 && mx < x2 + width2 / 2 && my >= y2 - height2 / 2 && my < y2 + height2 / 2;
+        if(collisionShape)
+        {
+            if(Debug)
+            {
+                System.out.println("Inside: " + Name);
+            }
+        }
+        return collisionShape;
+    }
+
+    public void LeftArrow(int x, int y, int width, int height, Graphics2D g)
+    {
+        g.drawImage(LeftArrow, x, y, width, height,null);
+    }
+    public void RightArrow(int x, int y, int width, int height, Graphics2D g)
+    {
+        g.drawImage(RightArrow, x, y, width, height,null);
+    }
+    public boolean ArrowCollision(int x, int y, int offSetX, int offSetY, int width, int height, boolean Debug) {
+        int mx = gamePanel.getMX();
+        int my = gamePanel.getMY();
+
+        int x2 = x + offSetX;
+        int y2 = y + offSetY;
+        int width2 = width;
+        int height2 = height;
+
+        boolean collisionShape = mx >= x2 - width2 / 2 && mx < x2 + width2 / 2 && my >= y2 - height2 / 2 && my < y2 + height2 / 2;
+        if(collisionShape)
+        {
+            if(Debug)
+            {
+                System.out.println("Inside: Arrow");
+            }
+        }
+        return collisionShape;
+    }
+
+    public void drawSubWindow( int x, int y, int width, int height, Graphics2D g)
+    {
+        Color c = new Color(0,0,0,210);  // R,G,B, alfa(opacity)
+        g.setColor(c);
+        g.fillRoundRect(x,y,width,height,35,35);
+
+        c = new Color(255,255,255);
+        g.setColor(c);
+        g.setStroke(new BasicStroke(5));    // 5 = width of outlines of graphics
+        g.drawRoundRect(x+5,y+5,width-10,height-10,25,25);
+    }
 
 
 }
