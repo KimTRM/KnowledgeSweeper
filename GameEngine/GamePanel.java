@@ -3,8 +3,8 @@ package GameEngine;
 import GameEngine.Graphics.AnimatedBackground;
 import GameEngine.Graphics.AssetManager;
 import GameEngine.States.GameStateManager;
-import GameEngine.Util.KeyHandler;
-import GameEngine.Util.MouseHandler;
+import GameEngine.Util.Input.KeyHandler;
+import GameEngine.Util.Input.MouseHandler;
 
 import javax.swing.JPanel;
 import java.awt.*;

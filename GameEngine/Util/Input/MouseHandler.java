@@ -1,4 +1,4 @@
-package GameEngine.Util;
+package GameEngine.Util.Input;
 
 import GameEngine.States.GameStateManager;
 

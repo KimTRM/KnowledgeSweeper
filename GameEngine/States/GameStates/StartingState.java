@@ -45,23 +45,21 @@ public class StartingState extends State {
     {
         if (!gameStateManager.isStateActive(GameStateManager.MENU))
         {
-            // --- LEFT CLICK ---
-            if (assetManager.getButton() == 1) {
-                if (Start) {
-                    gameStateManager.AddAndRemoveState(GameStateManager.GAMEOPTIONS, GameStateManager.STARTING);
-                    assetManager.playSE(1);
-                }
-
-                if (Settings) {
-                    assetManager.playSE(1);
-                    gameStateManager.addState(GameStateManager.MENU);
-                }
-
-                if (Exit) {
-                    assetManager.playSE(1);
-                    System.exit(0);
-                }
+            if (Start) {
+                assetManager.playSE(1);
+                gameStateManager.AddAndRemoveState(GameStateManager.GAMEOPTIONS, GameStateManager.STARTING);
             }
+
+            if (Settings) {
+                assetManager.playSE(1);
+                gameStateManager.addState(GameStateManager.MENU);
+            }
+
+            if (Exit) {
+                assetManager.playSE(1);
+                System.exit(0);
+            }
+
         }
     }
 

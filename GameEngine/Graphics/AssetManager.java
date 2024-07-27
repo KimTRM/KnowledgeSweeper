@@ -39,7 +39,7 @@ public class AssetManager {
     // --- FONT ---
     public Font Pixel;
 
-    protected GamePanel gamePanel;
+    public GamePanel gamePanel;
     public MusicPlayer Music = new MusicPlayer();
     public MusicPlayer SE = new MusicPlayer();
 

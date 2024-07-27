@@ -1,8 +1,6 @@
 package GameEngine.States;
 
 import GameEngine.Graphics.AssetManager;
-import GameEngine.Util.KeyHandler;
-import GameEngine.Util.MouseHandler;
 
 import java.awt.Graphics2D;
 
