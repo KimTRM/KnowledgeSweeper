@@ -13,8 +13,8 @@ public class GameStateManager
     public State[] states;
     protected GamePanel gamePanel;
     protected AssetManager assetManager;
-    protected GameBoard gameBoard;
-    protected QuizManager quizManager;
+    public GameBoard gameBoard;
+    public QuizManager quizManager;
 
     public static final int STARTING = 0;
     public static final int GAMEOPTIONS = 1;

@@ -233,6 +233,22 @@ public class AssetManager {
         }
     }
 
+
+    public void PrintTexts (String text, int x, int y, int ln, int size, boolean ForceColor, Graphics2D g)
+    {
+        if (ForceColor)
+        {
+            g.setColor(new Color(73, 29, 0));
+        }
+
+        g.setFont(g.getFont().deriveFont(Font.BOLD, size));
+        for (String line : text.split("\\\\n"))
+        {
+            g.drawString(line, x, y);
+            y += ln; // Adjust the increment as needed for your line spacing
+        }
+    }
+
     public void Button (int x, int y, int width, int height, Graphics2D g)
     {
         g.drawImage(Button, x, y, width, height, null);

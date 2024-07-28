@@ -6,28 +6,28 @@ What is the result of 5 + 7?
 14
 B
 ///
-If a triangle has three sides measuring 3 cm, 4 cm, and 5 cm, what type of triangle is it?
+If a triangle has three sides \nmeasuring 3 cm, 4 cm, and 5 cm, \nwhat type of triangle is it?
 Equilateral
 Isosceles
 Scalene
 Right
 D
 ///
-What is the value of π (pi) rounded to two decimal places?
+What the value of π (pi) rounded \nto two decimal places?
 3.12
 3.14
 3.16
 3.18
 B
 ///
-What is the next number in the sequence: 2, 4, 6, 8, ...?
+What is the next number in the \nsequence: 2, 4, 6, 8, ...?
 9
 10
 11
 12
 B
 ///
-If a rectangle has a length of 8 cm and a width of 3 cm, what is its area?
+If a rectangle has a length of 8 cm \nand a width of 3 cm, what is its \narea?
 11 cm²
 21 cm²
 24 cm²
@@ -41,7 +41,7 @@ What is the square root of 64?
 9
 C
 ///
-If 3 apples cost $2.25, how much would 6 apples cost?
+If 3 apples cost $2.25, how much \nwould 6 apples cost?
 $3.00
 $3.75
 $4.50
@@ -55,14 +55,14 @@ What is 25% of 80
 30
 B
 ///
-If you have 10 candies and you give away 3, how many do you have left?
+If you have 10 candies and you \ngive away 3, how many do you \nhave left?
 5
 6
 7
 8
 C 
 ///
-What is the sum of the interior angles of a triangle?
+What is the sum of the interior \nangles of a triangle?
 90 degrees
 180 degrees
 270 degrees
@@ -76,14 +76,14 @@ What is the value of 5×8+12?
 32
 C
 ///
-What is the area of a rectangle with length 6 units and width 4 units?
+What is the area of a rectangle \nwith length 6 units and width 4 \nunits?
 24 square units
 12 square units
 10 square units
 20 square units
 A
 ///
-Which of the following is equal to 3/4 as a decimal?
+Which of the following is equal \nto 3/4 as a decimal?
 0.25
 0.5
 0.75
@@ -97,7 +97,7 @@ What is the square root of 25?
 7
 C 
 ///
-If a triangle has angles measuring 30°, 60°, and 90°, what type of triangle is it?
+If a triangle has angles measuring \n30°, 60°, and 90°, what type of \ntriangle is it?
 Equilateral
 Isosceles
 Scalene
@@ -111,28 +111,28 @@ Solve for x: 2x+5=15
 10
 B
 ///
-What is the next number in the sequence: 2, 4, 6, 8, ___?
+What is the next number in the \nsequence: 2, 4, 6, 8, ___?
 9
 10
 12
 14
 B
 ///
-What is the perimeter of a square with sides measuring 7 units?
+What is the perimeter of a square \nwith sides measuring 7 units?
 21 units
 28 units
 14 units
 35 units
 B
 ///
-Which of the following is a prime number?
+Which of the following is a prime \nnumber?
 12
 15
 17
 20
 C
 ///
-How many sides does a hexagon have?
+How many sides does a hexagon \nhave?
 4
 5
 6

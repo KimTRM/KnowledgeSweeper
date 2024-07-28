@@ -20,18 +20,30 @@ public class QuizState extends State {
     @Override
     public void update()
     {
+        quizManager.update();
 
+        if (quizManager.Confirm == true)
+        {
+            gameStateManager.removeState(GameStateManager.QUIZ);
+        }
     }
 
     @Override
     public void input()
     {
-        quizManager.input();
+        if (gameStateManager.isStateActive(GameStateManager.QUIZ))
+        {
+            quizManager.input();
+        }
+
     }
 
     @Override
     public void render(Graphics2D g)
     {
-        quizManager.render(g);
+        if (gameStateManager.isStateActive(GameStateManager.QUIZ))
+        {
+            quizManager.render(g);
+        }
     }
 }

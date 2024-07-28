@@ -43,22 +43,28 @@ public class GameOptionsState extends State {
         {
             assetManager.playSE(1);
             Science = true;
-            History = false;
-            Math = false;
+            quizManager.Science = true;
+            quizManager.History = false;
+            quizManager.Math = false;
+            quizManager.ChangeSubject("Science");
         }
         else if (inHis == true)
         {
-            assetManager.playSE(1);
             History = true;
-            Science = false;
-            Math = false;
+            assetManager.playSE(1);
+            quizManager.History = true;
+            quizManager.Science = false;
+            quizManager.Math = false;
+            quizManager.ChangeSubject("History");
         }
         else if (inMath == true)
         {
-            assetManager.playSE(1);
             Math = true;
-            Science = false;
-            History = false;
+            assetManager.playSE(1);
+            quizManager.Math = true;
+            quizManager.Science = false;
+            quizManager.History = false;
+            quizManager.ChangeSubject("Math");
         }
 
         // --- DIFFICULTY --
@@ -123,22 +129,24 @@ public class GameOptionsState extends State {
             g.setColor(new Color(255, 102, 0));
             g.drawString("Math", 500, 160);
         }
+
+        g.setColor(new Color(0, 0, 0));
         g.drawString("+", 640, 160);
 
         // -- DIFFICULTY CHOOSEN --
         if (Easy == true)
         {
-            g.setColor(Color.GREEN);
+            g.setColor(new Color(95, 171, 73));
             g.drawString("Easy", 695, 160);
         }
         if (Mid == true)
         {
-            g.setColor(Color.BLUE);
+            g.setColor(new Color(199, 105, 0));
             g.drawString("Medium", 695, 160);
         }
         if (Hard == true)
         {
-            g.setColor(Color.RED);
+            g.setColor(new Color(255, 0, 0));
             g.drawString("Hard", 695, 160);
         }
 

@@ -19,11 +19,11 @@ public class GameBoard {
     Random rend = new Random();
     Date startDate = new Date();
 
-    public GameBoard(AssetManager assetManager) {
+    public GameBoard(AssetManager assetManager)
+    {
         this.assetManager = assetManager;
 
         BombRand();
-
     }
 
     int spacing = 2;
@@ -34,16 +34,18 @@ public class GameBoard {
     int rows;
     int NumBomb;
     public int TotalBoxes;
+    public String Difficulty;
 
     // ----- GAME DIFFICULTY -----
-    public void ChangeDifficulty(String difficulty, boolean activate) {
-        if (activate) {
+    public void ChangeDifficulty(String difficulty, boolean activate)
+    {
+        if (activate)
+        {
             System.out.println(difficulty + " mode activated");
+            Difficulty = difficulty;
         }
 
-        String Difficulty = difficulty;
-
-        switch (Difficulty) {
+        switch (difficulty) {
             case "Easy":
                 if (activate) {
                     EasyMode();
@@ -105,128 +107,22 @@ public class GameBoard {
         flagged = new boolean[cols][rows];
     }
 
-    // ----- COLLISION DETECTION -----
-    public boolean BoxCollision() {
-        int mx = assetManager.gamePanel.getMX();
-        int my = assetManager.gamePanel.getMY();
 
-        for (int i = paddingX; i < cols + paddingX; i++) {
-            for (int j = paddingY; j < rows + paddingY; j++) {
-                int boxLeft = spacing + i * (boxSize + spacing);
-                int boxRight = boxLeft + boxSize - spacing;
-                int boxTop = spacing + j * (boxSize + spacing);
-                int boxBottom = boxTop + boxSize - spacing;
-
-                boolean collisionShape = mx >= boxLeft && mx < boxRight && my >= boxTop && my < boxBottom;
-
-                if (collisionShape) {
-                    System.out.println("Collision detected with box: (" + i + ", " + j + ")");
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public int boxX() {
-        int mx = assetManager.gamePanel.getMX();
-
-        for (int i = paddingX; i < cols; i++) {
-            int BoxSize = boxSize + 20;
-            int x = 30;
-            int boxLeft = spacing + i * (BoxSize + spacing) - x;
-            int boxRight = boxLeft + BoxSize - spacing;
-
-            if (mx >= boxLeft && mx < boxRight) {
-                return i;
-            }
-        }
-        return -1;
-    }
-    public int boxY() {
-        int my = assetManager.gamePanel.getMY();
-
-        for (int j = paddingY; j < rows; j++) {
-            int BoxSize = boxSize + 20;
-            int y = 20;
-            int boxTop = spacing + j * (BoxSize + spacing) - y;
-            int boxBottom = boxTop + BoxSize - spacing;
-
-            if (my >= boxTop && my < boxBottom) {
-                return j;
-            }
-        }
-        return -1;
-    }
-
-    public void render(Graphics2D g) {
-        for (int i = paddingX; i < cols; i++) {
-            for (int j = paddingY; j < rows; j++) {
-                int boxX = spacing + i * (boxSize + spacing);
-                int boxY = spacing + j * (boxSize + spacing);
-                g.drawImage(assetManager.Grass, boxX, boxY, boxSize, boxSize, null);
-
-                if (revealed[i][j])
+    public void update()
+    {
+        if ((boxX() != -1 && boxY() != -1))
+        {
+            if ( !AlreadyRevealed[boxX()][boxY()])
+            {
+                if (!revealed[boxX()][boxY()] && mines[boxX()][boxY()] == 1)
                 {
-                    g.drawImage(assetManager.RevGrass,boxX, boxY, boxSize, boxSize, null);
-
-                    // - NEIGHBOURS -
-                    if (mines[i][j] == 0 && neighbours[i][j] != 0)
-                    {
-                        setNeighbourColor(g, neighbours[i][j]);
-                        g.setFont(g.getFont().deriveFont(Font.BOLD, 40F));
-                        g.drawString(Integer.toString(neighbours[i][j]), boxX + 25, boxY + 50);
-                    }
-
-                    // - BOMBS -
-                    else if (mines[i][j] == 1)
-                    {
-                        g.drawImage(assetManager.Bomb, boxX, boxY, 70 - 2 * spacing, 70 - 2 * spacing, null);
-                    }
+                    bomb = true;
                 }
-
-                // - FLAGGED -
-                if (flagged[i][j])
+                else
                 {
-                    g.drawImage(assetManager.ActiveBlock, boxX, boxY, boxSize, boxSize, null);
-                }
-
-                // - HOVER CURSOR -
-                if (boxX() == i && boxY() == j)
-                {
-                    g.drawImage(assetManager.Select, boxX, boxY, boxSize, boxSize, null);
+                    bomb = false;
                 }
             }
-        }
-
-        g.drawImage(assetManager.Restart, 550, -10, 190, 170, null);
-    }
-    private void setNeighbourColor(Graphics2D g, int neighbourCount) {
-        switch (neighbourCount) {
-            case 1:
-                g.setColor(Color.BLUE);
-                break;
-            case 2:
-                g.setColor(Color.GREEN);
-                break;
-            case 3:
-                g.setColor(Color.RED);
-                break;
-            case 4:
-                g.setColor(new Color(0, 0, 128));
-                break;
-            case 5:
-                g.setColor(new Color(178, 34, 34));
-                break;
-            case 6:
-                g.setColor(new Color(72, 209, 204));
-                break;
-            case 8:
-                g.setColor(Color.DARK_GRAY);
-                break;
-            default:
-                g.setColor(Color.BLACK);
-                break;
         }
     }
 
@@ -261,16 +157,152 @@ public class GameBoard {
                             assetManager.playSE(6);
                             revealed[boxX()][boxY()] = true;
                             AlreadyRevealed[boxX()][boxY()] = true;
+
                         }
                     }
+
+                }
+                else
+                {
+//                    bomb[boxX()][boxY()] = false;
                 }
 
             }
         }
     }
 
+    public void render(Graphics2D g)
+    {
+        for (int i = paddingX; i < cols; i++) {
+            for (int j = paddingY; j < rows; j++) {
+                int boxX = spacing + i * (boxSize + spacing);
+                int boxY = spacing + j * (boxSize + spacing);
+                g.drawImage(assetManager.Grass, boxX, boxY, boxSize, boxSize, null);
+
+                if (revealed[i][j])
+                {
+                    g.drawImage(assetManager.RevGrass,boxX, boxY, boxSize, boxSize, null);
+
+                    // - NEIGHBOURS -
+                    if (mines[i][j] == 0 && neighbours[i][j] != 0)
+                    {
+                        setNeighbourColor(g, neighbours[i][j]);
+                        g.setFont(g.getFont().deriveFont(Font.BOLD, 40F));
+                        g.drawString(Integer.toString(neighbours[i][j]), boxX + 25, boxY + 50);
+                    }
+
+                    // - BOMBS -
+                    else if (mines[i][j] == 1)
+                    {
+                        g.drawImage(assetManager.Bomb, boxX, boxY, 70 - 2 * spacing, 70 - 2 * spacing, null);
+                    }
+                }
+
+                // - FLAGGED -
+                if (flagged[i][j])
+                {
+                    g.drawImage(assetManager.ActiveBlock, boxX, boxY, boxSize, boxSize, null);
+                }
+
+                // - HOVER CURSOR -
+                if (isActive)
+                {
+                    if (boxX() == i && boxY() == j) {
+                        g.drawImage(assetManager.Select, boxX, boxY, boxSize, boxSize, null);
+                    }
+                }
+            }
+        }
+
+        g.drawImage(assetManager.Restart, 550, -10, 190, 170, null);
+    }
+
+    boolean bomb;
+
+    // ----- COLLISION DETECTION -----
+    public boolean BoxCollision() {
+        int mx = assetManager.gamePanel.getMX();
+        int my = assetManager.gamePanel.getMY();
+
+        for (int i = paddingX; i < cols + paddingX; i++) {
+            for (int j = paddingY; j < rows + paddingY; j++) {
+                int boxLeft = spacing + i * (boxSize + spacing);
+                int boxRight = boxLeft + boxSize - spacing;
+                int boxTop = spacing + j * (boxSize + spacing);
+                int boxBottom = boxTop + boxSize - spacing;
+
+                boolean collisionShape = mx >= boxLeft && mx < boxRight && my >= boxTop && my < boxBottom;
+
+                if (collisionShape) {
+                    System.out.println("Collision detected with box: (" + i + ", " + j + ")");
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public int boxX() {
+        int mx = assetManager.gamePanel.getMX();
+
+        for (int i = paddingX; i < cols; i++) {
+            int BoxSize = boxSize + 20;
+            int x = 30;
+            int boxLeft = spacing + i * (BoxSize + spacing) - x;
+            int boxRight = boxLeft + BoxSize - spacing;
+
+            if (mx >= boxLeft && mx < boxRight) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    public int boxY() {
+        int my = assetManager.gamePanel.getMY();
+
+        for (int j = paddingY; j < rows; j++) {
+            int BoxSize = boxSize + 20;
+            int y = 20;
+            int boxTop = spacing + j * (BoxSize + spacing) - y;
+            int boxBottom = boxTop + BoxSize - spacing;
+
+            if (my >= boxTop && my < boxBottom) {
+                return j;
+            }
+        }
+        return -1;
+    }
+
     boolean flagger;
     public boolean isActive;
+
+    private void setNeighbourColor(Graphics2D g, int neighbourCount) {
+        switch (neighbourCount) {
+            case 1:
+                g.setColor(Color.BLUE);
+                break;
+            case 2:
+                g.setColor(Color.GREEN);
+                break;
+            case 3:
+                g.setColor(Color.RED);
+                break;
+            case 4:
+                g.setColor(new Color(0, 0, 128));
+                break;
+            case 5:
+                g.setColor(new Color(178, 34, 34));
+                break;
+            case 6:
+                g.setColor(new Color(72, 209, 204));
+                break;
+            case 8:
+                g.setColor(Color.DARK_GRAY);
+                break;
+            default:
+                g.setColor(Color.BLACK);
+                break;
+        }
+    }
 
     // ----- CHECKS THE STATUS OF THE GAME -----
     public int totalMines ()
@@ -359,15 +391,8 @@ public class GameBoard {
     // ----- BOMB CHECKER WHEN CLICKING -----
     public boolean isBomb()
     {
-        for (int i = paddingX; i < cols; i++)
-        {
-            for (int j = paddingY; j < rows; j++)
-            {
-                if (revealed[i][j] == true && mines[i][j] == 1)
-                {
-                    return true;
-                }
-            }
+        if (bomb) {
+            return true;
         }
 
         return false;
@@ -407,3 +432,4 @@ public class GameBoard {
         return false;
     }
 }
+

@@ -48,6 +48,7 @@ public class StartingState extends State {
             if (Start) {
                 assetManager.playSE(1);
                 gameStateManager.AddAndRemoveState(GameStateManager.GAMEOPTIONS, GameStateManager.STARTING);
+
             }
 
             if (Settings) {
