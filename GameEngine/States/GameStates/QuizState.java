@@ -20,11 +20,17 @@ public class QuizState extends State {
     @Override
     public void update()
     {
-        quizManager.update();
-
-        if (quizManager.Confirm == true)
+        if (gameStateManager.isStateActive(GameStateManager.QUIZ))
         {
-            gameStateManager.removeState(GameStateManager.QUIZ);
+            quizManager.update();
+
+
+            if (quizManager.Confirm)
+            {
+                quizManager.Confirm = false;
+                gameStateManager.removeState(GameStateManager.QUIZ);
+
+            }
         }
     }
 
@@ -44,6 +50,7 @@ public class QuizState extends State {
         if (gameStateManager.isStateActive(GameStateManager.QUIZ))
         {
             quizManager.render(g);
+            gameStateManager.gameBoard.UI(g);
         }
     }
 }

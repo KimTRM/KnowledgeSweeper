@@ -22,7 +22,6 @@ public class GameStateManager
     public static final int QUIZ = 3;
     public static final int ENDING = 4;
     public static final int LEADERBOARD = 5;
-
     public static final int MENU = 6;
     public static final int GMENU = 7;
 
@@ -68,22 +67,22 @@ public class GameStateManager
             case QUIZ:
                 states[QUIZ] = new QuizState(this, assetManager, quizManager);
                 break;
-//
-//            case ENDING:
-//                states[ENDING] = new EndingState(this, assetManager);
-//                break;
-//
-//            case LEADERBOARD:
-//                states[LEADERBOARD] = new LeaderboardState(this, assetManager);
-//                break;
+
+            case ENDING:
+                states[ENDING] = new EndingState(this, assetManager);
+                break;
+
+            case LEADERBOARD:
+                states[LEADERBOARD] = new LeaderboardState(this, assetManager);
+                break;
 
             case MENU:
                 states[MENU] = new MenuState(this, assetManager);
                 break;
 
-//            case GMENU:
-//                states[GMENU] = new GMenuState(this, assetManager);
-//                break;
+            case GMENU:
+                states[GMENU] = new GMenuState(this, assetManager);
+                break;
         }
     }
     public void removeState(int state)
@@ -100,32 +99,26 @@ public class GameStateManager
 
     public void Update()
     {
-        for (int state = 0; state < states.length; state++)
-        {
-            if (states[state] != null)
-            {
-                states[state].update();
+        for (State value : states) {
+            if (value != null) {
+                value.update();
             }
         }
     }
     public void Input()
     {
-        for (int state = 0; state < states.length; state++)
-        {
-            if (states[state] != null)
-            {
-                states[state].input();
+        for (State value : states) {
+            if (value != null) {
+                value.input();
             }
         }
     }
     public void Render(Graphics2D g)
     {
         g.setFont(assetManager.Pixel);
-        for (int state = 0; state < states.length; state++)
-        {
-            if (states[state] != null)
-            {
-                states[state].render(g);
+        for (State value : states) {
+            if (value != null) {
+                value.render(g);
             }
         }
     }

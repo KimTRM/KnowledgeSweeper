@@ -23,44 +23,40 @@ public class GameState extends State {
     {
         gameBoard.update();
 
-        boolean ShowQuiz = false;
-        if (!gameStateManager.isStateActive(GameStateManager.QUIZ))
+        if (gameBoard.boxX() != -1 && gameBoard.boxY() != -1)
         {
-            if (gameBoard.boxX() != -1 && gameBoard.boxY() != -1)
-            {
-                // -- TURN ON QUIZ --
-                if (gameBoard.revealed[gameBoard.boxX()][gameBoard.boxY()] == true && gameBoard.isBomb() == true) {
-                    ShowQuiz = true;
-                    gameStateManager.quizManager.Confirm = false;
-                }
-
-                // -- TURN OFF QUIZ --
-                if (gameStateManager.quizManager.Confirm == true) {
-                    gameStateManager.removeState(GameStateManager.QUIZ);
-                    ShowQuiz = false;
-                }
-
-                // -- QUIZ POPS UP --
-                if (ShowQuiz == true && gameStateManager.quizManager.Confirm == false) {
-                    gameStateManager.addState(GameStateManager.QUIZ);
-                }
+            // -- MAKES THE QUIZ POP UP --
+            if (gameBoard.isBomb()) {
+                gameStateManager.addState(GameStateManager.QUIZ);
             }
         }
 
-        if (gameStateManager.isStateActive(GameStateManager.QUIZ))
+        // -- RESETS THE BOMB STATUS --
+        if (gameStateManager.quizManager.Confirm)
         {
-            gameBoard.isActive = false;
+            gameBoard.bomb = false;
+
+            // -- REMOVES ONE LIFE --
+            if (gameStateManager.quizManager.AnswerWrong)
+            {
+                gameBoard.life--;
+            }
         }
-        else
+
+        // -- CHECKS IF THE GAME IS OVER --
+        if (gameBoard.defeat() || gameBoard.victory())
         {
-            gameBoard.isActive = true;
+            gameStateManager.addState(GameStateManager.ENDING);
         }
+
+        // -- ACTIVATES THE GAME BOARD INPUTS --
+        gameBoard.isActive = !gameStateManager.isStateActive(GameStateManager.QUIZ) && !gameStateManager.isStateActive(GameStateManager.ENDING);
     }
 
     @Override
     public void input()
     {
-        if (gameStateManager.isStateActive(GameStateManager.QUIZ) == false)
+        if (gameBoard.isActive)
         {
             gameBoard.input();
         }
@@ -70,5 +66,6 @@ public class GameState extends State {
     public void render(Graphics2D g)
     {
         gameBoard.render(g);
+        gameBoard.UI(g);
     }
 }

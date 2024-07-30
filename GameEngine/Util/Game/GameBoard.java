@@ -35,6 +35,15 @@ public class GameBoard {
     int NumBomb;
     public int TotalBoxes;
     public String Difficulty;
+    int rButtonX = 550;
+    int rButtonY = -10;
+    public int life = 3;
+
+    int timeX = 1090;
+    int timeY = 40;
+
+    int sec = 0;
+    public int Score;
 
     // ----- GAME DIFFICULTY -----
     public void ChangeDifficulty(String difficulty, boolean activate)
@@ -107,23 +116,10 @@ public class GameBoard {
         flagged = new boolean[cols][rows];
     }
 
-
+    boolean Reset;
     public void update()
     {
-        if ((boxX() != -1 && boxY() != -1))
-        {
-            if ( !AlreadyRevealed[boxX()][boxY()])
-            {
-                if (!revealed[boxX()][boxY()] && mines[boxX()][boxY()] == 1)
-                {
-                    bomb = true;
-                }
-                else
-                {
-                    bomb = false;
-                }
-            }
-        }
+        Reset = assetManager.StartCollision(rButtonX, rButtonY - 120, 190, 170, false, "Reset");
     }
 
     public void input()
@@ -132,9 +128,7 @@ public class GameBoard {
         {
             if (boxX() != -1 && boxY() != -1)
             {
-                System.out.println("Selected: " + boxX() + ", " + boxY());
-
-                if ( !AlreadyRevealed[boxX()][boxY()])
+                if (!AlreadyRevealed[boxX()][boxY()])
                 {
                     if (flagger && !revealed[boxX()][boxY()])
                     {
@@ -161,13 +155,20 @@ public class GameBoard {
                         }
                     }
 
+                    // -- SETS THE BOMB STATUS --
+                    if (revealed[boxX()][boxY()] && mines[boxX()][boxY()] == 1)
+                    {
+                       bomb = true;
+                    }
                 }
-                else
-                {
-//                    bomb[boxX()][boxY()] = false;
-                }
-
             }
+
+            // -- RESETS THE BOARD --
+            if (Reset)
+            {
+                ResetAll(TotalBoxes);
+            }
+
         }
     }
 
@@ -214,10 +215,14 @@ public class GameBoard {
             }
         }
 
-        g.drawImage(assetManager.Restart, 550, -10, 190, 170, null);
+        g.drawImage(assetManager.Restart, rButtonX, rButtonY, 190, 170, null);
+
+        if (Reset) {
+            g.drawImage(assetManager.Restart, rButtonX - 10, rButtonY - 5, 210, 185, null);
+        }
     }
 
-    boolean bomb;
+    public boolean bomb;
 
     // ----- COLLISION DETECTION -----
     public boolean BoxCollision() {
@@ -303,6 +308,81 @@ public class GameBoard {
                 break;
         }
     }
+    public void UI(Graphics2D g)
+    {
+        // -- LIFE --
+        if (life == 3)
+        {
+            g.drawImage(assetManager.Life, 0, 10, 80, 80, null);
+            g.drawImage(assetManager.Life, 70, 10, 80, 80, null);
+            g.drawImage(assetManager.Life, 140, 10, 80, 80, null);
+
+        }
+        else if (life == 2)
+        {
+            g.drawImage(assetManager.Life, 0, 10, 80, 80, null);
+            g.drawImage(assetManager.Life, 70, 10, 80, 80, null);
+            g.drawImage(assetManager.NoLife, 140, 10, 80, 80, null);
+
+        }
+        else if (life == 1)
+        {
+            g.drawImage(assetManager.Life, 0, 10, 80, 80, null);
+            g.drawImage(assetManager.NoLife, 70, 10, 80, 80, null);
+            g.drawImage(assetManager.NoLife, 140, 10, 80, 80, null);
+
+        }
+        else if (life <= 0)
+        {
+            g.drawImage(assetManager.NoLife, 0, 10, 80, 80, null);
+            g.drawImage(assetManager.NoLife, 70, 10, 80, 80, null);
+            g.drawImage(assetManager.NoLife, 140, 10, 80, 80, null);
+
+        }
+
+
+        // -- TIMER --
+        g.drawImage(assetManager.Button, 1050, -10, 190, 170, null);
+
+        if (victory() == false && life != 0)
+        {
+            sec = (int) ((new Date().getTime()- startDate.getTime()) / 1000);
+        }
+
+        if (sec > 999)
+        {
+            sec = 999;
+        }
+
+        // -- TIMER COLOR --
+        g.setColor(new Color(73, 29, 0));
+        if (victory())
+        {
+            g.setColor(new Color(51, 126, 27));
+            Score = sec;
+        }
+        else if (defeat())
+        {
+            g.setColor(new Color(173, 11, 11));
+            Score = sec;
+        }
+
+        // -- TIMER TEXT --
+        if (sec < 10)
+        {
+            assetManager.PrintText("00" + Integer.toString(sec), timeX + 10, timeY + 68, 0, 80, false, g);
+        }
+        else if (sec < 100)
+        {
+            assetManager.PrintText("0" + Integer.toString(sec), timeX + 10, timeY + 68, 0, 80, false, g);
+        }
+        else
+        {
+            assetManager.PrintText(Integer.toString(sec), timeX + 10, timeY + 68, 0, 80, false, g);
+        }
+
+    }
+
 
     // ----- CHECKS THE STATUS OF THE GAME -----
     public int totalMines ()
@@ -335,15 +415,15 @@ public class GameBoard {
         return total;
     }
     public boolean victory () {
-        if (totalBoxesRevealed() >= TotalBoxes - totalMines() + 3) {
+        if (totalBoxesRevealed() >= TotalBoxes - totalMines()) {
             return true;
         }
         return false;
     }
-    public boolean defeat () {
-
-
-
+    public boolean defeat() {
+        if (life == 0) {
+            return true;
+        }
         return false;
     }
 
@@ -351,20 +431,17 @@ public class GameBoard {
     public void ResetAll(int TotalBoxes)
     {
         this.TotalBoxes = TotalBoxes;
-//        restarter = true;
 
         flagger = false;
 
         startDate = new Date();
 
-//        gp.life = 3;
+        life = 3;
 
         BombRand();
         BombCheck();
 
         isBomb();
-
-//        restarter = false;
     }
 
     // ----- RANDOMIZES THE BOMBS -----
@@ -383,6 +460,7 @@ public class GameBoard {
                     mines[i][j] = 0;
                 }
                 revealed[i][j] = false;
+                AlreadyRevealed[i][j] = false;
             }
 
         }
@@ -400,7 +478,8 @@ public class GameBoard {
     }
 
     // ----- CHECKS EVRY DIRECTION -----
-    public void BombCheck() {
+    public void BombCheck()
+    {
         for (int i = paddingX; i < cols; i++)
         {
             for (int j = paddingY; j < rows; j++)

@@ -29,7 +29,11 @@ public class QuizManager {
     public boolean AnswerWrong;
 
     // ----- CLICK HANDLER -----
-    public boolean ansA, ansB, ansC, ansD, Confirm;
+    public boolean ansA;
+    public boolean ansB;
+    public boolean ansC;
+    public boolean ansD;
+    public boolean Confirm;
 
     public QuizManager(AssetManager assetManager) {
         this.assetManager = assetManager;
@@ -148,15 +152,6 @@ public class QuizManager {
                 assetManager.playSE(3);
             }
         }
-    }
-
-    public boolean QuizReady() {
-        if (Confirm) {
-            return false;
-        }
-
-
-        return true;
     }
 
     public void update() {
