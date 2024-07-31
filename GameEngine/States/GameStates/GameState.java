@@ -46,10 +46,6 @@ public class GameState extends State {
             {
                 assetManager.playSE(5);
             }
-            if (gameBoard.victory())
-            {
-                assetManager.playSE(4);
-            }
         }
 
         // -- CHECKS IF THE GAME IS OVER --

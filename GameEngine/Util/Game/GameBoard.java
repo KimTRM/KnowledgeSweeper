@@ -152,6 +152,10 @@ public class GameBoard {
                             revealed[boxX()][boxY()] = true;
                             AlreadyRevealed[boxX()][boxY()] = true;
 
+                            if (victory())
+                            {
+                                assetManager.playSE(4);
+                            }
                         }
                     }
 
