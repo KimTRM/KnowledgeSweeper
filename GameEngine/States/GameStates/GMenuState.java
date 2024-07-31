@@ -8,7 +8,8 @@ import java.awt.*;
 
 public class GMenuState extends State
 {
-    public GMenuState(GameStateManager gameStateManager, AssetManager assetManager) {
+    public GMenuState(GameStateManager gameStateManager, AssetManager assetManager)
+    {
         super(gameStateManager, assetManager);
     }
 

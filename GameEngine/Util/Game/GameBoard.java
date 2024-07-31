@@ -215,10 +215,15 @@ public class GameBoard {
             }
         }
 
+        // -- RESTART GAME --
         g.drawImage(assetManager.Restart, rButtonX, rButtonY, 190, 170, null);
 
-        if (Reset) {
-            g.drawImage(assetManager.Restart, rButtonX - 10, rButtonY - 5, 210, 185, null);
+        // -- HOVER --
+        if (isActive)
+        {
+            if (Reset) {
+                g.drawImage(assetManager.Restart, rButtonX - 10, rButtonY - 5, 210, 185, null);
+            }
         }
     }
 

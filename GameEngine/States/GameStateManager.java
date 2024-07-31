@@ -3,6 +3,8 @@ package GameEngine.States;
 import GameEngine.GamePanel;
 import GameEngine.Graphics.AssetManager;
 import GameEngine.States.GameStates.*;
+import GameEngine.Util.End.LossEnd;
+import GameEngine.Util.End.VictoryEnd;
 import GameEngine.Util.Game.GameBoard;
 import GameEngine.Util.Game.QuizManager;
 
@@ -15,6 +17,8 @@ public class GameStateManager
     protected AssetManager assetManager;
     public GameBoard gameBoard;
     public QuizManager quizManager;
+    public VictoryEnd victoryEnd;
+    public LossEnd lossEnd;
 
     public static final int STARTING = 0;
     public static final int GAMEOPTIONS = 1;
@@ -33,6 +37,8 @@ public class GameStateManager
         assetManager = new AssetManager(gamePanel);
         gameBoard = new GameBoard(assetManager);
         quizManager = new QuizManager(assetManager);
+        victoryEnd = new VictoryEnd(assetManager, this);
+        lossEnd = new LossEnd(assetManager, this);
 
         addState(STARTING);
 

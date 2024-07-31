@@ -43,6 +43,8 @@ public class GameOptionsState extends State {
         {
             assetManager.playSE(1);
             Science = true;
+            History = false;
+            Math = false;
             quizManager.Science = true;
             quizManager.History = false;
             quizManager.Math = false;
@@ -51,6 +53,8 @@ public class GameOptionsState extends State {
         else if (inHis == true)
         {
             History = true;
+            Science = false;
+            Math = false;
             assetManager.playSE(1);
             quizManager.History = true;
             quizManager.Science = false;
@@ -60,6 +64,8 @@ public class GameOptionsState extends State {
         else if (inMath == true)
         {
             Math = true;
+            History = false;
+            Science = false;
             assetManager.playSE(1);
             quizManager.Math = true;
             quizManager.Science = false;

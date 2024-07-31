@@ -8,7 +8,8 @@ import java.awt.*;
 
 public class LeaderboardState extends State
 {
-    public LeaderboardState(GameStateManager gameStateManager, AssetManager assetManager) {
+    public LeaderboardState(GameStateManager gameStateManager, AssetManager assetManager)
+    {
         super(gameStateManager, assetManager);
     }
 
