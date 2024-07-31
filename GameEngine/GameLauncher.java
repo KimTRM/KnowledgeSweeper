@@ -14,7 +14,7 @@ public class GameLauncher
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-//        window.setUndecorated(true);
+        window.setUndecorated(true);
         window.add(gamePanel);
         window.pack();
 
