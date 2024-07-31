@@ -22,7 +22,6 @@ public class EndingState extends State
         if (gameStateManager.gameBoard.defeat()) {
             gameStateManager.lossEnd.update();
         }
-//        gameStateManager.lossEnd.update();
     }
 
     @Override
