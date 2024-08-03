@@ -43,19 +43,19 @@ public class QuizManager {
         switch (Subject) {
             case "Science":
                 if (Science == true && History == false && Math == false) {
-                    file[0] = new File("GameEngine/Graphics/res/files/FILEQUESTIONSCIENCE.txt");
+                    file[0] = new File("GameEngine/Graphics/res/files/Subjects/FILEQUESTIONSCIENCE.txt");
                     getQuestion(0);
                 }
                 break;
             case "History":
                 if (History == true && Science == false && Math == false) {
-                    file[1] = new File("GameEngine/Graphics/res/files/FILEQUESTIONHISTORY.txt");
+                    file[1] = new File("GameEngine/Graphics/res/files/Subjects/FILEQUESTIONHISTORY.txt");
                     getQuestion(1);
                 }
                 break;
             case "Math":
                 if (Math == true && Science == false && History == false) {
-                    file[2] = new File("GameEngine/Graphics/res/files/FILEQUESTIONSMATH.txt");
+                    file[2] = new File("GameEngine/Graphics/res/files/Subjects/FILEQUESTIONSMATH.txt");
                     getQuestion(2);
                 }
                 break;

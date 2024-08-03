@@ -109,6 +109,7 @@ public class AssetManager {
         file[4] = new File("GameEngine/Graphics/res/sounds/Victory.wav");
         file[5] = new File("GameEngine/Graphics/res/sounds/Defeat.wav");
         file[6] = new File("GameEngine/Graphics/res/sounds/Reveal.wav");
+        file[7] = new File("GameEngine/Graphics/res/sounds/Explosion.wav");
     }
     public class MusicPlayer
     {

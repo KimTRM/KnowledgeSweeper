@@ -148,7 +148,6 @@ public class GameBoard {
                         // -- REVEAL BOX --
                         if (!flagged[boxX()][boxY()] &&  !AlreadyRevealed[boxX()][boxY()] && !revealed[boxX()][boxY()])
                         {
-                            assetManager.playSE(6);
                             revealed[boxX()][boxY()] = true;
                             AlreadyRevealed[boxX()][boxY()] = true;
 
@@ -160,9 +159,17 @@ public class GameBoard {
                     }
 
                     // -- SETS THE BOMB STATUS --
-                    if (revealed[boxX()][boxY()] && mines[boxX()][boxY()] == 1)
+                    if (revealed[boxX()][boxY()])
                     {
-                       bomb = true;
+                        if (mines[boxX()][boxY()] == 1)
+                        {
+                            assetManager.playSE(7);
+                            bomb = true;
+                        }
+                        else
+                        {
+                            assetManager.playSE(6);
+                        }
                     }
                 }
             }

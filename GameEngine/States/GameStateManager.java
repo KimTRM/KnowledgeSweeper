@@ -7,6 +7,7 @@ import GameEngine.Util.End.LossEnd;
 import GameEngine.Util.End.VictoryEnd;
 import GameEngine.Util.Game.GameBoard;
 import GameEngine.Util.Game.QuizManager;
+import GameEngine.Util.Leaderboard.Leaderboard;
 
 import java.awt.*;
 
@@ -19,6 +20,7 @@ public class GameStateManager
     public QuizManager quizManager;
     public VictoryEnd victoryEnd;
     public LossEnd lossEnd;
+    public Leaderboard leaderboard;
 
     public static final int STARTING = 0;
     public static final int GAMEOPTIONS = 1;
@@ -39,6 +41,7 @@ public class GameStateManager
         quizManager = new QuizManager(assetManager);
         victoryEnd = new VictoryEnd(assetManager, this);
         lossEnd = new LossEnd(assetManager, this);
+        leaderboard = new Leaderboard(assetManager, this);
 
         addState(STARTING);
 
