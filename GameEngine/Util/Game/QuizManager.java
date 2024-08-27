@@ -17,10 +17,9 @@ public class QuizManager {
     public String Question;
     public String A, B, C, D;
     public String correctAnswer;
-    public String category;
     public boolean Science, History, Math;
 
-    File file[] = new File[5];
+    File[] file = new File[5];
     List<Question> questionList = new ArrayList<>();
     public int x;
 
@@ -35,27 +34,33 @@ public class QuizManager {
     public boolean ansD;
     public boolean Confirm;
 
-    public QuizManager(AssetManager assetManager) {
+    public QuizManager(AssetManager assetManager)
+    {
         this.assetManager = assetManager;
     }
 
-    public void ChangeSubject(String Subject) {
-        switch (Subject) {
+    public void ChangeSubject(String Subject)
+    {
+        switch (Subject)
+        {
             case "Science":
-                if (Science == true && History == false && Math == false) {
-                    file[0] = new File("GameEngine/Graphics/res/files/FILEQUESTIONSCIENCE.txt");
+                if (Science && !History && !Math)
+                {
+                    file[0] = new File("GameEngine/Graphics/res/files/Subjects/FILEQUESTIONSCIENCE.txt");
                     getQuestion(0);
                 }
                 break;
             case "History":
-                if (History == true && Science == false && Math == false) {
-                    file[1] = new File("GameEngine/Graphics/res/files/FILEQUESTIONHISTORY.txt");
+                if (History && !Science && !Math)
+                {
+                    file[1] = new File("GameEngine/Graphics/res/files/Subjects/FILEQUESTIONHISTORY.txt");
                     getQuestion(1);
                 }
                 break;
             case "Math":
-                if (Math == true && Science == false && History == false) {
-                    file[2] = new File("GameEngine/Graphics/res/files/FILEQUESTIONSMATH.txt");
+                if (Math && !Science && !History)
+                {
+                    file[2] = new File("GameEngine/Graphics/res/files/Subjects/FILEQUESTIONSMATH.txt");
                     getQuestion(2);
                 }
                 break;
@@ -125,13 +130,13 @@ public class QuizManager {
 
     public String getAnswer() {
 
-        if (ansA == true) {
+        if (ansA) {
             return "A";
-        } else if (ansB == true) {
+        } else if (ansB) {
             return "B";
-        } else if (ansC == true) {
+        } else if (ansC) {
             return "C";
-        } else if (ansD == true) {
+        } else if (ansD) {
             return "D";
         }
 
@@ -155,14 +160,14 @@ public class QuizManager {
     }
 
     public void update() {
-        inQA = assetManager.TextBoxCollision(TextBoxAX, TextBoxAY, 150, 160, 300, 250, false, "A");
-        inQB = assetManager.TextBoxCollision(TextBoxBX, TextBoxBY, 220, 160, 300, 250, false, "B");
-        inQC = assetManager.TextBoxCollision(TextBoxCX, TextBoxCY, 280, 160, 300, 250, false, "C");
-        inQD = assetManager.TextBoxCollision(TextBoxDX, TextBoxDY, 350, 160, 300, 250, false, "D");
+        inQA = assetManager.TextBoxCollision(TextBoxAX, TextBoxAY, 100, 50, 300, 250, false, "A");
+        inQB = assetManager.TextBoxCollision(TextBoxBX, TextBoxBY, 100, 50, 300, 250, false, "B");
+        inQC = assetManager.TextBoxCollision(TextBoxCX, TextBoxCY, 100, 50, 300, 250, false, "C");
+        inQD = assetManager.TextBoxCollision(TextBoxDX, TextBoxDY, 100, 50, 300, 250, false, "D");
     }
 
     public void input() {
-        if (inQA == true) {
+        if (inQA) {
             ansA = true;
             ansB = false;
             ansC = false;
@@ -170,7 +175,7 @@ public class QuizManager {
             Confirm = true;
         }
 
-        if (inQB == true) {
+        if (inQB) {
             ansA = false;
             ansB = true;
             ansC = false;
@@ -178,7 +183,7 @@ public class QuizManager {
             Confirm = true;
         }
 
-        if (inQC == true) {
+        if (inQC) {
             ansA = false;
             ansB = false;
             ansC = true;
@@ -186,7 +191,7 @@ public class QuizManager {
             Confirm = true;
         }
 
-        if (inQD == true) {
+        if (inQD) {
             ansA = false;
             ansB = false;
             ansC = false;
@@ -194,7 +199,7 @@ public class QuizManager {
             Confirm = true;
         }
 
-        if (Confirm == true) {
+        if (Confirm) {
             checkAnswer();
             random();
 
@@ -222,17 +227,17 @@ public class QuizManager {
         assetManager.PrintText(D, TextBoxDX + 25, TextBoxDY + 80, 48, 25, false, g);
 
         // -- HOVER (A,B,C,D) --
-        if (inQA == true) {
-            g.drawImage(assetManager.Select1, TextBoxAX, TextBoxAY, 250, 150, null);
+        if (inQA) {
+            g.drawImage(AssetManager.Select1, TextBoxAX, TextBoxAY, 250, 150, null);
         }
-        if (inQB == true) {
-            g.drawImage(assetManager.Select1, TextBoxBX, TextBoxBY, 250, 150, null);
+        if (inQB) {
+            g.drawImage(AssetManager.Select1, TextBoxBX, TextBoxBY, 250, 150, null);
         }
-        if (inQC == true) {
-            g.drawImage(assetManager.Select1, TextBoxCX, TextBoxDY, 250, 150, null);
+        if (inQC) {
+            g.drawImage(AssetManager.Select1, TextBoxCX, TextBoxDY, 250, 150, null);
         }
-        if (inQD == true) {
-            g.drawImage(assetManager.Select1, TextBoxDX, TextBoxDY, 250, 150, null);
+        if (inQD) {
+            g.drawImage(AssetManager.Select1, TextBoxDX, TextBoxDY, 250, 150, null);
         }
 
     }

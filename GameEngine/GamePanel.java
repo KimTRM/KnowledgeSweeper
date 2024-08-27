@@ -38,10 +38,9 @@ public class GamePanel extends JPanel implements Runnable
     protected MouseHandler mouse = new MouseHandler(gsm);
     protected AssetManager assetManager = new AssetManager(this);
 
-
     public GamePanel()
     {
-//        setPreferredSize(new Dimension(screenWidth2, screenHeight2));
+        setPreferredSize(new Dimension(screenWidth2, screenHeight2));
         setBackground(Color.DARK_GRAY);
         setFocusable(true);
         requestFocus();
@@ -68,7 +67,7 @@ public class GamePanel extends JPanel implements Runnable
         image = new BufferedImage(screenWidth2, screenHeight2, BufferedImage.TYPE_INT_ARGB );
         g = (Graphics2D)image.getGraphics();
 
-        setFullScreen();
+//        setFullScreen();
     }
 
     public void addNotify()
@@ -125,7 +124,8 @@ public class GamePanel extends JPanel implements Runnable
         {
             double now = System.nanoTime();
             int updateCount = 0;
-            while (((now - lastUpdateTime) > TBU) && (updateCount < MUBR)) {
+            while (((now - lastUpdateTime) > TBU) && (updateCount < MUBR))
+            {
                 Update();
                 lastUpdateTime += TBU;
                 updateCount++;
@@ -144,14 +144,17 @@ public class GamePanel extends JPanel implements Runnable
             frameCount++;
 
             int thisSecond = (int) (lastUpdateTime / 1000000000);
-            if (thisSecond > lastSecondTime) {
-                if (frameCount != oldFrameCount) {
-                    System.out.println("NEW SECOND " + thisSecond + " Frame Count: " + frameCount);
+            if (thisSecond > lastSecondTime)
+            {
+                if (frameCount != oldFrameCount)
+                {
+//                    System.out.println("NEW SECOND " + thisSecond + " Frame Count: " + frameCount);
                     oldFrameCount = frameCount;
                 }
 
-                if (tickCount != oldTickCount) {
-                    System.out.println("NEW SECOND (T) " + thisSecond + " Tick Count: " + tickCount);
+                if (tickCount != oldTickCount)
+                {
+//                    System.out.println("NEW SECOND (T) " + thisSecond + " Tick Count: " + tickCount);
                     oldTickCount = tickCount;
                 }
                 tickCount = 0;
@@ -159,7 +162,8 @@ public class GamePanel extends JPanel implements Runnable
                 lastSecondTime = thisSecond;
             }
 
-            while (now - lastRenderTime < TTBR && now - lastUpdateTime < TBU) {
+            while (now - lastRenderTime < TTBR && now - lastUpdateTime < TBU)
+            {
                 Thread.yield();
 
                 try {
@@ -197,7 +201,8 @@ public class GamePanel extends JPanel implements Runnable
 
     public void Render()
     {
-        if (g != null) {
+        if (g != null)
+        {
             background.Render(g);
             gsm.Render(g);
         }

@@ -26,7 +26,8 @@ public class GameState extends State {
         if (gameBoard.boxX() != -1 && gameBoard.boxY() != -1)
         {
             // -- MAKES THE QUIZ POP UP --
-            if (gameBoard.isBomb()) {
+            if (gameBoard.isBomb() && !gameBoard.defeat() && !gameBoard.victory())
+            {
                 gameStateManager.addState(GameStateManager.QUIZ);
             }
         }
