@@ -23,7 +23,6 @@ public class Leaderboard
         this.assetManager = assetManager;
         this.gameStateManager = gameStateManager;
 
-        WriteData("Test", 10);
         getLeaderboard();
     }
 
@@ -48,7 +47,7 @@ public class Leaderboard
 //                time = token[1];
 
 
-                System.out.println(line);
+//                System.out.println(line);
             }
         }
         catch (FileNotFoundException e)

@@ -183,8 +183,8 @@ B
 /// 
 What was the name of the \n first constitution of the \n Philippines, promulgated \n during the Japanese occupation? 
 Malolos Constitution 
-Constitution of Biak\n-na-Bato 
-Constitution of the \n First Republic 
+Constitution of Biak\n naBato
+Constitution of the \nFirst Republic
 1943 Constitution 
 D 
 /// 

@@ -22,17 +22,22 @@ public class AnimatedBackground
     public void Update()
     {
         spriteCounter++;
-        if(spriteCounter > 15) {
-            if(spriteNum == 1) {
+        if(spriteCounter > 15)
+        {
+            if(spriteNum == 1)
+            {
                 spriteNum = 2;
             }
-            else if(spriteNum == 2) {
+            else if(spriteNum == 2)
+            {
                 spriteNum = 3;
             }
-            else if(spriteNum == 3) {
+            else if(spriteNum == 3)
+            {
                 spriteNum = 4;
             }
-            else if(spriteNum == 4) {
+            else if(spriteNum == 4)
+            {
                 spriteNum = 1;
             }
             spriteCounter = 0;

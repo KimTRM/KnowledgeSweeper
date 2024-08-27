@@ -18,8 +18,8 @@ public class LossEnd
     public boolean inRestart, inBacktoStart;
     public void update()
     {
-        inRestart = assetManager.inButtonCollision(bButtonX, bButtonY, 190, 220, 200, 200, true, "Restart");
-        inBacktoStart = assetManager.inButtonCollision(aButtonX, aButtonY, 250, 220, 200, 200, true, "Back to Start");
+        inRestart = assetManager.inButtonCollision(bButtonX, bButtonY, 100, 100, 200, 200, false, "Restart");
+        inBacktoStart = assetManager.inButtonCollision(aButtonX, aButtonY, 100, 100, 200, 200, false, "Back to Start");
     }
 
     public void input()

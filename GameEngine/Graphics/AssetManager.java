@@ -12,14 +12,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 public class AssetManager {
 
     public static BufferedImage
-
-            // --- ICON ---
-            Bomb, CamhiLogo, Button, BackButton, Start,
-            TextBox, Restart, Settings, RightArrow, LeftArrow,
+    // --- ICON ---
+   Bomb, CamhiLogo, Button, BackButton, Start,
+   TextBox, Restart, Settings, RightArrow, LeftArrow,
 
     // --- BACKGROUND ---
     B1,B2,B3,B4, Shade,
@@ -29,9 +29,9 @@ public class AssetManager {
 
     // --- SPRITES ---
     Life, NoLife,
-            Grass, RevGrass,
-            Select, Select1,
-            ActiveBlock, DeactBlock;
+    Grass, RevGrass,
+    Select, Select1,
+    ActiveBlock, DeactBlock;
 
     // --- MUSIC PLAYER ---
     File[] file = new File[10];
@@ -56,41 +56,41 @@ public class AssetManager {
     {
         try {
             // --- ICON ---
-            Bomb = ImageIO.read(getClass().getResourceAsStream("res/icon/Bomb.png"));
-            CamhiLogo = ImageIO.read(getClass().getResourceAsStream("res/icon/CamhiLogo.png"));
-            Button = ImageIO.read(getClass().getResourceAsStream("res/icon/Button.png"));
-            BackButton = ImageIO.read(getClass().getResourceAsStream("res/icon/BackButton.png"));
-            Start = ImageIO.read(getClass().getResourceAsStream("res/icon/StartButton.png"));
-            Restart = ImageIO.read(getClass().getResourceAsStream("res/icon/RestartButton.png"));
-            TextBox = ImageIO.read(getClass().getResourceAsStream("res/icon/TextBox.png"));
-            Settings = ImageIO.read(getClass().getResourceAsStream("res/icon/Settings.png"));
-            RightArrow = ImageIO.read(getClass().getResourceAsStream("res/icon/RightArrow.png"));
-            LeftArrow = ImageIO.read(getClass().getResourceAsStream("res/icon/LeftArrow.png"));
+            Bomb = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Bomb.png")));
+            CamhiLogo = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/CamhiLogo.png")));
+            Button = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Button.png")));
+            BackButton = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/BackButton.png")));
+            Start = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/StartButton.png")));
+            Restart = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/RestartButton.png")));
+            TextBox = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/TextBox.png")));
+            Settings = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Settings.png")));
+            RightArrow = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/RightArrow.png")));
+            LeftArrow = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/LeftArrow.png")));
 
             // --- BACKGROUND ---
-            B1 = ImageIO.read(getClass().getResourceAsStream("res/background/Background1.png"));
-            B2 = ImageIO.read(getClass().getResourceAsStream("res/background/Background2.png"));
-            B3 = ImageIO.read(getClass().getResourceAsStream("res/background/Background3.png"));
-            B4 = ImageIO.read(getClass().getResourceAsStream("res/background/Background4.png"));
-            Shade = ImageIO.read(getClass().getResourceAsStream("res/background/shade.png"));
+            B1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/background/Background1.png")));
+            B2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/background/Background2.png")));
+            B3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/background/Background3.png")));
+            B4 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/background/Background4.png")));
+            Shade = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/background/shade.png")));
 
             // --- TEXT IMAGE ---
-            Title = ImageIO.read(getClass().getResourceAsStream("res/title/Title.png"));
-            Defeat = ImageIO.read(getClass().getResourceAsStream("res/title/Defeat.png"));
-            Victory = ImageIO.read(getClass().getResourceAsStream("res/title/Victory.png"));
+            Title = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/title/Title.png")));
+            Defeat = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/title/Defeat.png")));
+            Victory = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/title/Victory.png")));
 
             // --- SPRITES ---
-            Life = ImageIO.read(getClass().getResourceAsStream("res/icon/Life.png"));
-            NoLife = ImageIO.read(getClass().getResourceAsStream("res/icon/NoLife.png"));
+            Life = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Life.png")));
+            NoLife = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/NoLife.png")));
 
-            Grass = ImageIO.read(getClass().getResourceAsStream("res/icon/Grass.png"));
-            RevGrass = ImageIO.read(getClass().getResourceAsStream("res/icon/RevGrass.png"));
+            Grass = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Grass.png")));
+            RevGrass = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/RevGrass.png")));
 
-            Select = ImageIO.read(getClass().getResourceAsStream("res/icon/Select.png"));
-            Select1 = ImageIO.read(getClass().getResourceAsStream("res/icon/Select2.png"));
+            Select = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Select.png")));
+            Select1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Select2.png")));
 
-            ActiveBlock = ImageIO.read(getClass().getResourceAsStream("res/icon/ActiveBlock.png"));
-            DeactBlock = ImageIO.read(getClass().getResourceAsStream("res/icon/DeactBlock.png"));
+            ActiveBlock = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/ActiveBlock.png")));
+            DeactBlock = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/DeactBlock.png")));
 
         }catch(IOException e) {
             e.printStackTrace();
@@ -192,6 +192,7 @@ public class AssetManager {
         try
         {
             InputStream is = getClass().getResourceAsStream("res/font/x12y16pxMaruMonica.ttf");
+            assert is != null;
             Pixel = Font.createFont(Font.TRUETYPE_FONT, is);
         }
         catch (FontFormatException | IOException e)
@@ -216,7 +217,6 @@ public class AssetManager {
         return gamePanel.getScreenHeight2();
     }
 
-
     // ----- QUICK DRAW (TEXTBOX/BUTTON) -----
     public void PrintText (String text, int x, int y, int ln, int size, boolean ForceColor, Graphics2D g)
     {
@@ -232,8 +232,7 @@ public class AssetManager {
             y += ln; // Adjust the increment as needed for your line spacing
         }
     }
-
-
+    
     public void PrintTexts (String text, int x, int y, int ln, int size, boolean ForceColor, Graphics2D g)
     {
         if (ForceColor)
@@ -283,8 +282,8 @@ public class AssetManager {
         int mx = gamePanel.getMX();
         int my = gamePanel.getMY();
 
-        int x2 = x + 210;
-        int y2 = y + 215;
+        int x2 = x + 100;
+        int y2 = y + 100;
         int width2 = width - 20;
         int height2 = height - 100;
 
@@ -338,10 +337,8 @@ public class AssetManager {
 
         int x2 = x + offSetX;
         int y2 = y + offSetY;
-        int width2 = width;
-        int height2 = height;
 
-        boolean collisionShape = mx >= x2 - width2 / 2 && mx < x2 + width2 / 2 && my >= y2 - height2 / 2 && my < y2 + height2 / 2;
+        boolean collisionShape = mx >= x2 - width / 2 && mx < x2 + width / 2 && my >= y2 - height / 2 && my < y2 + height / 2;
         if(collisionShape)
         {
             if(Debug)

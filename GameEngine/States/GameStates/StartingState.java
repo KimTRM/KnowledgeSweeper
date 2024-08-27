@@ -36,8 +36,8 @@ public class StartingState extends State {
     public void update()
     {
         Start = assetManager.StartCollision(sButtonX, sButtonY, sbuttonWidth, sbuttonHeight,false, "Start");
-        Settings = assetManager.inButtonCollision(stButtonX, stButtonY, 240, 215, stbuttonWidth, stbuttonHeight, false, "Settings");
-        Exit = assetManager.inButtonCollision(ExtButtonX, ExtButtonY, 280, 215, sbuttonWidth, sbuttonHeight, false, "Exit");
+        Settings = assetManager.inButtonCollision(stButtonX, stButtonY, 100, 100, stbuttonWidth, stbuttonHeight, false, "Settings");
+        Exit = assetManager.inButtonCollision(ExtButtonX, ExtButtonY, 100, 100, sbuttonWidth, sbuttonHeight, false, "Exit");
     }
 
     @Override

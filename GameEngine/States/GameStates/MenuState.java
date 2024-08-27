@@ -17,13 +17,13 @@ public class MenuState extends State
     @Override
     public void update()
     {
-        MusicLeftArrow = assetManager.ArrowCollision(ArwLVolX, ArwLVolY, 140, 50, ArwWidth, ArwHeight,true);
-        MusicRightArrow = assetManager.ArrowCollision(ArwRVolX, ArwRVolY, 180, 50, ArwWidth, ArwHeight,false);
+        MusicLeftArrow = assetManager.ArrowCollision(ArwLVolX, ArwLVolY, 20, 10, ArwWidth, ArwHeight,false);
+        MusicRightArrow = assetManager.ArrowCollision(ArwRVolX, ArwRVolY, 20, 10, ArwWidth, ArwHeight,false);
 
-        SFXLeftArrow = assetManager.ArrowCollision(ArwLSndEfctX, ArwLSndEfctY, 140, 55, ArwWidth, ArwHeight,true);
-        SFXRightArrow = assetManager.ArrowCollision(ArwRSndEfctX, ArwRSndEfctY, 180, 55, ArwWidth, ArwHeight,false);
+        SFXLeftArrow = assetManager.ArrowCollision(ArwLSndEfctX, ArwLSndEfctY, 20, 10, ArwWidth, ArwHeight,false);
+        SFXRightArrow = assetManager.ArrowCollision(ArwRSndEfctX, ArwRSndEfctY, 20, 10, ArwWidth, ArwHeight,false);
 
-        Confirm = assetManager.inButtonCollision(ConfirmButtonX, ConfirmButtonY, 220, 160, ConfirmBtnW, ConfirmBtnH, false, "Confirm");
+        Confirm = assetManager.inButtonCollision(ConfirmButtonX, ConfirmButtonY, 80, 90, ConfirmBtnW, ConfirmBtnH, false, "Confirm");
     }
 
     @Override
