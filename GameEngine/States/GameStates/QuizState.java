@@ -15,6 +15,7 @@ public class QuizState extends State {
     {
         super(gameStateManager, assetManager);
         this.quizManager = quizManager;
+        quizManager.Timer();
     }
 
     @Override
@@ -24,12 +25,19 @@ public class QuizState extends State {
         {
             quizManager.update();
 
-
             if (quizManager.Confirm)
             {
                 quizManager.Confirm = false;
+                quizManager.Stoptimer = true;
                 gameStateManager.removeState(GameStateManager.QUIZ);
+            }
 
+            if (gameStateManager.quizManager.seconds == 0 && gameStateManager.isStateActive(GameStateManager.QUIZ))
+            {
+                gameStateManager.removeState(GameStateManager.QUIZ);
+                gameStateManager.quizManager.checkAnswer();
+                gameStateManager.quizManager.Confirm = true;
+                gameStateManager.quizManager.random();
             }
         }
     }

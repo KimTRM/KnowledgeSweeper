@@ -24,103 +24,97 @@ public class GameOptionsState extends State {
     @Override
     public void update()
     {
-        inSci = assetManager.inButtonCollision(TextBoxSciX, TextBoxSciY,110, 50,  TextBoxSizeX + 30, TextBoxSizeY + 100, false, "Science");
-        inHis = assetManager.inButtonCollision(TextBoxHisX, TextBoxHisY,110, 50,  TextBoxSizeX + 30, TextBoxSizeY + 100, false, "History");
-        inMath = assetManager.inButtonCollision(TextBoxMathX, TextBoxMathY,110, 50,  TextBoxSizeX + 30, TextBoxSizeY + 100, false, "Math");
+        inBack = assetManager.inButtonCollision(BackX, BackY, 100, 100,  BackButtonW - 20, BackButtonH - 20, false, "Back");
+        inPlay = assetManager.inButtonCollision(PlayX, PlayY, 140, 140,  PlayButtonW + 30, PlayButtonH + 100, false, "Play");
 
-        inEasy = assetManager.inButtonCollision(EasyX, EasyY,100, 50, TextBoxSizeX + 30, TextBoxSizeY + 100, false, "Easy");
-        inMid = assetManager.inButtonCollision(MediumX, MediumY,100, 50, TextBoxSizeX + 30, TextBoxSizeY + 100, false, "Medium");
-        inHard = assetManager.inButtonCollision(HardX, HardY,100, 50, TextBoxSizeX + 30, TextBoxSizeY + 100, false, "Hard");
+        if (!gameStateManager.category.ConfirmCategory)
+        {
+            gameStateManager.category.update();
+        }
+        else
+        {
+            gameStateManager.level.update();
+        }
 
-        inPlay = assetManager.inButtonCollision(PlayX, PlayY, 150, 150,  PlayButtonW + 30, PlayButtonH + 100, false, "Play");
+        gameBoard.isActive = !gameStateManager.isStateActive(GameStateManager.QUIZ)
+                && !gameStateManager.isStateActive(GameStateManager.ENDING)
+                && !gameStateManager.isStateActive(GameStateManager.GAMEOPTIONS)
+                && !gameStateManager.isStateActive(GameStateManager.STARTING);
     }
 
     @Override
     public void input()
     {
-        // --- SUBJECTS ---
-        if (inSci)
+        if (!gameStateManager.category.ConfirmCategory)
         {
-            assetManager.playSE(1);
-            Science = true;
-            History = false;
-            Math = false;
+            gameStateManager.category.input();
+        }
+        else
+        {
+            gameStateManager.level.input();
+        }
+
+        // --- SUBJECTS ---
+        if (gameStateManager.category.inSci)
+        {
             quizManager.Science = true;
             quizManager.History = false;
             quizManager.Math = false;
+
             quizManager.clear();
             quizManager.ChangeSubject("Science");
         }
-        else if (inHis)
+        else if (gameStateManager.category.inHis)
         {
-            History = true;
-            Science = false;
-            Math = false;
-            assetManager.playSE(1);
             quizManager.History = true;
             quizManager.Science = false;
             quizManager.Math = false;
+
             quizManager.clear();
             quizManager.ChangeSubject("History");
         }
-        else if (inMath)
+        else if (gameStateManager.category.inMath)
         {
-            Math = true;
-            History = false;
-            Science = false;
-
             assetManager.playSE(1);
 
             quizManager.Math = true;
             quizManager.Science = false;
             quizManager.History = false;
-            quizManager.clear();
 
+            quizManager.clear();
             quizManager.ChangeSubject("Math");
         }
 
         // --- DIFFICULTY --
-        if (inEasy)
+        if (gameStateManager.level.inEasy)
         {
-            assetManager.playSE(1);
-
-            Easy = true;
-            Mid = false;
-            Hard = false;
-
             gameBoard.Easy = true;
             gameBoard.Medium = false;
             gameBoard.Hard = false;
 
             gameBoard.ChangeDifficulty("Easy", true);
         }
-        else if (inMid)
+        else if (gameStateManager.level.inMid)
         {
-            assetManager.playSE(1);
-
-            Easy = false;
-            Mid = true;
-            Hard = false;
-
             gameBoard.Easy = false;
             gameBoard.Medium = true;
             gameBoard.Hard = false;
 
             gameBoard.ChangeDifficulty("Medium", true);
         }
-        else if (inHard)
+        else if (gameStateManager.level.inHard)
         {
-            assetManager.playSE(1);
-
-            Easy = false;
-            Mid = false;
-            Hard = true;
-
             gameBoard.Easy = false;
             gameBoard.Medium = false;
             gameBoard.Hard = true;
 
             gameBoard.ChangeDifficulty("Hard", true);
+        }
+
+        if (inBack)
+        {
+            assetManager.playSE(1);
+            gameStateManager.category.ConfirmCategory = false;
         }
 
         // --- PLAY ---
@@ -136,158 +130,118 @@ public class GameOptionsState extends State {
     @Override
     public void render(Graphics2D g)
     {
-        // -- TEXT BOX (DIRECTIONS) --
-        g.setColor(new Color(0, 0, 0));
-        assetManager.TextBox(250, 10, 800, 200, g);
-        assetManager.PrintText("Choose a Category & Difficulty", 355, 100, 0, 50, false, g);
+        assetManager.TextBox(250, 100, 800, 200, g);
+
+        assetManager.drawSubWindow(1060, 10, 200, 50, g);
+        assetManager.PrintText("How to Play?", 1090, 45, 0, 30, false, g);
 
         // -- SUBJECT CHOOSEN --
-        if (Science)
+        if (!gameStateManager.category.ConfirmCategory)
+        {
+            gameStateManager.category.render(g);
+        }
+        else
+        {
+            gameStateManager.level.render(g);
+        }
+
+        // -- SUBJECT CHOOSEN --
+        if (gameStateManager.category.Science)
         {
             g.setColor(new Color(255, 153, 0));
-            g.drawString("Science", 455, 160);
+            g.setFont(g.getFont().deriveFont(Font.BOLD, 50));
+            g.drawString("Science", 455, 260);
         }
-        if (History)
+        if (gameStateManager.category.History)
         {
-            g.setColor(new Color(153, 102, 0));
-            g.drawString("History", 455, 160);
+            g.setColor(new Color(190, 1, 51));
+            g.setFont(g.getFont().deriveFont(Font.BOLD, 50));
+            g.drawString("History", 455, 260);
         }
-        if (Math)
+        if (gameStateManager.category.Math)
         {
-            g.setColor(new Color(255, 102, 0));
-            g.drawString("Math", 500, 160);
+            g.setColor(new Color(42, 150, 2));
+            g.setFont(g.getFont().deriveFont(Font.BOLD, 50));
+            g.drawString("Math", 500, 260);
         }
 
         g.setColor(new Color(0, 0, 0));
-        g.drawString("+", 640, 160);
+        g.drawString("+", 640, 260);
 
         // -- DIFFICULTY CHOOSEN --
-        if (Easy)
+        if (gameStateManager.level.Easy)
         {
             g.setColor(new Color(95, 171, 73));
-            g.drawString("Easy", 695, 160);
+            g.setFont(g.getFont().deriveFont(Font.BOLD, 50));
+            g.drawString("Easy", 695, 260);
         }
-        if (Mid)
+        if (gameStateManager.level.Mid)
         {
             g.setColor(new Color(199, 105, 0));
-            g.drawString("Medium", 695, 160);
+            g.setFont(g.getFont().deriveFont(Font.BOLD, 50));
+            g.drawString("Normal", 695, 260);
         }
-        if (Hard)
+        if (gameStateManager.level.Hard)
         {
             g.setColor(new Color(255, 0, 0));
-            g.drawString("Hard", 695, 160);
+            g.setFont(g.getFont().deriveFont(Font.BOLD, 50));
+            g.drawString("Hard", 695, 260);
         }
 
-        g.setColor(new Color(0, 0, 0));
-        // -- TEXTBOX (SUBJECT CHOICES) --
-        assetManager.TextBox(TextBoxSciX, TextBoxSciY, TextBoxSizeX, TextBoxSizeY, g);
-        assetManager.PrintText("Science", TextBoxSciX + 35, TextBoxSciY + 80, 0, 50, false, g);
-
-        assetManager.TextBox(TextBoxHisX, TextBoxHisY, TextBoxSizeX, TextBoxSizeY, g);
-        assetManager.PrintText("History", TextBoxHisX + 45, TextBoxHisY + 80, 0, 50, false, g);
-
-        assetManager.TextBox(TextBoxMathX, TextBoxMathY, TextBoxSizeX, TextBoxSizeY, g);
-        assetManager.PrintText("Math", TextBoxMathX + 65, TextBoxMathY + 80, 0, 50, false, g);
-
-        // -- TEXTBOX (DIFFICULTY CHOICES) --
-        assetManager.TextBox(EasyX, EasyY, TextBoxSizeX, TextBoxSizeY, g);
-        assetManager.PrintText("Easy", EasyX + 65, EasyY + 80, 0, 50, false, g);
-
-        assetManager.TextBox(MediumX, MediumY, TextBoxSizeX, TextBoxSizeY, g);
-        assetManager.PrintText("Medium", MediumX + 35, MediumY + 80, 0, 50, false, g);
-
-        assetManager.TextBox(HardX, HardY, TextBoxSizeX, TextBoxSizeY, g);
-        assetManager.PrintText("Hard", HardX + 70, HardY + 80, 0, 50, false, g);
-
-        // -- TEXTBOX (PLAY) --
-        assetManager.Button(PlayX, PlayY, PlayButtonW, PlayButtonH, g);
-        assetManager.PrintText("Play", PlayX + 58, PlayY + 140, 0, 70, true, g);
-
-        // -- PLAY HOVER --
-        if(inPlay && SubjectCheck() && DifficultyCheck())
+        if (gameStateManager.category.ConfirmCategory)
         {
-            assetManager.Button(PlayX - 10, PlayY - 15, PlayButtonW + 20, PlayButtonH + 30, g);
-            assetManager.PrintText("Play", PlayX + 50, PlayY + 145, 0, 80, true, g);
+            // -- BACK BUTTON --
+            assetManager.Button(BackX, BackY, BackButtonW, BackButtonH, g);
+            assetManager.PrintText("Back", BackX + 48, BackY + 110, 0, 50, true, g);
+
+            // -- BACK HOVER --
+            if (inBack) {
+                assetManager.Button(BackX - 10, BackY - 15, BackButtonW + 20, BackButtonH + 30, g);
+                assetManager.PrintText("Back", BackX + 35, BackY + 115, 0, 60, true, g);
+            }
         }
 
-        // -- SUBJECT HOVER --
-        if (inSci || Science)
+        // -- PLAY BUTTON --
+        if (SubjectCheck() && DifficultyCheck())
         {
-            g.drawImage(AssetManager.Select1, TextBoxSciX, TextBoxSciY, TextBoxSizeX, TextBoxSizeY, null);
-        }
-        if (inHis || History)
-        {
-            g.drawImage(AssetManager.Select1, TextBoxHisX, TextBoxHisY, TextBoxSizeX, TextBoxSizeY, null);
-        }
-        if (inMath || Math)
-        {
-            g.drawImage(AssetManager.Select1, TextBoxMathX, TextBoxMathY, TextBoxSizeX, TextBoxSizeY, null);
-        }
+            // -- TEXTBOX (PLAY) --
+            assetManager.Button(PlayX, PlayY, PlayButtonW, PlayButtonH, g);
+            assetManager.PrintText("Play", PlayX + 58, PlayY + 140, 0, 70, true, g);
 
-        // -- DIFFICULTY HOVER --
-        if (inEasy || Easy)
-        {
-            g.drawImage(AssetManager.Select1, EasyX, EasyY, TextBoxSizeX, TextBoxSizeY, null);
+            // -- PLAY HOVER --
+            if (inPlay && SubjectCheck() && DifficultyCheck())
+            {
+                assetManager.Button(PlayX - 10, PlayY - 15, PlayButtonW + 20, PlayButtonH + 30, g);
+                assetManager.PrintText("Play", PlayX + 50, PlayY + 145, 0, 80, true, g);
+            }
         }
-        if (inMid || Mid)
-        {
-            g.drawImage(AssetManager.Select1, MediumX, MediumY, TextBoxSizeX, TextBoxSizeY, null);
-        }
-        if (inHard || Hard)
-        {
-            g.drawImage(AssetManager.Select1, HardX, HardY, TextBoxSizeX, TextBoxSizeY, null);
-        }
+        g.drawImage(assetManager.KLTL_Logo, 1120, 570, 200, 200, null);
 
+        g.setColor(new Color(0xB9B9B9));
+        assetManager.PrintText(gameStateManager.version, 20, 700, 0, 20, false, g);
     }
-
 
     // -- SUBJECTS & DIFFICULTY CHECKER --
     public boolean SubjectCheck() {
-        return Science || History || Math;
+        return gameStateManager.category.Science || gameStateManager.category.History || gameStateManager.category.Math;
     }
     public boolean DifficultyCheck() {
-        return Easy || Mid || Hard;
+        return gameStateManager.level.Easy || gameStateManager.level.Mid || gameStateManager.level.Hard;
     }
 
-    // -- CATEGORY BUTTONS --
-    int CTextBoxY = 250;
+    // -- BUTTONS --
+    boolean inBack;
 
-    public boolean Science;
-    int TextBoxSciX = 230;
-    int TextBoxSciY = CTextBoxY;
+    int BackX = 10;
+    int BackY = -20;
+    int BackButtonW = 180;
+    int BackButtonH = 180;
 
-    public boolean History;
-    int TextBoxHisX = 530;
-    int TextBoxHisY = CTextBoxY;
-
-    public boolean Math;
-    int TextBoxMathX = 830;
-    int TextBoxMathY = CTextBoxY;
-
-
-    // -- DIFFICULTY BUTTONS --
-    int DTextBoxY = 420;
-
-    public boolean Easy;
-    int EasyX = 230;
-    int EasyY = DTextBoxY;
-
-    public boolean Mid;
-    int MediumX = 530;
-    int MediumY = DTextBoxY;
-
-    public boolean Hard;
-    int HardX = 830;
-    int HardY = DTextBoxY;
+    boolean inPlay;
 
     int PlayX = 528;
-    int PlayY = 520;
+    int PlayY = 530;
 
     int PlayButtonW = 220;
     int PlayButtonH = 220;
-
-    int TextBoxSizeX = 220;
-    int TextBoxSizeY = 120;
-
-    boolean inSci, inHis, inMath, inEasy, inMid, inHard, inPlay;
 }

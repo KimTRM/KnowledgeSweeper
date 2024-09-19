@@ -51,6 +51,7 @@ public class GameBoard
     public boolean Easy;
     public boolean Medium;
     public boolean Hard;
+    public int TimerSeconds;
 
     int xLoc;
     int yLoc;
@@ -60,7 +61,6 @@ public class GameBoard
     {
         if (activate)
         {
-            System.out.println(difficulty + " mode activated");
             Difficulty = difficulty;
         }
 
@@ -92,8 +92,9 @@ public class GameBoard
         rows = 7;
         paddingY = 1;
 
-        NumBomb = 15;
+        NumBomb = 20;
         TotalBoxes = 30;
+        TimerSeconds = 61;
 
         xLoc = 30;
         yLoc = 20;
@@ -109,6 +110,7 @@ public class GameBoard
 
         NumBomb = 20;
         TotalBoxes = 60;
+        TimerSeconds = 31;
 
         xLoc = 50;
         yLoc = 10;
@@ -124,6 +126,7 @@ public class GameBoard
 
         NumBomb = 25;
         TotalBoxes = 80;
+        TimerSeconds = 16;
 
         xLoc = 50;
         yLoc = 20;
@@ -139,60 +142,58 @@ public class GameBoard
     }
 
     boolean Reset;
+    public boolean Home;
     public void update()
     {
         Reset = assetManager.StartCollision(rButtonX, rButtonY - 20, 190, 170, false, "Reset");
-
+        Home = assetManager.ArrowCollision(1228, 665, 0,0, 70, 70, false);
     }
 
-    public void input()
-    {
-        if (isActive)
-        {
-            if (boxX() != -1 && boxY() != -1 && !AlreadyRevealed[boxX()][boxY()])
+    public void input() {
+        if (isActive) {
+            int x = boxX();
+            int y = boxY();
+
+            if (x != -1 && y != -1 && !AlreadyRevealed[x][y])
             {
-                if (flagger && !revealed[boxX()][boxY()])
-                {
-                    // -- PLACE BLOCKER --
-                    // -- REMOVE BLOCKER --
-                    flagged[boxX()][boxY()] = !flagged[boxX()][boxY()] && !AlreadyRevealed[boxX()][boxY()];
+                if (assetManager.getButton() == 3 && !revealed[x][y]) {
+                    flagged[x][y] = !flagged[x][y] && !AlreadyRevealed[x][y];
                 }
                 else
                 {
                     // -- REVEAL BOX --
-                    if (!flagged[boxX()][boxY()] && !AlreadyRevealed[boxX()][boxY()] && !revealed[boxX()][boxY()])
-                    {
-                        revealed[boxX()][boxY()] = true;
-                        AlreadyRevealed[boxX()][boxY()] = true;
+                    if (!flagged[x][y] && !AlreadyRevealed[x][y] && !revealed[x][y]) {
+                        if (assetManager.getButton() == 1) {
+                            revealed[x][y] = true;
+                            AlreadyRevealed[x][y] = true;
 
-                        if (victory())
-                        {
-                            assetManager.playSE(4);
+                            // Call the recursive reveal if the clicked box is empty
+                            if (mines[x][y] == 0 && neighbours[x][y] == 0) {
+                                revealAdjacentEmpty(x, y);
+                            }
+
+                            if (victory()) {
+                                assetManager.playSE(4);
+                            }
                         }
                     }
                 }
 
                 // -- SETS THE BOMB STATUS --
-                if (revealed[boxX()][boxY()])
-                {
-                    if (mines[boxX()][boxY()] == 1)
-                    {
+                if (revealed[x][y]) {
+                    if (mines[x][y] == 1) {
                         assetManager.playSE(7);
                         bomb = true;
-                    }
-                    else
-                    {
+                    } else {
                         assetManager.playSE(6);
                     }
                 }
-            }
 
-            // -- RESETS THE BOARD --
-            if (Reset)
-            {
-                ResetAll(TotalBoxes);
+                // -- RESETS THE BOARD --
+                if (Reset) {
+                    ResetAll(TotalBoxes);
+                }
             }
-
         }
     }
 
@@ -245,6 +246,9 @@ public class GameBoard
         // -- RESTART GAME --
         g.drawImage(AssetManager.Restart, rButtonX, rButtonY, 190, 170, null);
 
+        // -- HOME BUTTON --
+        g.drawImage(AssetManager.Home, 1200,650, 60,60,null);
+
         // -- HOVER --
         if (isActive)
         {
@@ -252,14 +256,18 @@ public class GameBoard
             {
                 g.drawImage(AssetManager.Restart, rButtonX - 10, rButtonY - 5, 210, 185, null);
             }
+
+            if (Home)
+            {
+                g.drawImage(AssetManager.Home, 1195,645, 70,70,null);
+            }
         }
     }
 
     public boolean bomb;
+    public boolean Name;
 
     // ----- COLLISION DETECTION -----
-
-
     int BoxWidth = 80;
     int BoxHeight = 80;
     public int boxX()
@@ -279,7 +287,6 @@ public class GameBoard
         return -1;
     }
     public int boxY()
-
     {
         int my = assetManager.gamePanel.getMY();
 
@@ -361,6 +368,10 @@ public class GameBoard
 
         }
 
+        // -- NUMBER OF BOMBS --
+        g.drawImage(AssetManager.Bomb, 10, 637, 80, 80, null);
+        g.setColor(new Color(227, 133, 73));
+        assetManager.PrintTexts(String.valueOf(totalMines()), 90, 710, 0, 80, false, g);
 
         // -- TIMER --
         g.drawImage(AssetManager.Button, 1050, -10, 190, 170, null);
@@ -434,6 +445,33 @@ public class GameBoard
         }
         return total;
     }
+
+    public void revealAdjacentEmpty(int x, int y)
+    {
+
+        // Mark the current cell as revealed
+        AlreadyRevealed[x][y] = true;
+        revealed[x][y] = true;
+
+        // If the cell has no neighboring mines, we need to reveal adjacent cells
+        if (neighbours[x][y] == 0) {
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    int newX = x + i;
+                    int newY = y + j;
+
+                    // Check boundaries and ensure we don't call on the current cell
+                    if (newX >= paddingX && newX < cols && newY >= paddingY && newY < rows) {
+                        if (!AlreadyRevealed[newX][newY] && mines[newX][newY] == 0 && neighbours[newX][newY] >= 0) {
+                            revealAdjacentEmpty(newX, newY); // Recursive call for adjacent empty cells
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
     public boolean victory () {
         return totalBoxesRevealed() >= TotalBoxes - totalMines();
     }
@@ -446,7 +484,11 @@ public class GameBoard
     {
         this.TotalBoxes = TotalBoxes;
 
-        flagger = false;
+        for (int i = paddingX; i < cols; i++) {
+            for (int j = paddingY; j < rows; j++) {
+                flagged[i][j] = false;
+            }
+        }
 
         startDate = new Date();
 

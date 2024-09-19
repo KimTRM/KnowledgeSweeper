@@ -2,6 +2,7 @@ package GameEngine;
 
 import GameEngine.Graphics.AnimatedBackground;
 import GameEngine.Graphics.AssetManager;
+import GameEngine.Graphics.ParallaxBackground;
 import GameEngine.States.GameStateManager;
 import GameEngine.Util.Input.KeyHandler;
 import GameEngine.Util.Input.MouseHandler;
@@ -24,19 +25,14 @@ public class GamePanel extends JPanel implements Runnable
     private BufferedImage image;
     public Graphics2D g;
 
-    // ----- FRAME UPDATE SETTINGS -----
-    public static int oldFrameCount;
-    public static int oldTickCount;
-    public static int tickCount;
-
-    private boolean running = false;
-
     // ----- IMPORTED CLASSES -----
     protected GameStateManager gsm = new GameStateManager(this);
-    private KeyHandler key;
-    private final AnimatedBackground background = new AnimatedBackground(this);
-    protected MouseHandler mouse = new MouseHandler(gsm);
+    private KeyHandler key = new KeyHandler();
     protected AssetManager assetManager = new AssetManager(this);
+    private final AnimatedBackground background = new AnimatedBackground(this);
+    private final ParallaxBackground parallax = new ParallaxBackground();
+    protected MouseHandler mouse = new MouseHandler(gsm);
+
 
     public GamePanel()
     {
@@ -70,22 +66,6 @@ public class GamePanel extends JPanel implements Runnable
 //        setFullScreen();
     }
 
-    public void addNotify()
-    {
-        super.addNotify();
-
-        if (thread == null)
-        {
-            Initialize();
-        }
-    }
-
-    public void Initialize()
-    {
-        running = true;
-
-    }
-
     public void setFullScreen()
     {
         // <- GETS THE DEVICE SCREEN SIZE ->
@@ -101,78 +81,30 @@ public class GamePanel extends JPanel implements Runnable
     @Override
     public void run()
     {
+        int FPS = 60;
 
-        final double GAME_HERTZ = 64.0;
-        final double TBU = 1000000000 / GAME_HERTZ; // Time Before Update
+        float drawInterval = (float) 1000000000 /FPS; // 0.01666 seconds
+        float delta = 0;
+        long lastTime = System.nanoTime();
+        long currentTime;
+        long timer = 0;
 
-        final int MUBR = 3; // Must Update before render
+        while(thread != null) {
+            currentTime = System.nanoTime();
 
-        double lastUpdateTime = System.nanoTime();
-        double lastRenderTime;
+            delta += (currentTime - lastTime) / drawInterval;
+            timer += (currentTime - lastTime);
+            lastTime = currentTime;
 
-        final double TARGET_FPS = 60;
-        final double TTBR = 1000000000 / TARGET_FPS; // Total time before render
-
-        int frameCount = 0;
-        int lastSecondTime = (int) (lastUpdateTime / 1000000000);
-        oldFrameCount = 0;
-
-        tickCount = 0;
-        oldTickCount = 0;
-
-        while (running)
-        {
-            double now = System.nanoTime();
-            int updateCount = 0;
-            while (((now - lastUpdateTime) > TBU) && (updateCount < MUBR))
-            {
+            if(delta >= 1) {
                 Update();
-                lastUpdateTime += TBU;
-                updateCount++;
-                tickCount++;
-                // (^^^^) We use this varible for the soul purpose of displaying it
+                Render();
+                Draw();
+                delta--;
             }
 
-            if ((now - lastUpdateTime) > TBU) {
-                lastUpdateTime = now - TBU;
-            }
-
-            Render();
-            Draw();
-
-            lastRenderTime = now;
-            frameCount++;
-
-            int thisSecond = (int) (lastUpdateTime / 1000000000);
-            if (thisSecond > lastSecondTime)
-            {
-                if (frameCount != oldFrameCount)
-                {
-//                    System.out.println("NEW SECOND " + thisSecond + " Frame Count: " + frameCount);
-                    oldFrameCount = frameCount;
-                }
-
-                if (tickCount != oldTickCount)
-                {
-//                    System.out.println("NEW SECOND (T) " + thisSecond + " Tick Count: " + tickCount);
-                    oldTickCount = tickCount;
-                }
-                tickCount = 0;
-                frameCount = 0;
-                lastSecondTime = thisSecond;
-            }
-
-            while (now - lastRenderTime < TTBR && now - lastUpdateTime < TBU)
-            {
-                Thread.yield();
-
-                try {
-                    Thread.sleep(1);
-                } catch (Exception e) {
-                    System.out.println("ERROR: yielding thread");
-                }
-
-                now = System.nanoTime();
+            if(timer >= 1000000000) {
+                timer = 0;
             }
 
         }
@@ -201,11 +133,9 @@ public class GamePanel extends JPanel implements Runnable
 
     public void Render()
     {
-        if (g != null)
-        {
-            background.Render(g);
-            gsm.Render(g);
-        }
+        parallax.Render(g);
+        background.Render(g);
+        gsm.Render(g);
     }
     public void Draw()
     {

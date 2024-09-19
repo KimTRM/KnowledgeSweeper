@@ -1,2 +1,63 @@
 ///
-Test, 10
+Aiza, 25
+///
+Cambe, 75
+///
+Roa, 22
+///
+Magistrado, 100
+///
+Kim, 17
+///
+Aspe, 23
+///
+enzo, 72
+///
+BROBIO-SAMA, 33
+///
+putotoy, 37
+///
+pisot, 43
+///
+xada, 37
+///
+dahdadad, 27
+///
+aiza, 49
+///
+aimie, 33
+///
+teri, 104
+///
+david 12 PROG 1, 95
+///
+aimie, 42
+///
+n, 42
+///
+perez, 48
+///
+lulu, 112
+///
+lulu moko, 43
+///
+aiza, 90
+///
+yemfvckerson, 65
+///
+Kim, 5, Easy, Science
+///
+cambs, 5, Easy, Science
+///
+jerme, 1, Easy, Science
+///
+BROBS, 0, Easy, Science
+///
+KIm, 6, Easy, History
+///
+Kim labrador, 97, Hard, Science
+///
+KIM, 54, Hard, Science
+///
+Kim, 32, Hard, Science
+///

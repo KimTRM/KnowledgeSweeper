@@ -6,38 +6,47 @@ import GameEngine.States.State;
 
 import java.awt.*;
 
+@SuppressWarnings("all")
 public class StartingState extends State {
 
     // -- START BUTTON --
-    int sButtonX = 350;
-    int sButtonY = 400;
+    int sButtonX = 480;
+    int sButtonY = 180;
 
-    int sbuttonWidth = 220;
+    int sbuttonWidth = 350;
     int sbuttonHeight = 220;
 
+    // -- LEADERBOARD BUTTON --
+    int leaderboardX = sButtonX;
+    int leaderboardY = 280;
+
+    int leaderboardWidth = sbuttonWidth;
+    int leaderboardHeight = sbuttonHeight;
+
     // -- SETTINGS BUTTON --
-    int stButtonX = 550;
-    int stButtonY = sButtonY;
+    int stButtonX = sButtonX;
+    int stButtonY = 380;
 
     int stbuttonWidth = sbuttonWidth;
     int stbuttonHeight = sbuttonHeight;
 
     // -- EXIT BUTTON --
-    int ExtButtonX = 750;
-    int ExtButtonY = sButtonY;
+    int ExtButtonX = sButtonX;
+    int ExtButtonY = 480;
 
     public StartingState(GameStateManager gameStateManager, AssetManager assetManager) {
         super(gameStateManager, assetManager);
     }
 
-    boolean Start,Settings,Exit;
+    boolean Start, LeaderBoard,Settings,Exit;
 
     @Override
     public void update()
     {
-        Start = assetManager.StartCollision(sButtonX, sButtonY, sbuttonWidth, sbuttonHeight,false, "Start");
-        Settings = assetManager.inButtonCollision(stButtonX, stButtonY, 100, 100, stbuttonWidth, stbuttonHeight, false, "Settings");
-        Exit = assetManager.inButtonCollision(ExtButtonX, ExtButtonY, 100, 100, sbuttonWidth, sbuttonHeight, false, "Exit");
+        Start = assetManager.StartCollision(sButtonX, sButtonY, sbuttonWidth, sbuttonHeight -20,false, "Start");
+        LeaderBoard = assetManager.inButtonCollision(leaderboardX, leaderboardY, 100, 100, leaderboardWidth, leaderboardHeight - 20, false, "Leaderboard");
+        Settings = assetManager.inButtonCollision(stButtonX, stButtonY, 100, 100, stbuttonWidth, stbuttonHeight - 20, false, "Settings");
+        Exit = assetManager.inButtonCollision(ExtButtonX, ExtButtonY, 100, 100, sbuttonWidth, sbuttonHeight - 20, false, "Exit");
     }
 
     @Override
@@ -48,7 +57,11 @@ public class StartingState extends State {
             if (Start) {
                 assetManager.playSE(1);
                 gameStateManager.AddAndRemoveState(GameStateManager.GAMEOPTIONS, GameStateManager.STARTING);
+            }
 
+            if (LeaderBoard) {
+                assetManager.playSE(1);
+                gameStateManager.addState(GameStateManager.LEADERBOARD);
             }
 
             if (Settings) {
@@ -65,39 +78,60 @@ public class StartingState extends State {
     }
 
     @Override
-    public void render(Graphics2D g) {
+    public void render(Graphics2D g)
+    {
         // - Title -
-        g.drawImage(assetManager.Title, 240, -50, 850, 450, null);
+        g.drawImage(assetManager.Title, 110, -150, 1050, 550, null);
 
         // - CamhiLogo -
-        g.drawImage(assetManager.CamhiLogo,5, 5, 150, 150, null);
+        g.drawImage(assetManager.CamhiLogo,1080, 620, 90, 90, null);
 
+        g.setColor(new Color(96, 95, 95));
         // - START BUTTON -
-        assetManager.Start(sButtonX, sButtonY, sbuttonWidth, sbuttonHeight, g);
-
+        if (!Start) {
+//        assetManager.Button(sButtonX, sButtonY, sbuttonWidth, sbuttonHeight, g);
+            assetManager.PrintText("START", sButtonX + 130, sButtonY + 130, 0, 50, false, g);
+        }
+        // - LEADERBOARD BUTTON -
+        if (!LeaderBoard) {
+//        assetManager.Button(leaderboardX,  leaderboardY, leaderboardWidth, leaderboardHeight, g);
+            assetManager.PrintText("LEADERBOARD", leaderboardX + 50, leaderboardY + 130, 0, 50, false, g);
+        }
         // - SETTINGS BUTTON -
-        assetManager.Button(stButtonX, stButtonY, stbuttonWidth, stbuttonHeight, g);
-        assetManager.PrintText("SETTINGS", 580, 535, 0, 50, true, g);
-
+        if (!Settings) {
+//        assetManager.Button(stButtonX, stButtonY, stbuttonWidth, stbuttonHeight, g);
+            assetManager.PrintText("SETTINGS", stButtonX + 100, stButtonY + 130, 0, 50, false, g);
+        }
         // - EXIT BUTTON -
-        assetManager.Button(ExtButtonX, ExtButtonY, sbuttonWidth, sbuttonHeight, g);
-        assetManager.PrintText("EXIT", 826, 535, 0, 50, true, g);
-
+        if (!Exit) {
+//        assetManager.Button(ExtButtonX, ExtButtonY, sbuttonWidth, sbuttonHeight, g);
+            assetManager.PrintText("EXIT", ExtButtonX + 143, ExtButtonY + 130, 0, 50, false, g);
+        }
         // - SELECTION HOVER -
         if (!gameStateManager.isStateActive(GameStateManager.MENU))
         {
             if (Start) {
-                assetManager.Start(sButtonX - 10, sButtonY - 12, sbuttonWidth + 20, sbuttonHeight + 20, g);
+//                assetManager.Button(sButtonX - 10, sButtonY - 12, sbuttonWidth + 20, sbuttonHeight + 20, g);
+                assetManager.PrintText("START", sButtonX + 125,sButtonY + 130, 0, 56, true, g);
+            }
+            if (LeaderBoard) {
+//                assetManager.Button(leaderboardX - 10, leaderboardY - 12, leaderboardWidth + 20, leaderboardHeight + 20, g);
+                assetManager.PrintText("LEADERBOARD", leaderboardX + 38, leaderboardY + 130, 0, 56, true, g);
             }
             if (Settings) {
-                assetManager.Button(stButtonX - 10, stButtonY - 12, stbuttonWidth + 20, stbuttonHeight + 20, g);
-                assetManager.PrintText("SETTINGS", 569, 535, 0, 56, true, g);
+//                assetManager.Button(stButtonX - 10, stButtonY - 12, stbuttonWidth + 20, stbuttonHeight + 20, g);
+                assetManager.PrintText("SETTINGS", stButtonX + 88, stButtonY + 130, 0, 56, true, g);
             }
             if (Exit) {
-                assetManager.Button(ExtButtonX - 10, ExtButtonY - 12, sbuttonWidth + 20, sbuttonHeight + 20, g);
+//                assetManager.Button(ExtButtonX - 10, ExtButtonY - 12, sbuttonWidth + 20, sbuttonHeight + 20, g);
                 g.setColor(new Color(0x8F0000));
-                assetManager.PrintText("EXIT", 824, 535, 0, 56, false, g);
+                assetManager.PrintText("EXIT", ExtButtonX + 140, ExtButtonY + 130, 0, 56, false, g);
             }
         }
+
+        g.drawImage(assetManager.KLTL_Logo, 1120, 570, 200, 200, null);
+
+        g.setColor(new Color(0xB9B9B9));
+        assetManager.PrintText(gameStateManager.version, 20, 700, 0, 20, false, g);
     }
 }

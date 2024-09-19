@@ -50,13 +50,24 @@ public class GameState extends State {
         }
 
         // -- CHECKS IF THE GAME IS OVER --
-        if (gameBoard.defeat() || gameBoard.victory())
+        if (gameBoard.defeat())
         {
             gameStateManager.addState(GameStateManager.ENDING);
         }
 
+
+        if (gameBoard.victory() && gameBoard.isActive)
+        {
+            gameStateManager.gameBoard.Name = true;
+            gameStateManager.addState(GameStateManager.PLAYERNAME);
+        }
+
         // -- ACTIVATES THE GAME BOARD INPUTS --
-        gameBoard.isActive = !gameStateManager.isStateActive(GameStateManager.QUIZ) && !gameStateManager.isStateActive(GameStateManager.ENDING);
+        gameBoard.isActive = !gameStateManager.isStateActive(GameStateManager.QUIZ)
+                          && !gameStateManager.isStateActive(GameStateManager.ENDING)
+                          && !gameStateManager.isStateActive(GameStateManager.GAMEOPTIONS)
+                          && !gameStateManager.isStateActive(GameStateManager.STARTING)
+                          && !gameStateManager.isStateActive(GameStateManager.PLAYERNAME);
     }
 
     @Override
@@ -65,6 +76,22 @@ public class GameState extends State {
         if (gameBoard.isActive)
         {
             gameBoard.input();
+
+            if (gameBoard.Home && !gameBoard.Name)
+            {
+                assetManager.playSE(1);
+
+                gameBoard.ResetAll(gameBoard.TotalBoxes);
+                gameStateManager.quizManager.clear();
+                Reset();
+
+                gameStateManager.removeState(GameStateManager.GAMEOPTIONS);
+                gameStateManager.removeState(GameStateManager.GAME);
+                gameStateManager.removeState(GameStateManager.QUIZ);
+                gameStateManager.removeState(GameStateManager.ENDING);
+                gameStateManager.addState(GameStateManager.STARTING);
+                gameBoard.Home = false;
+            }
         }
     }
 
@@ -73,5 +100,25 @@ public class GameState extends State {
     {
         gameBoard.render(g);
         gameBoard.UI(g);
+    }
+
+    void Reset()
+    {
+        gameStateManager.category.Math = false;
+        gameStateManager.category.History = false;
+        gameStateManager.category.Science = false;
+
+        gameStateManager.category.inMath = false;
+        gameStateManager.category.inHis = false;
+        gameStateManager.category.inSci = false;
+
+        gameStateManager.level.Easy = false;
+        gameStateManager.level.Mid = false;
+        gameStateManager.level.Hard = false;
+
+        gameStateManager.level.inEasy = false;
+        gameStateManager.level.inMid = false;
+        gameStateManager.level.inHard = false;
+        gameStateManager.category.ConfirmCategory = false;
     }
 }

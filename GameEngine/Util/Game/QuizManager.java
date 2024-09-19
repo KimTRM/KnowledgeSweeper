@@ -5,13 +5,12 @@ import GameEngine.Graphics.AssetManager;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
+import java.util.*;
 import java.util.List;
 
 public class QuizManager {
     AssetManager assetManager;
+    GameBoard gameBoard;
 
     // ----- QUESTION RANDOMIZER -----
     public String Question;
@@ -34,9 +33,10 @@ public class QuizManager {
     public boolean ansD;
     public boolean Confirm;
 
-    public QuizManager(AssetManager assetManager)
+    public QuizManager(AssetManager assetManager, GameBoard gameBoard)
     {
         this.assetManager = assetManager;
+        this.gameBoard = gameBoard;
     }
 
     public void ChangeSubject(String Subject)
@@ -115,10 +115,12 @@ public class QuizManager {
         questionList.clear();
     }
 
-    public void random() {
+    public void random()
+    {
         Collections.shuffle(questionList);
         // Ask questions and get user's answers
-        for (Question question : questionList) {
+        for (Question question : questionList)
+        {
             Question = question.question;
             A = question.first;
             B = question.second;
@@ -143,30 +145,45 @@ public class QuizManager {
         return null;
     }
 
-    public void checkAnswer() {
+    public void checkAnswer()
+    {
         String userAnswer = getAnswer();
-        if (userAnswer != null) {
-            if (userAnswer.equals(correctAnswer)) {
+
+        if (userAnswer != null)
+        {
+            if (userAnswer.equals(correctAnswer))
+            {
                 AnswerCorrect = true;
                 AnswerWrong = false;
                 assetManager.playSE(2);
 
-            } else {
+            }
+            else
+            {
                 AnswerCorrect = false;
                 AnswerWrong = true;
                 assetManager.playSE(3);
             }
         }
+
+        if (seconds == 0)
+        {
+            AnswerCorrect = false;
+            AnswerWrong = true;
+            assetManager.playSE(3);
+        }
     }
 
-    public void update() {
+    public void update()
+    {
         inQA = assetManager.TextBoxCollision(TextBoxAX, TextBoxAY, 100, 50, 300, 250, false, "A");
         inQB = assetManager.TextBoxCollision(TextBoxBX, TextBoxBY, 100, 50, 300, 250, false, "B");
         inQC = assetManager.TextBoxCollision(TextBoxCX, TextBoxCY, 100, 50, 300, 250, false, "C");
         inQD = assetManager.TextBoxCollision(TextBoxDX, TextBoxDY, 100, 50, 300, 250, false, "D");
     }
 
-    public void input() {
+    public void input()
+    {
         if (inQA) {
             ansA = true;
             ansB = false;
@@ -206,7 +223,8 @@ public class QuizManager {
         }
     }
 
-    public void render(Graphics2D g) {
+    public void render(Graphics2D g)
+    {
         g.drawImage(AssetManager.Shade, 0, 0, assetManager.getScreenWidth(), assetManager.getScreenHeight(), null);
 
         assetManager.TextBox(250, 10, 800, 400, g);
@@ -221,24 +239,68 @@ public class QuizManager {
         int Qx = 320;
         assetManager.PrintTexts(Question, Qx, Qy, 48, 55, false, g);
 
-        assetManager.PrintText(A, TextBoxAX + 25, TextBoxAY + 80, 48, 25, false, g);
-        assetManager.PrintText(B, TextBoxBX + 25, TextBoxBY + 80, 48, 25, false, g);
-        assetManager.PrintText(C, TextBoxCX + 25, TextBoxCY + 80, 48, 25, false, g);
-        assetManager.PrintText(D, TextBoxDX + 25, TextBoxDY + 80, 48, 25, false, g);
+        assetManager.PrintTexts(A, TextBoxAX + 25, TextBoxAY + 80, 48, 25, false, g);
+        assetManager.PrintTexts(B, TextBoxBX + 25, TextBoxBY + 80, 48, 25, false, g);
+        assetManager.PrintTexts(C, TextBoxCX + 25, TextBoxCY + 80, 48, 25, false, g);
+        assetManager.PrintTexts(D, TextBoxDX + 25, TextBoxDY + 80, 48, 25, false, g);
 
         // -- HOVER (A,B,C,D) --
-        if (inQA) {
+        if (inQA)
+        {
             g.drawImage(AssetManager.Select1, TextBoxAX, TextBoxAY, 250, 150, null);
         }
-        if (inQB) {
+        if (inQB)
+        {
             g.drawImage(AssetManager.Select1, TextBoxBX, TextBoxBY, 250, 150, null);
         }
-        if (inQC) {
+        if (inQC)
+        {
             g.drawImage(AssetManager.Select1, TextBoxCX, TextBoxDY, 250, 150, null);
         }
-        if (inQD) {
+        if (inQD)
+        {
             g.drawImage(AssetManager.Select1, TextBoxDX, TextBoxDY, 250, 150, null);
         }
+
+        if (seconds <= 10)
+        {
+            g.setColor(Color.RED);
+        }
+        else
+        {
+            g.setColor(new Color(73, 29, 0));
+        }
+
+//        g.drawImage(AssetManager.Timer, Qx - 20, Qy - 120, 80, 80, null);
+        assetManager.PrintTexts(String.valueOf(seconds), Qx, Qy - 60, 48, 55, false, g);
+    }
+
+    public boolean Stoptimer;
+    public int seconds;
+    public void Timer()
+    {
+        Stoptimer = false;
+        seconds = gameBoard.TimerSeconds;
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+
+            @Override
+            public void run()
+            {
+                if (seconds > 0) {
+                    seconds--;
+                }
+                else {
+                    timer.cancel(); // Stop the timer
+                }
+
+                if (Stoptimer) {
+                    timer.cancel();
+                }
+            }
+        };
+
+        timer.scheduleAtFixedRate(task, 0, 1000); // Schedule task to run every second
 
     }
 

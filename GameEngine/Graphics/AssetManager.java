@@ -31,7 +31,9 @@ public class AssetManager {
     Life, NoLife,
     Grass, RevGrass,
     Select, Select1,
-    ActiveBlock, DeactBlock;
+    ActiveBlock, DeactBlock,
+    KLTL_Logo, Timer,
+    Reset, Home;
 
     // --- MUSIC PLAYER ---
     File[] file = new File[10];
@@ -91,6 +93,12 @@ public class AssetManager {
 
             ActiveBlock = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/ActiveBlock.png")));
             DeactBlock = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/DeactBlock.png")));
+
+            KLTL_Logo = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/KLTL Logo3.png")));
+            Timer = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Timer.png")));
+
+            Reset = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Restart.png")));
+            Home = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Home.png")));
 
         }catch(IOException e) {
             e.printStackTrace();
@@ -351,7 +359,7 @@ public class AssetManager {
 
     public void drawSubWindow( int x, int y, int width, int height, Graphics2D g)
     {
-        Color c = new Color(0,0,0,210);  // R,G,B, alfa(opacity)
+        Color c = new Color(0,0,0, 161);  // R,G,B, alfa(opacity)
         g.setColor(c);
         g.fillRoundRect(x,y,width,height,35,35);
 
@@ -361,5 +369,15 @@ public class AssetManager {
         g.drawRoundRect(x+5,y+5,width-10,height-10,25,25);
     }
 
+    public void drawRoundRect( int x, int y, int width, int height, Graphics2D g)
+    {
+        Color c = new Color(211,135,85, 231);  // R,G,B, alfa(opacity)
+        g.setColor(c);
+        g.fillRoundRect(x,y,width,height,35,35);
 
+        c = new Color(51,29,15);
+        g.setColor(c);
+        g.setStroke(new BasicStroke(5));    // 5 = width of outlines of graphics
+        g.drawRoundRect(x+5,y+5,width-10,height-10,25,25);
+    }
 }

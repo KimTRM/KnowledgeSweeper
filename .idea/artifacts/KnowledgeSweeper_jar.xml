@@ -1,10 +1,8 @@
 <component name="ArtifactManager">
-  <artifact name="KnowledgeSweeper:jar">
+  <artifact type="jar" build-on-make="true" name="KnowledgeSweeper:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/KnowledgeSweeper_jar</output-path>
-    <root id="root">
-      <element id="archive" name="KnowledgeSweeper.jar">
-        <element id="module-output" name="KnowledgeSweeper" />
-      </element>
+    <root id="archive" name="KnowledgeSweeper.jar">
+      <element id="module-output" name="KnowledgeSweeper" />
     </root>
   </artifact>
 </component>

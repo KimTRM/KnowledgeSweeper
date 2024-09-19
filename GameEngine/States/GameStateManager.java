@@ -9,6 +9,8 @@ import GameEngine.Util.Game.GameBoard;
 import GameEngine.Util.Game.QuizManager;
 import GameEngine.Util.Leaderboard.Leaderboard;
 import GameEngine.Util.Leaderboard.PlayerName;
+import GameEngine.Util.Options.Category;
+import GameEngine.Util.Options.Level;
 
 import java.awt.*;
 
@@ -17,12 +19,14 @@ public class GameStateManager
     // ------ GAME OBJECTS ------
     protected GamePanel gamePanel;
     protected AssetManager assetManager;
+    public Category category;
+    public Level level;
     public GameBoard gameBoard;
     public QuizManager quizManager;
     public VictoryEnd victoryEnd;
     public LossEnd lossEnd;
     public Leaderboard leaderboard;
-    public PlayerName playerName;
+    public PlayerName player;
 
     // ------ SCENES ------
     public State[] states;
@@ -35,19 +39,24 @@ public class GameStateManager
     public static final int MENU = 6;
     public static final int GMENU = 7;
     public static final int PLAYERNAME = 8;
+    public static final int TUTORIALS = 9;
+
+    public String version = "1.3";
 
     public GameStateManager(GamePanel gamePanel)
     {
-        states = new State[9];
+        states = new State[10];
         this.gamePanel = gamePanel;
 
         assetManager = new AssetManager(gamePanel);
+        category = new Category(assetManager);
+        level = new Level(assetManager);
         gameBoard = new GameBoard(assetManager);
-        quizManager = new QuizManager(assetManager);
+        quizManager = new QuizManager(assetManager, gameBoard);
         victoryEnd = new VictoryEnd(assetManager, this);
         lossEnd = new LossEnd(assetManager, this);
+        player = new PlayerName(assetManager);
         leaderboard = new Leaderboard(assetManager, this);
-        playerName = new PlayerName(assetManager);
 
         addState(STARTING);
 
@@ -91,7 +100,10 @@ public class GameStateManager
                 states[GMENU] = new GMenuState(this, assetManager);
                 break;
             case PLAYERNAME:
-                states[PLAYERNAME] = new PlayerNameState(this, assetManager);
+                states[PLAYERNAME] = new PlayerNameState(this, assetManager, player);
+                break;
+            case TUTORIALS:
+                states[TUTORIALS] = new TutorialsState(this, assetManager);
                 break;
         }
     }

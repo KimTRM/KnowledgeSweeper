@@ -27,40 +27,51 @@ public class EndingState extends State
     @Override
     public void input()
     {
-        if (gameStateManager.gameBoard.victory()) {
-            gameStateManager.victoryEnd.input();
+        if (gameStateManager.isStateActive(GameStateManager.ENDING))
+        {
+            if (gameStateManager.gameBoard.victory()) {
+                gameStateManager.victoryEnd.input();
 
-            // -- RESTARTS THE GAME --
-            if(gameStateManager.victoryEnd.inRestart)
-            {
-                gameStateManager.removeState(GameStateManager.ENDING);
+                // -- RESTARTS THE GAME --
+                if (gameStateManager.victoryEnd.inRestart) {
+                    gameStateManager.gameBoard.Name = false;
+                    gameStateManager.removeState(GameStateManager.ENDING);
+                }
+
+                // -- GOES BACK TO START --
+                if (gameStateManager.victoryEnd.inBacktoStart) {
+                    gameStateManager.gameBoard.bomb = false;
+                    gameStateManager.gameBoard.Name = false;
+
+                    Reset();
+
+                    gameStateManager.removeState(GameStateManager.GAME);
+                    gameStateManager.removeState(GameStateManager.QUIZ);
+                    gameStateManager.removeState(GameStateManager.ENDING);
+                    gameStateManager.addState(GameStateManager.STARTING);
+                }
             }
+            if (gameStateManager.gameBoard.defeat()) {
+                gameStateManager.lossEnd.input();
 
-            // -- GOES BACK TO START --
-            if (gameStateManager.victoryEnd.inBacktoStart)
-            {
-                gameStateManager.removeState(GameStateManager.GAME);
-                gameStateManager.removeState(GameStateManager.QUIZ);
-                gameStateManager.removeState(GameStateManager.ENDING);
-                gameStateManager.addState(GameStateManager.STARTING);
-            }
-        }
-        if (gameStateManager.gameBoard.defeat()) {
-            gameStateManager.lossEnd.input();
+                // -- RESTARTS THE GAME --
+                if (gameStateManager.lossEnd.inRestart) {
+                    gameStateManager.gameBoard.Name = false;
+                    gameStateManager.removeState(GameStateManager.ENDING);
+                }
 
-            // -- RESTARTS THE GAME --
-            if(gameStateManager.lossEnd.inRestart)
-            {
-                gameStateManager.removeState(GameStateManager.ENDING);
-            }
+                // -- GOES BACK TO START --
+                if (gameStateManager.lossEnd.inBacktoStart) {
+                    gameStateManager.gameBoard.bomb = false;
+                    gameStateManager.gameBoard.Name = false;
 
-            // -- GOES BACK TO START --
-            if (gameStateManager.lossEnd.inBacktoStart)
-            {
-                gameStateManager.removeState(GameStateManager.GAME);
-                gameStateManager.removeState(GameStateManager.QUIZ);
-                gameStateManager.removeState(GameStateManager.ENDING);
-                gameStateManager.addState(GameStateManager.STARTING);
+                    Reset();
+
+                    gameStateManager.removeState(GameStateManager.GAME);
+                    gameStateManager.removeState(GameStateManager.QUIZ);
+                    gameStateManager.removeState(GameStateManager.ENDING);
+                    gameStateManager.addState(GameStateManager.STARTING);
+                }
             }
         }
     }
@@ -76,5 +87,25 @@ public class EndingState extends State
         }
 
         gameStateManager.gameBoard.UI(g);
+    }
+
+    void Reset()
+    {
+        gameStateManager.category.Math = false;
+        gameStateManager.category.History = false;
+        gameStateManager.category.Science = false;
+
+        gameStateManager.category.inMath = false;
+        gameStateManager.category.inHis = false;
+        gameStateManager.category.inSci = false;
+
+        gameStateManager.level.Easy = false;
+        gameStateManager.level.Mid = false;
+        gameStateManager.level.Hard = false;
+
+        gameStateManager.level.inEasy = false;
+        gameStateManager.level.inMid = false;
+        gameStateManager.level.inHard = false;
+        gameStateManager.category.ConfirmCategory = false;
     }
 }
