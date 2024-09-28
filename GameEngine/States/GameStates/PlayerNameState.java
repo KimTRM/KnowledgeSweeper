@@ -5,6 +5,7 @@ import GameEngine.States.GameStateManager;
 import GameEngine.States.State;
 import GameEngine.Util.Leaderboard.PlayerName;
 import java.awt.*;
+import java.util.Objects;
 
 public class PlayerNameState extends State
 {
@@ -21,7 +22,22 @@ public class PlayerNameState extends State
     {
         if (player.Confirm)
         {
-            gameStateManager.leaderboard.WriteData(player.playerName, gameStateManager.gameBoard.Score, gameStateManager.level.Level, gameStateManager.category.category);
+            if (Objects.equals(gameStateManager.level.Level, "Easy"))
+            {
+                gameStateManager.leaderboard.File(1);
+                gameStateManager.leaderboard.WriteData(player.playerName, gameStateManager.gameBoard.Score, gameStateManager.level.Level, gameStateManager.category.category);
+            }
+            if (Objects.equals(gameStateManager.level.Level, "Normal"))
+            {
+                gameStateManager.leaderboard.File(2);
+                gameStateManager.leaderboard.WriteData(player.playerName, gameStateManager.gameBoard.Score, gameStateManager.level.Level, gameStateManager.category.category);
+            }
+            if (Objects.equals(gameStateManager.level.Level, "Hard"))
+            {
+                gameStateManager.leaderboard.File(3);
+                gameStateManager.leaderboard.WriteData(player.playerName, gameStateManager.gameBoard.Score, gameStateManager.level.Level, gameStateManager.category.category);
+            }
+
             gameStateManager.leaderboard.refreshLeaderboard();
 
             player.Confirm = false;

@@ -56,7 +56,7 @@ public class PlayerName extends JFrame {
         // Create the input panel
         JPanel inputPanel = new JPanel(new FlowLayout());
         JLabel nameLabel = new JLabel("Enter your name: ");
-        JTextField nameField = new JTextField(20);
+        JTextField nameField = new JTextField(12);
         JButton submitButton = new JButton("Submit");
 
         nameLabel.setFont(assetManager.Pixel);

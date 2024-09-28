@@ -61,3 +61,9 @@ KIM, 54, Hard, Science
 ///
 Kim, 32, Hard, Science
 ///
+kylo, 140, Normal, Science
+///
+KIM, 59, Hard, Science
+///
+Test, 24, Easy, Science
+///

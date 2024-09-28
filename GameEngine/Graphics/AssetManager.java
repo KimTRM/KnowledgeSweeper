@@ -33,7 +33,11 @@ public class AssetManager {
     Select, Select1,
     ActiveBlock, DeactBlock,
     KLTL_Logo, Timer,
-    Reset, Home;
+    Reset, ResetHover, Home, Exit, HoverExit,
+
+    // --- MEDALS ---
+    Medal1, Medal2, Medal3,
+    Leaderboard;
 
     // --- MUSIC PLAYER ---
     File[] file = new File[10];
@@ -98,7 +102,17 @@ public class AssetManager {
             Timer = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Timer.png")));
 
             Reset = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Restart.png")));
+            ResetHover = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/RestartHover.png")));
             Home = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Home.png")));
+
+            Medal1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Medal1.png")));
+            Medal2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Medal2.png")));
+            Medal3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Medal3.png")));
+
+            Leaderboard = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Leaderboard.png")));
+
+            Exit = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Exit.png")));
+            HoverExit = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/HoverExit.png")));
 
         }catch(IOException e) {
             e.printStackTrace();

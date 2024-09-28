@@ -52,7 +52,7 @@ public class StartingState extends State {
     @Override
     public void input()
     {
-        if (!gameStateManager.isStateActive(GameStateManager.MENU))
+        if (!gameStateManager.isStateActive(GameStateManager.MENU) && !gameStateManager.isStateActive(GameStateManager.LEADERBOARD))
         {
             if (Start) {
                 assetManager.playSE(1);

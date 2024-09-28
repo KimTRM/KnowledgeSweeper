@@ -13,18 +13,25 @@ public class LeaderboardState extends State
         super(gameStateManager, assetManager);
     }
 
+    boolean Exit;
+    int sButtonX = 1160;
+    int sButtonY = 60;
+
     @Override
     public void update()
     {
         gameStateManager.leaderboard.update();
+        Exit = assetManager.ArrowCollision(sButtonX, sButtonY, 28,5, 60, 60, false);
     }
 
     @Override
     public void input()
     {
         gameStateManager.leaderboard.input();
-       if (gameStateManager.leaderboard.Active)
+
+       if (Exit)
        {
+           assetManager.playSE(1);
            gameStateManager.gameBoard.bomb = false;
            gameStateManager.gameBoard.Name = false;
 
@@ -39,12 +46,18 @@ public class LeaderboardState extends State
        }
     }
 
-    boolean inLeader = false;
-
     @Override
     public void render(Graphics2D g)
     {
         gameStateManager.leaderboard.render(g);
+
+        g.drawImage(AssetManager.Exit, sButtonX + 5, sButtonY, 50,50,null);
+
+        if (Exit)
+        {
+            g.drawImage(AssetManager.HoverExit, sButtonX, sButtonY - 5, 60,60,null);
+        }
+
     }
 
     void Reset()

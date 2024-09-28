@@ -93,7 +93,7 @@ public class GameBoard
         paddingY = 1;
 
         NumBomb = 20;
-        TotalBoxes = 30;
+        TotalBoxes = 36;
         TimerSeconds = 61;
 
         xLoc = 30;
@@ -125,7 +125,7 @@ public class GameBoard
         paddingY = 1;
 
         NumBomb = 25;
-        TotalBoxes = 80;
+        TotalBoxes = 84;
         TimerSeconds = 16;
 
         xLoc = 50;
