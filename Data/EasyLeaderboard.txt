@@ -3,3 +3,19 @@ Kim, 14, Easy, Science
 ///
 Louise, 9, Easy, Science
 ///
+berano, 26, Easy, Science
+///
+aiz, 75, Easy, Science
+///
+bell, 43, Easy, Science
+///
+kyle, 15, Easy, Science
+///
+kim, 84, Easy, Science
+///
+lee, 90, Easy, Science
+///
+Kim, 39, Easy, Science
+///
+jepriiyot, 25, Easy, Science
+///

@@ -23,7 +23,6 @@ public class MouseHandler implements MouseMotionListener, MouseListener {
     public int getX() {
         return mouseX;
     }
-
     public int getY() {
         return mouseY;
     }

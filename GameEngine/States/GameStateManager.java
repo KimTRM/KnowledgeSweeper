@@ -41,7 +41,7 @@ public class GameStateManager
     public static final int PLAYERNAME = 8;
     public static final int TUTORIALS = 9;
 
-    public String version = "1.3";
+    public String version = "1.4";
 
     public GameStateManager(GamePanel gamePanel)
     {

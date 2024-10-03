@@ -30,6 +30,12 @@ public class QuizState extends State {
                 quizManager.Confirm = false;
                 quizManager.Stoptimer = true;
                 gameStateManager.removeState(GameStateManager.QUIZ);
+
+                // -- REMOVES ONE LIFE --
+                if (gameStateManager.quizManager.AnswerWrong)
+                {
+                    gameStateManager.gameBoard.life--;
+                }
             }
 
             if (gameStateManager.quizManager.seconds == 0 && gameStateManager.isStateActive(GameStateManager.QUIZ))
@@ -58,7 +64,6 @@ public class QuizState extends State {
         if (gameStateManager.isStateActive(GameStateManager.QUIZ))
         {
             quizManager.render(g);
-            gameStateManager.gameBoard.UI(g);
         }
     }
 }

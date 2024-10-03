@@ -37,12 +37,6 @@ public class GameState extends State {
         {
             gameBoard.bomb = false;
 
-            // -- REMOVES ONE LIFE --
-            if (gameStateManager.quizManager.AnswerWrong)
-            {
-                gameBoard.life--;
-            }
-
             if (gameBoard.defeat())
             {
                 assetManager.playSE(5);

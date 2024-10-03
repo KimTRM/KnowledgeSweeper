@@ -1,1 +1,11 @@
 ///
+iris, 83, Hard, Science
+///
+lie, 88, Hard, Math
+///
+Kim, 42, Hard, Math
+///
+kim, 84, Hard, Science
+///
+Louise, 47, Hard, Science
+///

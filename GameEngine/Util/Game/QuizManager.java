@@ -226,40 +226,41 @@ public class QuizManager {
     public void render(Graphics2D g)
     {
         g.drawImage(AssetManager.Shade, 0, 0, assetManager.getScreenWidth(), assetManager.getScreenHeight(), null);
+        g.drawImage(AssetManager.Shade, 0, 0, assetManager.getScreenWidth(), assetManager.getScreenHeight(), null);
 
-        assetManager.TextBox(250, 10, 800, 400, g);
+        g.drawImage(AssetManager.Leaderboard, 250, 10, 800, 350, null);
 
-        assetManager.TextBox(TextBoxAX, TextBoxAY, 250, 150, g);
-        assetManager.TextBox(TextBoxBX, TextBoxBY, 250, 150, g);
-        assetManager.TextBox(TextBoxCX, TextBoxCY, 250, 150, g);
-        assetManager.TextBox(TextBoxDX, TextBoxDY, 250, 150, g);
+        assetManager.TextBox(TextBoxAX, TextBoxAY, 300, 150, g);
+        assetManager.TextBox(TextBoxBX, TextBoxBY, 300, 150, g);
+        assetManager.TextBox(TextBoxCX, TextBoxCY, 300, 150, g);
+        assetManager.TextBox(TextBoxDX, TextBoxDY, 300, 150, g);
 
         g.setColor(Color.BLACK);
         int Qy = 180;
         int Qx = 320;
         assetManager.PrintTexts(Question, Qx, Qy, 48, 55, false, g);
 
-        assetManager.PrintTexts(A, TextBoxAX + 25, TextBoxAY + 80, 48, 25, false, g);
-        assetManager.PrintTexts(B, TextBoxBX + 25, TextBoxBY + 80, 48, 25, false, g);
-        assetManager.PrintTexts(C, TextBoxCX + 25, TextBoxCY + 80, 48, 25, false, g);
-        assetManager.PrintTexts(D, TextBoxDX + 25, TextBoxDY + 80, 48, 25, false, g);
+        assetManager.PrintTexts(A, TextBoxAX + 25, TextBoxAY + 80, 48, 30, false, g);
+        assetManager.PrintTexts(B, TextBoxBX + 25, TextBoxBY + 80, 48, 30, false, g);
+        assetManager.PrintTexts(C, TextBoxCX + 25, TextBoxCY + 80, 48, 30, false, g);
+        assetManager.PrintTexts(D, TextBoxDX + 25, TextBoxDY + 80, 48, 30, false, g);
 
         // -- HOVER (A,B,C,D) --
         if (inQA)
         {
-            g.drawImage(AssetManager.Select1, TextBoxAX, TextBoxAY, 250, 150, null);
+            g.drawImage(AssetManager.Select1, TextBoxAX, TextBoxAY, 300, 150, null);
         }
         if (inQB)
         {
-            g.drawImage(AssetManager.Select1, TextBoxBX, TextBoxBY, 250, 150, null);
+            g.drawImage(AssetManager.Select1, TextBoxBX, TextBoxBY, 300, 150, null);
         }
         if (inQC)
         {
-            g.drawImage(AssetManager.Select1, TextBoxCX, TextBoxDY, 250, 150, null);
+            g.drawImage(AssetManager.Select1, TextBoxCX, TextBoxCY, 300, 150, null);
         }
         if (inQD)
         {
-            g.drawImage(AssetManager.Select1, TextBoxDX, TextBoxDY, 250, 150, null);
+            g.drawImage(AssetManager.Select1, TextBoxDX, TextBoxDY, 300, 150, null);
         }
 
         if (seconds <= 10)
@@ -306,20 +307,23 @@ public class QuizManager {
 
     boolean inQA, inQB, inQC, inQD;
 
+    int Boxlenght = 300;
+    int Boxwidth = 120;
+
     // POPUP SCREEN
     int TextBoxY = 380;
 
-    int TextBoxAX = 50;
+    int TextBoxAX = 320;
     int TextBoxAY = TextBoxY;
 
-    int TextBoxBX = 330;
-    int TextBoxBY = TextBoxY;
+    int TextBoxBX = 320;
+    int TextBoxBY = TextBoxY + 150;
 
-    int TextBoxCX = 630;
+    int TextBoxCX = 680;
     int TextBoxCY = TextBoxY;
 
-    int TextBoxDX = 960;
-    int TextBoxDY = TextBoxY;
+    int TextBoxDX = 680;
+    int TextBoxDY = TextBoxY + 150;
 
 }
 
