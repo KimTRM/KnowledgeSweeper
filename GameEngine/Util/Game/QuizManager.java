@@ -18,7 +18,7 @@ public class QuizManager {
     public String correctAnswer;
     public boolean Science, History, Math;
 
-    File[] file = new File[5];
+    File[] file = new File[8];
     List<Question> questionList = new ArrayList<>();
     public int x;
 

@@ -192,7 +192,8 @@ public class Leaderboard
         assetManager.PrintText("SCORE", 980, 190, 0, 50, true, g);
 
         // -- OUTPUTS THE LEADERBOARD --
-        for (Player player : players)
+        List<Player> playersCopy = new ArrayList<>(players);
+        for (Player player : playersCopy)
         {
             if (players.indexOf(player) < 10)
             {

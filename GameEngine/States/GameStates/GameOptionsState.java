@@ -27,6 +27,11 @@ public class GameOptionsState extends State {
         inBack = assetManager.inButtonCollision(BackX, BackY, 100, 100,  BackButtonW - 20, BackButtonH - 20, false, "Back");
         inPlay = assetManager.inButtonCollision(PlayX, PlayY, 140, 140,  PlayButtonW + 30, PlayButtonH + 100, false, "Play");
 
+        if (!gameStateManager.isStateActive(GameStateManager.TUTORIALS))
+        {
+            inTutorial = assetManager.inButtonCollision(TutorialX, TutorialY, 100, 0, TutorialButtonW, TutorialButtonH, false, "Tutorial");
+        }
+
         if (!gameStateManager.category.ConfirmCategory)
         {
             gameStateManager.category.update();
@@ -45,85 +50,78 @@ public class GameOptionsState extends State {
     @Override
     public void input()
     {
-        if (!gameStateManager.category.ConfirmCategory)
+        if (!gameStateManager.isStateActive(GameStateManager.TUTORIALS))
         {
-            gameStateManager.category.input();
-        }
-        else
-        {
-            gameStateManager.level.input();
-        }
+            if (!gameStateManager.category.ConfirmCategory) {
+                gameStateManager.category.input();
+            } else {
+                gameStateManager.level.input();
+            }
 
-        // --- SUBJECTS ---
-        if (gameStateManager.category.inSci)
-        {
-            quizManager.Science = true;
-            quizManager.History = false;
-            quizManager.Math = false;
+            if (inTutorial) {
+                assetManager.playSE(1);
+                gameStateManager.addState(GameStateManager.TUTORIALS);
+            }
 
-            quizManager.clear();
-            quizManager.ChangeSubject("Science");
-        }
-        else if (gameStateManager.category.inHis)
-        {
-            quizManager.History = true;
-            quizManager.Science = false;
-            quizManager.Math = false;
+            // --- SUBJECTS ---
+            if (gameStateManager.category.inSci) {
+                quizManager.Science = true;
+                quizManager.History = false;
+                quizManager.Math = false;
 
-            quizManager.clear();
-            quizManager.ChangeSubject("History");
-        }
-        else if (gameStateManager.category.inMath)
-        {
-            assetManager.playSE(1);
+                quizManager.clear();
+                quizManager.ChangeSubject("Science");
+            } else if (gameStateManager.category.inHis) {
+                quizManager.History = true;
+                quizManager.Science = false;
+                quizManager.Math = false;
 
-            quizManager.Math = true;
-            quizManager.Science = false;
-            quizManager.History = false;
+                quizManager.clear();
+                quizManager.ChangeSubject("History");
+            } else if (gameStateManager.category.inMath) {
+                assetManager.playSE(1);
 
-            quizManager.clear();
-            quizManager.ChangeSubject("Math");
-        }
+                quizManager.Math = true;
+                quizManager.Science = false;
+                quizManager.History = false;
 
-        // --- DIFFICULTY --
-        if (gameStateManager.level.inEasy)
-        {
-            gameBoard.Easy = true;
-            gameBoard.Medium = false;
-            gameBoard.Hard = false;
+                quizManager.clear();
+                quizManager.ChangeSubject("Math");
+            }
 
-            gameBoard.ChangeDifficulty("Easy", true);
-        }
-        else if (gameStateManager.level.inMid)
-        {
-            gameBoard.Easy = false;
-            gameBoard.Medium = true;
-            gameBoard.Hard = false;
+            // --- DIFFICULTY --
+            if (gameStateManager.level.inEasy) {
+                gameBoard.Easy = true;
+                gameBoard.Medium = false;
+                gameBoard.Hard = false;
 
-            gameBoard.ChangeDifficulty("Medium", true);
-        }
-        else if (gameStateManager.level.inHard)
-        {
-            gameBoard.Easy = false;
-            gameBoard.Medium = false;
-            gameBoard.Hard = true;
+                gameBoard.ChangeDifficulty("Easy", true);
+            } else if (gameStateManager.level.inMid) {
+                gameBoard.Easy = false;
+                gameBoard.Medium = true;
+                gameBoard.Hard = false;
 
-            gameBoard.ChangeDifficulty("Hard", true);
-        }
+                gameBoard.ChangeDifficulty("Medium", true);
+            } else if (gameStateManager.level.inHard) {
+                gameBoard.Easy = false;
+                gameBoard.Medium = false;
+                gameBoard.Hard = true;
 
-        if (inBack)
-        {
-            assetManager.playSE(1);
-            gameStateManager.category.ConfirmCategory = false;
-        }
+                gameBoard.ChangeDifficulty("Hard", true);
+            }
 
-        // --- PLAY ---
-        if (inPlay && SubjectCheck() && DifficultyCheck())
-        {
-            assetManager.playSE(1);
+            if (inBack) {
+                assetManager.playSE(1);
+                gameStateManager.category.ConfirmCategory = false;
+            }
 
-            gameBoard.ResetAll(gameBoard.TotalBoxes);
-            gameStateManager.AddAndRemoveState(GameStateManager.GAME, GameStateManager.GAMEOPTIONS);
+            // --- PLAY ---
+            if (inPlay && SubjectCheck() && DifficultyCheck()) {
+                assetManager.playSE(1);
+
+                gameBoard.ResetAll(gameBoard.TotalBoxes);
+                gameStateManager.AddAndRemoveState(GameStateManager.GAME, GameStateManager.GAMEOPTIONS);
+            }
         }
     }
 
@@ -132,8 +130,16 @@ public class GameOptionsState extends State {
     {
         assetManager.TextBox(250, 100, 800, 200, g);
 
-        assetManager.drawSubWindow(1060, 10, 200, 50, g);
-        assetManager.PrintText("How to Play?", 1090, 45, 0, 30, false, g);
+        if (inTutorial)
+        {
+            assetManager.drawSubWindow(1050, 5, 220, 60, g);
+            assetManager.PrintText("How to Play?", 1080, 48, 0, 35, false, g);
+        }
+        else
+        {
+            assetManager.drawSubWindow(1060, 10, 200, 50, g);
+            assetManager.PrintText("How to Play?", 1090, 45, 0, 30, false, g);
+        }
 
         // -- SUBJECT CHOOSEN --
         if (!gameStateManager.category.ConfirmCategory)
@@ -231,6 +237,7 @@ public class GameOptionsState extends State {
 
     // -- BUTTONS --
     boolean inBack;
+    boolean inTutorial;
 
     int BackX = 10;
     int BackY = -20;
@@ -244,4 +251,9 @@ public class GameOptionsState extends State {
 
     int PlayButtonW = 220;
     int PlayButtonH = 220;
+
+    int TutorialX = 1060;
+    int TutorialY = 10;
+    int TutorialButtonW = 200;
+    int TutorialButtonH = 200;
 }

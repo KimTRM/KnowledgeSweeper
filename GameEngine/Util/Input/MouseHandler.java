@@ -19,7 +19,6 @@ public class MouseHandler implements MouseMotionListener, MouseListener {
         this.gameStateManager = gameStateManager;
     }
 
-
     public int getX() {
         return mouseX;
     }

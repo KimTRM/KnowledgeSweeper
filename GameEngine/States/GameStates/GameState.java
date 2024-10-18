@@ -71,6 +71,7 @@ public class GameState extends State {
         {
             gameBoard.input();
 
+
             if (gameBoard.Home && !gameBoard.Name)
             {
                 assetManager.playSE(1);

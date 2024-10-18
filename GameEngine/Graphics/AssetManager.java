@@ -37,7 +37,8 @@ public class AssetManager {
 
     // --- MEDALS ---
     Medal1, Medal2, Medal3,
-    Leaderboard;
+    Leaderboard,
+    Mouse_Left, Mouse_Right;       ;
 
     // --- MUSIC PLAYER ---
     File[] file = new File[10];
@@ -114,6 +115,8 @@ public class AssetManager {
             Exit = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Exit.png")));
             HoverExit = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/HoverExit.png")));
 
+            Mouse_Left = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Mouse_LeftClick.png")));
+            Mouse_Right = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Mouse_RightClick.png")));
         }catch(IOException e) {
             e.printStackTrace();
         }

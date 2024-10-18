@@ -19,3 +19,7 @@ Kim, 39, Easy, Science
 ///
 jepriiyot, 25, Easy, Science
 ///
+Mik, 21, Easy, Science
+///
+manigasupot, 64, Easy, Science
+///

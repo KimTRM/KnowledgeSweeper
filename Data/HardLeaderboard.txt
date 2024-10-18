@@ -9,3 +9,7 @@ kim, 84, Hard, Science
 ///
 Louise, 47, Hard, Science
 ///
+Kim, 62, Hard, Science
+///
+KIM, 50, Hard, Science
+///

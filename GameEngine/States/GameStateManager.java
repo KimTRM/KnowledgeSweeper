@@ -11,6 +11,8 @@ import GameEngine.Util.Leaderboard.Leaderboard;
 import GameEngine.Util.Leaderboard.PlayerName;
 import GameEngine.Util.Options.Category;
 import GameEngine.Util.Options.Level;
+import GameEngine.Util.Tutorial.Page;
+import GameEngine.Util.Tutorial.PageManager;
 
 import java.awt.*;
 
@@ -49,6 +51,7 @@ public class GameStateManager
         this.gamePanel = gamePanel;
 
         assetManager = new AssetManager(gamePanel);
+
         category = new Category(assetManager);
         level = new Level(assetManager);
         gameBoard = new GameBoard(assetManager);
