@@ -16,9 +16,6 @@ public class EndingState extends State
     @Override
     public void update()
     {
-        if (gameStateManager.gameBoard.victory()) {
-            gameStateManager.victoryEnd.update();
-        }
         if (gameStateManager.gameBoard.defeat()) {
             gameStateManager.lossEnd.update();
         }
@@ -29,28 +26,6 @@ public class EndingState extends State
     {
         if (gameStateManager.isStateActive(GameStateManager.ENDING))
         {
-            if (gameStateManager.gameBoard.victory()) {
-                gameStateManager.victoryEnd.input();
-
-                // -- RESTARTS THE GAME --
-                if (gameStateManager.victoryEnd.inRestart) {
-                    gameStateManager.gameBoard.Name = false;
-                    gameStateManager.removeState(GameStateManager.ENDING);
-                }
-
-                // -- GOES BACK TO START --
-                if (gameStateManager.victoryEnd.inBacktoStart) {
-                    gameStateManager.gameBoard.bomb = false;
-                    gameStateManager.gameBoard.Name = false;
-
-                    Reset();
-
-                    gameStateManager.removeState(GameStateManager.GAME);
-                    gameStateManager.removeState(GameStateManager.QUIZ);
-                    gameStateManager.removeState(GameStateManager.ENDING);
-                    gameStateManager.addState(GameStateManager.STARTING);
-                }
-            }
             if (gameStateManager.gameBoard.defeat()) {
                 gameStateManager.lossEnd.input();
 
@@ -79,9 +54,6 @@ public class EndingState extends State
     @Override
     public void render(Graphics2D g)
     {
-        if (gameStateManager.gameBoard.victory()) {
-            gameStateManager.victoryEnd.render(g);
-        }
         if (gameStateManager.gameBoard.defeat()) {
             gameStateManager.lossEnd.render(g);
         }

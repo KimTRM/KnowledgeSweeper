@@ -1,0 +1,141 @@
+///
+\n            What is 9×(3+2)?
+            45
+            50
+            55
+            60  
+D
+///
+\n           If 7x=42, what is x?
+               4
+               5
+               6
+               7  
+C
+///
+\n  What is the value of 25÷(2+3)?
+            5
+            10
+            15
+            20  
+A
+///
+\n            What is 12+6×3?
+            30
+            36
+            42
+            48  
+C
+///
+     What is the perimeter of a\n       triangle with sides 8 cm,\n              6 cm, and 5 cm?
+            18cm
+            19cm
+            20cm
+            21cm  
+B
+///
+\n          Solve for y: 2y-5=15
+            10
+            12
+            15
+            17
+B
+///
+\n                What is 5³?
+            125
+            150
+            175
+            200  
+A
+///
+   What is the area of a triangle\n      with a base of 10 cm and\n            a height of 6 cm?
+            30cm²
+            60cm²
+            70cm²
+            80cm²  
+A
+///
+\nWhat is the value of 7×(4−2)?
+            12
+            14
+            16
+            18
+B
+///
+   If a number is multiplied by 8\n          and the result is 56,\n         what is the number?
+            6
+            7
+            8
+            9  
+B 
+///
+\n          What is (15−5)÷2?
+              4
+              5
+              6
+             10  
+B
+///
+     What is the perimeter of a\n    rectangle with length 12 cm\n            and width 7 cm?
+            34cm
+            38cm
+            40cm
+            42cm  
+B
+///
+\n           Solve for x: 4x+3=19
+              3
+              4
+              5
+              6  
+C
+///
+  What is the sum of the angles\n           in a quadrilateral?
+            360°
+            180°
+            270°
+            90°
+A 
+///
+ If you subtract 8 from a number\nand then multiply by 3, the result\n      is 27. What is the number?
+              11
+              13
+              15
+              17  
+B
+///
+\n           What is 9÷(3−1)?
+              4
+              6
+              9
+              12  
+B
+///
+\n           What is 6×(2+5)?
+              36
+              42
+              48
+              56  
+B
+///
+    What is the area of a square\n     with a side length of 7 cm?
+            42cm²
+            49cm²
+            56cm²
+            63cm²  
+B
+///
+\n          Solve for z: 3z−4=11
+              4
+              5
+              6
+              7  
+D
+///
+\n             What is 3²+4²?
+              25
+              30
+              34
+              40  
+C
+///

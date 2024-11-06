@@ -69,14 +69,12 @@ public class GameOptionsState extends State {
                 quizManager.History = false;
                 quizManager.Math = false;
 
-                quizManager.clear();
                 quizManager.ChangeSubject("Science");
             } else if (gameStateManager.category.inHis) {
                 quizManager.History = true;
                 quizManager.Science = false;
                 quizManager.Math = false;
 
-                quizManager.clear();
                 quizManager.ChangeSubject("History");
             } else if (gameStateManager.category.inMath) {
                 assetManager.playSE(1);
@@ -85,7 +83,6 @@ public class GameOptionsState extends State {
                 quizManager.Science = false;
                 quizManager.History = false;
 
-                quizManager.clear();
                 quizManager.ChangeSubject("Math");
             }
 
@@ -95,18 +92,24 @@ public class GameOptionsState extends State {
                 gameBoard.Medium = false;
                 gameBoard.Hard = false;
 
+                quizManager.clear();
+                quizManager.ChangeQuestion();
                 gameBoard.ChangeDifficulty("Easy", true);
             } else if (gameStateManager.level.inMid) {
                 gameBoard.Easy = false;
                 gameBoard.Medium = true;
                 gameBoard.Hard = false;
 
+                quizManager.clear();
+                quizManager.ChangeQuestion();
                 gameBoard.ChangeDifficulty("Medium", true);
             } else if (gameStateManager.level.inHard) {
                 gameBoard.Easy = false;
                 gameBoard.Medium = false;
                 gameBoard.Hard = true;
 
+                quizManager.clear();
+                quizManager.ChangeQuestion();
                 gameBoard.ChangeDifficulty("Hard", true);
             }
 

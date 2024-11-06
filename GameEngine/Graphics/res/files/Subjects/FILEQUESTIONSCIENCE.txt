@@ -1,8 +1,8 @@
 ///
 What is the chemical symbol for \nwater?
-H2O
-CO2
-O2
+H²O
+CO²
+O²
 NaCl
 A
 ///

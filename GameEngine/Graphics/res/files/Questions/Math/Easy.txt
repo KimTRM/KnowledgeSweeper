@@ -1,0 +1,176 @@
+///
+\n              What is 1+4?
+               7
+               8
+               5
+               6
+C
+///
+\n              What is 8x6?
+            42
+            48
+            54
+            60
+B
+///
+\n              What is 15-9?
+               4
+               5
+               6
+               7
+C
+///
+\n             What is 5x(4+2)?
+               20
+               24
+               30
+               32
+C
+///
+\n              What is 45/9?
+               4
+               5
+               6
+               7
+B
+/// 
+\n              What is 18-9?
+               7
+               9
+               10
+               15
+A
+/// 
+    What is the parameter of a\n      rectangle with a length\n   of 6cm and a width of 3cm?
+            12cm
+            18cm
+            24cm
+            30cm
+B
+/// 
+\n              What is 25+36?
+               50
+               60
+               70
+               61
+D
+///
+\n              What is 10x7?
+               30
+               48
+               54
+               70
+D
+/// 
+\n              What is 3x3?
+               4
+               8
+               5
+               9
+D
+/// 
+\n              What is 18/3?
+               4
+               3
+               5
+               6
+D
+/// 
+\n             What is 7+13-5?
+               10	
+               12
+               18
+               15
+D
+///
+   What is the area of a square\n     with a side length of 4cm?
+            8cm
+            12cm
+            16cm
+            20cm
+C
+///
+\n    What is the value of 3x4+2?
+               10
+               12
+               14
+               15
+C
+///
+\n             What is 8x(2+3)?
+               10
+               12
+               14
+               16
+B
+/// 
+\n              What is 27-8?
+               16
+               18
+               19
+               21
+C
+/// 
+\n      What is the value of 5x5?
+               20
+               25
+               30
+               60
+B
+///
+\n   What is the sum of 17 and 8?
+               25
+               30
+               54
+               60
+A
+///
+\n              What is 48/6?
+               6
+               7
+               8
+               9
+C
+/// 
+\n              What is 9x9?
+               42
+               81
+               54
+               60
+B
+/// 
+\n              What is 14-5?
+               4
+               9
+               5
+               6
+B
+/// 
+\n             What is 6x(5-2)?
+               12
+               18
+               24
+               30
+B
+/// 
+\n              What is 35+27?
+               60
+               62
+               64
+               70
+B
+/// 
+\n              What is 21/3?
+               12
+               7
+               15
+               18
+B
+/// 
+\n              What is 13x2?
+               42
+               26
+               54
+               60
+B
+/// 

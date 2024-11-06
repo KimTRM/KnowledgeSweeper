@@ -1,0 +1,295 @@
+///
+What is the chemical symbol for\n                  water?
+           H²O
+           CO²
+           O²
+           NaCl
+A
+///
+  Which planet is known as the\n               "Red Planet"? 
+          Earth
+          Mars
+          Saturn
+          Neptune  
+B
+///
+What force keeps objects on the\n            Earth's surface?
+           Gravity
+         Magnetism
+         Friction
+           Inertia
+A
+///
+    What is the hardest natural\n          substance on Earth?
+           Gold
+         Diamond
+          Iron
+           Quartz
+B
+///
+What process do plants use to\n      make their own food?
+       Respiration
+      Photosynthesis
+       Fermentation
+        Digestion
+B
+///
+What is the unit of measurement\n                 for force?
+          Newton
+           Watt
+          Joule
+           Volt
+A
+///
+  What part of the atom has a\n          negative charge?
+           Proton
+           Electron
+           Neutron
+           Nucleus
+B
+///
+  Which animal is known for its\nability to change color to match\n           its surroundings?
+      Chameleon
+      Elaphant
+         Tiger
+        Giraffe
+A
+///
+What is the main gas that makes\n    up the Earth's atmosphere?
+      Oxygen
+      Nitrogen
+    Carbon dioxide
+      Hydrogen
+B
+///
+  What is the process by which\n        liquid water becomes\n              water vapor?
+        Condensation
+        Evaporation
+        Sublimation
+        Precipitation
+B
+///
+      What is the powerhouse\n               of the cell?
+           Nucleus
+        Mitochondria
+        Chloroplast
+       Endoplasmic\n         reticulum
+B
+///
+    What is the outermost layer\n        of the Earth called?
+        Mantle
+        Crust
+          Core
+     Lithosphere
+B
+///
+       What is the closest star\n                 to Earth?
+     Alpha Centauri
+     Proxima Centauri
+       Betelgeuse
+         Sirius
+B
+///
+   Which of the following is the\n           largest organ in the\n                human body?
+           Liver
+           Brain
+           Skin
+           Heart
+C
+///
+       Which element has the\n        chemical symbol 'Fe'?
+             Iron
+             Gold
+             Silver
+             Lead
+A
+///
+   What is the SI unit of electric\n                current?
+             Ohm
+             Volt
+            Ampere
+             Watt
+C
+///
+  What is the process by which\n    rocks are broken down into\n       smaller particles called?
+        Erosion
+       Weathering
+      Sedimentation
+        Deposition
+B
+///
+ Which of the following is not a\n                mammal?
+           Dolphin
+           Penguin
+          Kangaroo
+             Bat
+B
+///
+ What is the chemical symbol\n                for gold?
+              Au
+              Ag
+              Fe
+              Pb
+A
+//
+ What is the largest moon in the\n              solar system?
+          Europa
+        Ganymede
+           Titan
+          Callisto
+B
+///
+ Which of the following is not a\n        primary color of light?
+          Red
+         Green
+          Blue
+         Yellow
+D
+///
+   Which of the following is the\n   most abundant gas in Earth's\n               atmosphere?
+          Oxygen
+         Nitrogen
+      Carbon dioxide
+           Argon
+B
+///
+\n  What do plants need to grow? 
+    Water, sunlight,\n           and air
+         Only water 
+     Only sunlight 
+          Only air
+A
+///
+    What is the sky usually like\n            on a sunny day? 
+   Dark and cloudy 
+    Light and blue 
+   Rainy and stormy 
+    Snowy and cold
+B
+///
+   What is the biggest planet in\n           our solar system? 
+          Earth 
+          Saturn 
+          Jupiter 
+          Mars
+C
+///
+   What do we call the remains\n    of plants and animals from\n           a long time ago? 
+         Fossils 
+         Rocks 
+         Minerals 
+             Soil
+A
+///
+      What is the largest living\n              thing on Earth?
+      Blue whale 
+       Elephant 
+          Tree 
+        Coral reef
+A
+///
+  What is the sun's role in our\n             solar system? 
+       It is a planet 
+       It is a moon 
+    It is the star that\ngives us light and heat 
+       It is a comet
+C
+///
+  What is the largest mammal\n                 on Earth? 
+       Elephant 
+      Blue whale 
+          Lion 
+         Giraffe
+B
+///
+ What do we call the movement\n      of the Earth on its axis? 
+       Rotation 
+       Revolution 
+            Orbit 
+          Eclipse
+A
+///
+     Which state of matter has\n     a fixed shape and volume?
+          Solid
+          Liquid
+           Gas
+          Plasma
+A
+///
+     Which state of matter has\n particles that are close together\n         but can move around?
+          Solid
+          Liquid
+           Gas
+          Plasma
+B
+///
+ Which state of matter is easily\n               compressed?
+          Solid
+          Liquid
+           Gas
+          Plasma
+C
+///
+     Which state of matter has\n     particles that are far apart\n                 and move 
+          Solid
+          Liquid
+           Gas
+          Plasma
+C
+///
+   Which of the following is an\n         example of a solid?
+         Water
+          Air
+          Ice
+        Steam
+D
+///
+   Which of the following is an\n         example of a liquid?
+         Rock
+         Water
+          Ice
+        Steam
+B
+///
+   Which of the following is an\n         example of a gas?
+         Wood
+         Oxygen
+         Metal
+         Stone
+B
+///
+ How many planets are there in\n           our solar system?
+             7
+             8
+             9
+            10
+B
+///
+     Which planet is closest to\n                  the Sun?
+          Venus
+          Mercury
+           Mars
+         Jupiter 
+B
+///
+  Which planet is the largest to\n        in our solar system?
+          Earth
+          Jupiter
+          Saturn
+          Neptune  
+B
+///
+  Which planet is known as the\n               "Red Planet"? 
+          Earth
+          Mars
+          Saturn
+          Neptune  
+B
+///
+What are Saturn's rings primarily\n                 made of?
+       Frozen lava
+           Rock
+             Ice
+       Gas and dust  
+C
+///

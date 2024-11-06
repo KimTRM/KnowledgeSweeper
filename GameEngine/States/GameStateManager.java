@@ -4,15 +4,12 @@ import GameEngine.GamePanel;
 import GameEngine.Graphics.AssetManager;
 import GameEngine.States.GameStates.*;
 import GameEngine.Util.End.LossEnd;
-import GameEngine.Util.End.VictoryEnd;
 import GameEngine.Util.Game.GameBoard;
 import GameEngine.Util.Game.QuizManager;
 import GameEngine.Util.Leaderboard.Leaderboard;
 import GameEngine.Util.Leaderboard.PlayerName;
 import GameEngine.Util.Options.Category;
 import GameEngine.Util.Options.Level;
-import GameEngine.Util.Tutorial.Page;
-import GameEngine.Util.Tutorial.PageManager;
 
 import java.awt.*;
 
@@ -25,7 +22,6 @@ public class GameStateManager
     public Level level;
     public GameBoard gameBoard;
     public QuizManager quizManager;
-    public VictoryEnd victoryEnd;
     public LossEnd lossEnd;
     public Leaderboard leaderboard;
     public PlayerName player;
@@ -43,7 +39,7 @@ public class GameStateManager
     public static final int PLAYERNAME = 8;
     public static final int TUTORIALS = 9;
 
-    public String version = "1.4";
+    public String version = "1.5";
 
     public GameStateManager(GamePanel gamePanel)
     {
@@ -54,9 +50,8 @@ public class GameStateManager
 
         category = new Category(assetManager);
         level = new Level(assetManager);
-        gameBoard = new GameBoard(assetManager);
+        gameBoard = new GameBoard(assetManager, this);
         quizManager = new QuizManager(assetManager, gameBoard);
-        victoryEnd = new VictoryEnd(assetManager, this);
         lossEnd = new LossEnd(assetManager, this);
         player = new PlayerName(assetManager);
         leaderboard = new Leaderboard(assetManager, this);

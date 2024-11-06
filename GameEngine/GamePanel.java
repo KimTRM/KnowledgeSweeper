@@ -73,7 +73,7 @@ public class GamePanel extends JPanel implements Runnable
         GraphicsDevice gd = ge.getDefaultScreenDevice();
         gd.setFullScreenWindow(GameLauncher.window);
 
-        // <- GETS THE FULL SCREEN SIZE (WIDTH & HIEGHT) ->
+        // <- GETS THE FULL SCREEN SIZE (WIDTH & HEIGHT) ->
         screenWidth2 = GameLauncher.window.getWidth();
         screenHeight2 = GameLauncher.window.getHeight();
     }
@@ -106,7 +106,6 @@ public class GamePanel extends JPanel implements Runnable
             if(timer >= 1000000000) {
                 timer = 0;
             }
-
         }
     }
 
@@ -134,7 +133,11 @@ public class GamePanel extends JPanel implements Runnable
     public void Render()
     {
         parallax.Render(g);
-        background.Render(g);
+
+        if (!gsm.isStateActive(GameStateManager.GAME))
+        {
+            background.Render(g);
+        }
         gsm.Render(g);
     }
     public void Draw()

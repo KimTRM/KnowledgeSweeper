@@ -22,20 +22,61 @@ public class PlayerNameState extends State
     {
         if (player.Confirm)
         {
-            if (Objects.equals(gameStateManager.level.Level, "Easy"))
+            if (Objects.equals(gameStateManager.category.category, "Science"))
             {
-                gameStateManager.leaderboard.File(1);
-                gameStateManager.leaderboard.WriteData(player.playerName, gameStateManager.gameBoard.Score, gameStateManager.level.Level, gameStateManager.category.category);
+                if (Objects.equals(gameStateManager.level.Level, "Easy"))
+                {
+                    gameStateManager.leaderboard.File(1);
+                    gameStateManager.leaderboard.WriteData(player.playerName, gameStateManager.gameBoard.Score, gameStateManager.level.Level, gameStateManager.category.category);
+                }
+                if (Objects.equals(gameStateManager.level.Level, "Normal"))
+                {
+                    gameStateManager.leaderboard.File(2);
+                    gameStateManager.leaderboard.WriteData(player.playerName, gameStateManager.gameBoard.Score, gameStateManager.level.Level, gameStateManager.category.category);
+                }
+                if (Objects.equals(gameStateManager.level.Level, "Hard"))
+                {
+                    gameStateManager.leaderboard.File(3);
+                    gameStateManager.leaderboard.WriteData(player.playerName, gameStateManager.gameBoard.Score, gameStateManager.level.Level, gameStateManager.category.category);
+                }
             }
-            if (Objects.equals(gameStateManager.level.Level, "Normal"))
+
+            if (Objects.equals(gameStateManager.category.category, "History"))
             {
-                gameStateManager.leaderboard.File(2);
-                gameStateManager.leaderboard.WriteData(player.playerName, gameStateManager.gameBoard.Score, gameStateManager.level.Level, gameStateManager.category.category);
+                if (Objects.equals(gameStateManager.level.Level, "Easy"))
+                {
+                    gameStateManager.leaderboard.File(5);
+                    gameStateManager.leaderboard.WriteData(player.playerName, gameStateManager.gameBoard.Score, gameStateManager.level.Level, gameStateManager.category.category);
+                }
+                if (Objects.equals(gameStateManager.level.Level, "Normal"))
+                {
+                    gameStateManager.leaderboard.File(6);
+                    gameStateManager.leaderboard.WriteData(player.playerName, gameStateManager.gameBoard.Score, gameStateManager.level.Level, gameStateManager.category.category);
+                }
+                if (Objects.equals(gameStateManager.level.Level, "Hard"))
+                {
+                    gameStateManager.leaderboard.File(7);
+                    gameStateManager.leaderboard.WriteData(player.playerName, gameStateManager.gameBoard.Score, gameStateManager.level.Level, gameStateManager.category.category);
+                }
             }
-            if (Objects.equals(gameStateManager.level.Level, "Hard"))
+
+            if (Objects.equals(gameStateManager.category.category, "Math"))
             {
-                gameStateManager.leaderboard.File(3);
-                gameStateManager.leaderboard.WriteData(player.playerName, gameStateManager.gameBoard.Score, gameStateManager.level.Level, gameStateManager.category.category);
+                if (Objects.equals(gameStateManager.level.Level, "Easy"))
+                {
+                    gameStateManager.leaderboard.File(9);
+                    gameStateManager.leaderboard.WriteData(player.playerName, gameStateManager.gameBoard.Score, gameStateManager.level.Level, gameStateManager.category.category);
+                }
+                if (Objects.equals(gameStateManager.level.Level, "Normal"))
+                {
+                    gameStateManager.leaderboard.File(10);
+                    gameStateManager.leaderboard.WriteData(player.playerName, gameStateManager.gameBoard.Score, gameStateManager.level.Level, gameStateManager.category.category);
+                }
+                if (Objects.equals(gameStateManager.level.Level, "Hard"))
+                {
+                    gameStateManager.leaderboard.File(11);
+                    gameStateManager.leaderboard.WriteData(player.playerName, gameStateManager.gameBoard.Score, gameStateManager.level.Level, gameStateManager.category.category);
+                }
             }
 
             gameStateManager.leaderboard.refreshLeaderboard();

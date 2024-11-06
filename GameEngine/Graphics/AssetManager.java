@@ -29,7 +29,7 @@ public class AssetManager {
 
     // --- SPRITES ---
     Life, NoLife,
-    Grass, RevGrass,
+    Grass, RevGrass, NumBlock,
     Select, Select1,
     ActiveBlock, DeactBlock,
     KLTL_Logo, Timer,
@@ -38,7 +38,13 @@ public class AssetManager {
     // --- MEDALS ---
     Medal1, Medal2, Medal3,
     Leaderboard,
-    Mouse_Left, Mouse_Right;       ;
+    Mouse_Left, Mouse_Right, Star,
+
+    EasyBG1, EasyBG2, EasyBG3, EasyBG4,
+    NormalBG1, NormalBG2, NormalBG3, NormalBG4,
+    HardBG1, HardBG2, HardBG3, HardBG4,
+
+            BombExploded;
 
     // --- MUSIC PLAYER ---
     File[] file = new File[10];
@@ -92,6 +98,7 @@ public class AssetManager {
 
             Grass = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Grass.png")));
             RevGrass = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/RevGrass.png")));
+            NumBlock = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/NumBlock.png")));
 
             Select = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Select.png")));
             Select1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Select2.png")));
@@ -117,6 +124,25 @@ public class AssetManager {
 
             Mouse_Left = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Mouse_LeftClick.png")));
             Mouse_Right = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Mouse_RightClick.png")));
+
+            Star = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/Star.png")));
+
+            EasyBG1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/background/EasyBG1.png")));
+            EasyBG2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/background/EasyBG2.png")));
+            EasyBG3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/background/EasyBG3.png")));
+            EasyBG4 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/background/EasyBG4.png")));
+
+            NormalBG1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/background/NormalBG1.png")));
+            NormalBG2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/background/NormalBG2.png")));
+            NormalBG3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/background/NormalBG3.png")));
+            NormalBG4 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/background/NormalBG4.png")));
+
+            HardBG1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/background/HardBG1.png")));
+            HardBG2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/background/HardBG2.png")));
+            HardBG3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/background/HardBG3.png")));
+            HardBG4 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/background/HardBG4.png")));
+
+            BombExploded = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("res/icon/BombExploded.png")));
         }catch(IOException e) {
             e.printStackTrace();
         }
@@ -388,7 +414,7 @@ public class AssetManager {
 
     public void drawRoundRect( int x, int y, int width, int height, Graphics2D g)
     {
-        Color c = new Color(211,135,85, 231);  // R,G,B, alfa(opacity)
+        Color c = new Color(224, 207, 144, 195);  // R,G,B, alfa(opacity)
         g.setColor(c);
         g.fillRoundRect(x,y,width,height,35,35);
 

@@ -27,6 +27,7 @@ public class QuizState extends State {
 
             if (quizManager.Confirm)
             {
+                gameStateManager.gameBoard.BombStatus();
                 quizManager.Confirm = false;
                 quizManager.Stoptimer = true;
                 gameStateManager.removeState(GameStateManager.QUIZ);

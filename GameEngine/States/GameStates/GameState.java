@@ -1,6 +1,7 @@
 package GameEngine.States.GameStates;
 
 import GameEngine.Graphics.AssetManager;
+import GameEngine.Graphics.GameBoardAnimation;
 import GameEngine.States.GameStateManager;
 import GameEngine.States.State;
 import GameEngine.Util.Game.GameBoard;
@@ -10,17 +11,20 @@ import java.awt.*;
 public class GameState extends State {
 
     GameBoard gameBoard;
+    GameBoardAnimation gba;
 
     public GameState(GameStateManager gameStateManager, AssetManager assetManager, GameBoard gameBoard)
     {
         super(gameStateManager, assetManager);
 
         this.gameBoard = gameBoard;
+        this.gba = new GameBoardAnimation(gameStateManager);
     }
 
     @Override
     public void update()
     {
+        gba.Update();
         gameBoard.update();
 
         if (gameBoard.boxX() != -1 && gameBoard.boxY() != -1)
@@ -93,6 +97,7 @@ public class GameState extends State {
     @Override
     public void render(Graphics2D g)
     {
+        gba.Render(g);
         gameBoard.render(g);
         gameBoard.UI(g);
     }

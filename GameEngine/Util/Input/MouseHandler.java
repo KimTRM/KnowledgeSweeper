@@ -32,7 +32,8 @@ public class MouseHandler implements MouseMotionListener, MouseListener {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent e)
+    {
         gameStateManager.Input();
     }
 
@@ -64,7 +65,8 @@ public class MouseHandler implements MouseMotionListener, MouseListener {
     }
 
     @Override
-    public void mouseMoved(MouseEvent e) {
+    public void mouseMoved(MouseEvent e)
+    {
         mouseX = e.getX();
         mouseY = e.getY();
     }

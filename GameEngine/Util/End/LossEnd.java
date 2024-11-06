@@ -18,8 +18,9 @@ public class LossEnd
     public boolean inRestart, inBacktoStart;
     public void update()
     {
-        inRestart = assetManager.inButtonCollision(bButtonX, bButtonY, 100, 100, 200, 200, false, "Restart");
-        inBacktoStart = assetManager.inButtonCollision(aButtonX, aButtonY, 100, 100, 200, 200, false, "Back to Start");
+
+        inRestart = assetManager.ArrowCollision(bButtonX, bButtonY, 28, 15, 90, 90, false);
+        inBacktoStart = assetManager.ArrowCollision(aButtonX, aButtonY, 28,15, 90, 90, false);
     }
 
     public void input()
@@ -47,31 +48,29 @@ public class LossEnd
         g.drawImage(assetManager.Defeat, 130, 50, 1000, 500, null);
 
         // -- RESTART GAME --
-        g.drawImage(assetManager.Restart, bButtonX, bButtonY, 200, 200, null);
+        g.drawImage(AssetManager.Reset, bButtonX, bButtonY, 80, 80, null);
 
-        // -- BACK TO MAIN --
-        g.drawImage(assetManager.Button, aButtonX, aButtonY, 200, 200, null);
-        assetManager.PrintText("GO BACK\nTO START", aButtonX + 40, aButtonY + 105,33, 40, true, g);
+        // -- HOME BUTTON --
+        g.drawImage(AssetManager.Home, aButtonX, aButtonY, 80,80,null);
 
-        // -- HOVER --
+
         if (inRestart)
         {
-            g.drawImage(assetManager.Restart, bButtonX -10 , bButtonY - 10, 220, 220, null);
-
+            g.drawImage(AssetManager.Reset, bButtonX - 5, bButtonY -5, 90, 90, null);
         }
+
         if (inBacktoStart)
         {
-            g.drawImage(assetManager.Button, aButtonX - 10, aButtonY - 10, 220, 220, null);
-            assetManager.PrintText("GO BACK\nTO START", aButtonX + 30, aButtonY + 105,38, 45, true, g);
+            g.drawImage(AssetManager.Home, aButtonX - 5, aButtonY -5, 90,90,null);
         }
 
     }
 
     // BACK TO GAME
-    int bButtonX = 400;
-    int bButtonY = 500;
+    int bButtonX = 500;
+    int bButtonY = 550;
 
     // BACK TO MAIN
-    int aButtonX = 650;
-    int aButtonY = 500;
+    int aButtonX = 660;
+    int aButtonY = 550;
 }

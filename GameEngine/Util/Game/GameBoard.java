@@ -1,6 +1,7 @@
 package GameEngine.Util.Game;
 
 import GameEngine.Graphics.AssetManager;
+import GameEngine.States.GameStateManager;
 
 import java.awt.*;
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.Random;
 public class GameBoard
 {
     AssetManager assetManager;
+    GameStateManager gsm;
 
     public int[][] mines;
     public int[][] neighbours;
@@ -20,14 +22,15 @@ public class GameBoard
     Random rend = new Random();
     Date startDate = new Date();
 
-    public GameBoard(AssetManager assetManager)
+    public GameBoard(AssetManager assetManager, GameStateManager gsm)
     {
         this.assetManager = assetManager;
+        this.gsm = gsm;
 
         BombRand();
     }
 
-    int spacing = 2;
+    int spacing = 0;
     int boxSize = 70;
 
     int paddingX;
@@ -38,8 +41,8 @@ public class GameBoard
     int NumBomb;
     public int TotalBoxes;
     public String Difficulty;
-    int rButtonX = 550;
-    int rButtonY = -10;
+    int rButtonX = 1120;
+    int rButtonY = 650;
     public int life = 3;
 
     int timeX = 1090;
@@ -118,15 +121,15 @@ public class GameBoard
         init();
     }
     public void HardMode() {
-        cols = 15;
-        paddingX = 1;
+        cols = 14;
+        paddingX = 2;
 
         rows = 7;
         paddingY = 1;
 
         NumBomb = 25;
         TotalBoxes = 84;
-        TimerSeconds = 16;
+        TimerSeconds = 21;
 
         xLoc = 50;
         yLoc = 20;
@@ -139,13 +142,16 @@ public class GameBoard
         AlreadyRevealed = new boolean[cols][rows];
         revealed = new boolean[cols][rows];
         flagged = new boolean[cols][rows];
+
+        bombStatus = new int[cols][rows];
+        BombChanged = new boolean[cols][rows];
     }
 
     boolean Reset;
     public boolean Home;
     public void update()
     {
-        Reset = assetManager.StartCollision(rButtonX, rButtonY - 20, 190, 170, false, "Reset");
+        Reset = assetManager.ArrowCollision(rButtonX, rButtonY, 28, 15, 70, 70, false);
         Home = assetManager.ArrowCollision(1228, 665, 0,0, 70, 70, false);
     }
 
@@ -153,6 +159,13 @@ public class GameBoard
         if (isActive) {
             int x = boxX();
             int y = boxY();
+
+            // -- RESETS THE BOARD --
+            if (Reset) {
+                System.out.println("Reset");
+                ResetAll(TotalBoxes);
+
+            }
 
             if (x != -1 && y != -1 && !AlreadyRevealed[x][y])
             {
@@ -163,7 +176,8 @@ public class GameBoard
                 {
                     // -- REVEAL BOX --
                     if (!flagged[x][y] && !AlreadyRevealed[x][y] && !revealed[x][y]) {
-                        if (assetManager.getButton() == 1) {
+                        if (assetManager.getButton() == 1)
+                        {
                             revealed[x][y] = true;
                             AlreadyRevealed[x][y] = true;
 
@@ -188,11 +202,6 @@ public class GameBoard
                         assetManager.playSE(6);
                     }
                 }
-
-                // -- RESETS THE BOARD --
-                if (Reset) {
-                    ResetAll(TotalBoxes);
-                }
             }
         }
     }
@@ -205,31 +214,41 @@ public class GameBoard
             {
                 int boxX = spacing + i * 80;
                 int boxY = spacing + j * 80 + 80;
-                g.drawImage(AssetManager.Grass, boxX, boxY, boxSize, boxSize, null);
+
+
+                g.drawImage(AssetManager.Grass,  boxX, boxY, 80 - 2 * spacing, 80 - 2 * spacing, null);
 
                 if (revealed[i][j])
                 {
-                    g.drawImage(AssetManager.RevGrass,boxX, boxY, boxSize, boxSize, null);
+                    g.drawImage(AssetManager.RevGrass,boxX, boxY, 80 - 2 * spacing, 80 - 2 * spacing, null);
 
                     // - NEIGHBOURS -
                     if (mines[i][j] == 0 && neighbours[i][j] != 0)
                     {
+                        g.drawImage(AssetManager.NumBlock,boxX, boxY, 80 - 2 * spacing, 80 - 2 * spacing, null);
                         setNeighbourColor(g, neighbours[i][j]);
                         g.setFont(g.getFont().deriveFont(Font.BOLD, 40F));
-                        g.drawString(Integer.toString(neighbours[i][j]), boxX + 25, boxY + 50);
+                        g.drawString(Integer.toString(neighbours[i][j]), boxX + 30, boxY + 55);
                     }
 
                     // - BOMBS -
                     else if (mines[i][j] == 1)
                     {
-                        g.drawImage(AssetManager.Bomb, boxX, boxY, 70 - 2 * spacing, 70 - 2 * spacing, null);
+                        if (bombStatus[i][j] == DEACTIVATED)
+                        {
+                            g.drawImage(AssetManager.Bomb, boxX , boxY - 2, 80 - 2 * spacing, 80 - 2 * spacing, null);
+                        }
+                        if (bombStatus[i][j] == ACTIVATED)
+                        {
+                            g.drawImage(AssetManager.BombExploded, boxX, boxY, 80 - 2 * spacing, 80 - 2 * spacing, null);
+                        }
                     }
                 }
 
                 // - FLAGGED -
                 if (flagged[i][j])
                 {
-                    g.drawImage(AssetManager.ActiveBlock, boxX, boxY, boxSize, boxSize, null);
+                    g.drawImage(AssetManager.ActiveBlock, boxX, boxY, 80 - 2 * spacing, 80 - 2 * spacing, null);
                 }
 
                 // - HOVER CURSOR -
@@ -237,14 +256,14 @@ public class GameBoard
                 {
                     if (boxX() == i && boxY() == j)
                     {
-                        g.drawImage(AssetManager.Select, boxX, boxY, boxSize, boxSize, null);
+                        g.drawImage(AssetManager.Select, boxX, boxY, 80 - 2 * spacing, 80 - 2 * spacing, null);
                     }
                 }
             }
         }
 
         // -- RESTART GAME --
-        g.drawImage(AssetManager.Restart, rButtonX, rButtonY, 190, 170, null);
+        g.drawImage(AssetManager.Reset, rButtonX, rButtonY, 60, 60, null);
 
         // -- HOME BUTTON --
         g.drawImage(AssetManager.Home, 1200,650, 60,60,null);
@@ -254,7 +273,7 @@ public class GameBoard
         {
             if (Reset)
             {
-                g.drawImage(AssetManager.Restart, rButtonX - 10, rButtonY - 5, 210, 185, null);
+                g.drawImage(AssetManager.Reset, rButtonX - 5, rButtonY -5, 70, 70, null);
             }
 
             if (Home)
@@ -263,6 +282,33 @@ public class GameBoard
             }
         }
     }
+
+    public static int ACTIVATED = 1;
+    public static int DEACTIVATED = 0;
+
+    int[][] bombStatus;
+    boolean[][] BombChanged;
+    public void BombStatus()
+    {
+        for (int i = paddingX; i < cols; i++)
+        {
+            for (int j = paddingY; j < rows; j++)
+            {
+                if (mines[i][j] == 1 && revealed[i][j] && gsm.quizManager.AnswerWrong && !BombChanged[i][j])
+                {
+                    bombStatus[i][j] = ACTIVATED;
+                    BombChanged[i][j] = true;
+                }
+
+                if (mines[i][j] == 1 && revealed[i][j] && gsm.quizManager.AnswerCorrect && !BombChanged[i][j])
+                {
+                    bombStatus[i][j] = DEACTIVATED;
+                    BombChanged[i][j] = true;
+                }
+            }
+        }
+    }
+
 
     public boolean bomb;
     public boolean Name;
@@ -470,7 +516,6 @@ public class GameBoard
             }
         }
     }
-
 
     public boolean victory () {
         return totalBoxesRevealed() >= TotalBoxes - totalMines();

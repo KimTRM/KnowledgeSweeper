@@ -15,7 +15,7 @@ public class LeaderboardState extends State
 
     boolean Exit;
     int sButtonX = 1160;
-    int sButtonY = 60;
+    int sButtonY = 90;
 
     @Override
     public void update()
@@ -36,7 +36,6 @@ public class LeaderboardState extends State
            gameStateManager.gameBoard.Name = false;
 
            Reset();
-           gameStateManager.leaderboard.Active = false;
 
            gameStateManager.removeState(GameStateManager.GAME);
            gameStateManager.removeState(GameStateManager.QUIZ);

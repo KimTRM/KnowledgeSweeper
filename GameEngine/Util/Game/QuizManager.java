@@ -17,8 +17,11 @@ public class QuizManager {
     public String A, B, C, D;
     public String correctAnswer;
     public boolean Science, History, Math;
+    boolean Easy, Normal, Hard;
 
-    File[] file = new File[8];
+    String subject;
+
+    File[] file = new File[10];
     List<Question> questionList = new ArrayList<>();
     public int x;
 
@@ -44,34 +47,93 @@ public class QuizManager {
         switch (Subject)
         {
             case "Science":
+                subject = "Science";
+                break;
+            case "History":
+                subject = "History";
+                break;
+            case "Math":
+                subject = "Math";
+                break;
+        }
+    }
+
+    public void ChangeQuestion()
+    {
+        Easy = gameBoard.Easy;
+        Normal = gameBoard.Medium;
+        Hard = gameBoard.Hard;
+
+        switch (subject)
+        {
+            case "Science":
                 if (Science && !History && !Math)
                 {
-                    file[0] = new File("GameEngine/Graphics/res/files/Subjects/FILEQUESTIONSCIENCE.txt");
-                    getQuestion(0);
+                    if (Easy)
+                    {
+                        file[0] = new File("GameEngine/Graphics/res/files/Questions/Science/Easy.txt");
+                        getQuestion(0);
+                    }
+                    if(Normal)
+                    {
+                        file[1] = new File("GameEngine/Graphics/res/files/Questions/Science/Normal.txt");
+                        getQuestion(1);
+                    }
+                    if(Hard)
+                    {
+                        file[2] = new File("GameEngine/Graphics/res/files/Questions/Science/Hard.txt");
+                        getQuestion(2);
+                    }
                 }
                 break;
             case "History":
                 if (History && !Science && !Math)
                 {
-                    file[1] = new File("GameEngine/Graphics/res/files/Subjects/FILEQUESTIONHISTORY.txt");
-                    getQuestion(1);
+                    if (Easy)
+                    {
+                        file[3] = new File("GameEngine/Graphics/res/files/Questions/History/Easy.txt");
+                        getQuestion(3);
+                    }
+                    if(Normal)
+                    {
+                        file[4] = new File("GameEngine/Graphics/res/files/Questions/History/Normal.txt");
+                        getQuestion(4);
+                    }
+                    if(Hard)
+                    {
+                        file[5] = new File("GameEngine/Graphics/res/files/Questions/History/Hard.txt");
+                        getQuestion(5);
+                    }
                 }
                 break;
             case "Math":
                 if (Math && !Science && !History)
                 {
-                    file[2] = new File("GameEngine/Graphics/res/files/Subjects/FILEQUESTIONSMATH.txt");
-                    getQuestion(2);
+                    if (Easy)
+                    {
+                        file[6] = new File("GameEngine/Graphics/res/files/Questions/Math/Easy.txt");
+                        getQuestion(6);
+                    }
+                    if(Normal)
+                    {
+                        file[7] = new File("GameEngine/Graphics/res/files/Questions/Math/Normal.txt");
+                        getQuestion(7);
+                    }
+                    if(Hard)
+                    {
+                        file[8] = new File("GameEngine/Graphics/res/files/Questions/Math/Hard.txt");
+                        getQuestion(8);
+                    }
                 }
                 break;
         }
     }
 
-    public void getQuestion(int x) {
+    public void getQuestion(int files) {
         Scanner inputFile;
 
         try {
-            inputFile = new Scanner(file[x]);
+            inputFile = new Scanner(file[files]);
 
             StringBuilder fileContent = new StringBuilder();
 
@@ -157,12 +219,14 @@ public class QuizManager {
                 AnswerWrong = false;
                 assetManager.playSE(2);
 
+
             }
             else
             {
                 AnswerCorrect = false;
                 AnswerWrong = true;
                 assetManager.playSE(3);
+
             }
         }
 
@@ -236,14 +300,14 @@ public class QuizManager {
         assetManager.TextBox(TextBoxDX, TextBoxDY, 300, 150, g);
 
         g.setColor(Color.BLACK);
-        int Qy = 180;
+        int Qy = 140;
         int Qx = 320;
         assetManager.PrintTexts(Question, Qx, Qy, 48, 55, false, g);
 
-        assetManager.PrintTexts(A, TextBoxAX + 25, TextBoxAY + 80, 48, 30, false, g);
-        assetManager.PrintTexts(B, TextBoxBX + 25, TextBoxBY + 80, 48, 30, false, g);
-        assetManager.PrintTexts(C, TextBoxCX + 25, TextBoxCY + 80, 48, 30, false, g);
-        assetManager.PrintTexts(D, TextBoxDX + 25, TextBoxDY + 80, 48, 30, false, g);
+        assetManager.PrintTexts(A, TextBoxAX + 25, TextBoxAY + 80, 36, 30, false, g);
+        assetManager.PrintTexts(B, TextBoxBX + 25, TextBoxBY + 80, 36, 30, false, g);
+        assetManager.PrintTexts(C, TextBoxCX + 25, TextBoxCY + 80, 36, 30, false, g);
+        assetManager.PrintTexts(D, TextBoxDX + 25, TextBoxDY + 80, 36, 30, false, g);
 
         // -- HOVER (A,B,C,D) --
         if (inQA)
@@ -273,7 +337,7 @@ public class QuizManager {
         }
 
 //        g.drawImage(AssetManager.Timer, Qx - 20, Qy - 120, 80, 80, null);
-        assetManager.PrintTexts(String.valueOf(seconds), Qx, Qy - 60, 48, 55, false, g);
+        assetManager.PrintTexts(String.valueOf(seconds), Qx - 30, Qy - 50, 48, 55, false, g);
     }
 
     public boolean Stoptimer;
