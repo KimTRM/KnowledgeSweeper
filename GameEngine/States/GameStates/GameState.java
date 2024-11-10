@@ -19,6 +19,8 @@ public class GameState extends State {
 
         this.gameBoard = gameBoard;
         this.gba = new GameBoardAnimation(gameStateManager);
+
+        gameBoard.Num = gameBoard.totalMines();
     }
 
     @Override

@@ -169,13 +169,9 @@ public class GameBoard
 
             if (x != -1 && y != -1 && !AlreadyRevealed[x][y])
             {
-                if (assetManager.getButton() == 3 && !revealed[x][y]) {
-                    flagged[x][y] = !flagged[x][y] && !AlreadyRevealed[x][y];
-                }
-                else
-                {
+
                     // -- REVEAL BOX --
-                    if (!flagged[x][y] && !AlreadyRevealed[x][y] && !revealed[x][y]) {
+                    if (!flagged[x][y] && !revealed[x][y]) {
                         if (assetManager.getButton() == 1)
                         {
                             revealed[x][y] = true;
@@ -191,12 +187,20 @@ public class GameBoard
                             }
                         }
                     }
+
+                if (assetManager.getButton() == 3 && !revealed[x][y]) {
+                    flagged[x][y] = !flagged[x][y] && !AlreadyRevealed[x][y];
                 }
 
                 // -- SETS THE BOMB STATUS --
                 if (revealed[x][y]) {
                     if (mines[x][y] == 1) {
                         assetManager.playSE(7);
+
+                        if (Num > 0) {
+                            Num--;
+                        }
+
                         bomb = true;
                     } else {
                         assetManager.playSE(6);
@@ -309,7 +313,6 @@ public class GameBoard
         }
     }
 
-
     public boolean bomb;
     public boolean Name;
 
@@ -417,7 +420,7 @@ public class GameBoard
         // -- NUMBER OF BOMBS --
         g.drawImage(AssetManager.Bomb, 10, 637, 80, 80, null);
         g.setColor(new Color(227, 133, 73));
-        assetManager.PrintTexts(String.valueOf(totalMines()), 90, 710, 0, 80, false, g);
+        assetManager.PrintTexts(String.valueOf(NumberOfBombs()), 90, 710, 0, 80, false, g);
 
         // -- TIMER --
         g.drawImage(AssetManager.Button, 1050, -10, 190, 170, null);
@@ -461,6 +464,13 @@ public class GameBoard
 
     }
 
+
+    public int Num;
+    int NumberOfBombs()
+    {
+        return Num;
+    }
+
     // ----- CHECKS THE STATUS OF THE GAME -----
     public int totalMines ()
     {
@@ -500,7 +510,12 @@ public class GameBoard
         revealed[x][y] = true;
 
         // If the cell has no neighboring mines, we need to reveal adjacent cells
-        if (neighbours[x][y] == 0) {
+        if (neighbours[x][y] == 0 ) {
+
+            if (flagged[x][y]) {
+                flagged[x][y] = false;
+            }
+
             for (int i = -1; i <= 1; i++) {
                 for (int j = -1; j <= 1; j++) {
                     int newX = x + i;
@@ -577,6 +592,7 @@ public class GameBoard
     public boolean isBomb()
     {
         return bomb;
+
     }
 
     // ----- CHECKS EVERY DIRECTION -----
