@@ -170,23 +170,23 @@ public class GameBoard
             if (x != -1 && y != -1 && !AlreadyRevealed[x][y])
             {
 
-                    // -- REVEAL BOX --
-                    if (!flagged[x][y] && !revealed[x][y]) {
-                        if (assetManager.getButton() == 1)
-                        {
-                            revealed[x][y] = true;
-                            AlreadyRevealed[x][y] = true;
+                // -- REVEAL BOX --
+                if (!flagged[x][y] && !revealed[x][y]) {
+                    if (assetManager.getButton() == 1)
+                    {
+                        revealed[x][y] = true;
+                        AlreadyRevealed[x][y] = true;
 
-                            // Call the recursive reveal if the clicked box is empty
-                            if (mines[x][y] == 0 && neighbours[x][y] == 0) {
-                                revealAdjacentEmpty(x, y);
-                            }
+                        // Call the recursive reveal if the clicked box is empty
+                        if (mines[x][y] == 0 && neighbours[x][y] == 0) {
+                            revealAdjacentEmpty(x, y);
+                        }
 
-                            if (victory()) {
-                                assetManager.playSE(4);
-                            }
+                        if (victory()) {
+                            assetManager.playSE(4);
                         }
                     }
+                }
 
                 if (assetManager.getButton() == 3 && !revealed[x][y]) {
                     flagged[x][y] = !flagged[x][y] && !AlreadyRevealed[x][y];

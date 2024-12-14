@@ -64,10 +64,10 @@ public class GameState extends State {
 
         // -- ACTIVATES THE GAME BOARD INPUTS --
         gameBoard.isActive = !gameStateManager.isStateActive(GameStateManager.QUIZ)
-                          && !gameStateManager.isStateActive(GameStateManager.ENDING)
-                          && !gameStateManager.isStateActive(GameStateManager.GAMEOPTIONS)
-                          && !gameStateManager.isStateActive(GameStateManager.STARTING)
-                          && !gameStateManager.isStateActive(GameStateManager.PLAYERNAME);
+                && !gameStateManager.isStateActive(GameStateManager.ENDING)
+                && !gameStateManager.isStateActive(GameStateManager.GAMEOPTIONS)
+                && !gameStateManager.isStateActive(GameStateManager.STARTING)
+                && !gameStateManager.isStateActive(GameStateManager.PLAYERNAME);
     }
 
     @Override
