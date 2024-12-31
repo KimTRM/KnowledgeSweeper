@@ -359,8 +359,8 @@ public class Leaderboard
 
     public void render(Graphics2D g)
     {
-        g.drawImage(assetManager.Shade, 0, 0, assetManager.getScreenWidth(), assetManager.getScreenHeight(), null);
-        g.drawImage(assetManager.Leaderboard, 20, 50, 1240, 620, null);
+        g.drawImage(AssetManager.Shade, 0, 0, assetManager.getScreenWidth(), assetManager.getScreenHeight(), null);
+        g.drawImage(AssetManager.Leaderboard, 20, 50, 1240, 620, null);
 
         assetManager.Button(380, -40, 550, 250, g);
         g.drawImage(AssetManager.Star, 600, -20, 110, 110, null);

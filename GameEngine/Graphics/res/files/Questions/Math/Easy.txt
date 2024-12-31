@@ -39,7 +39,7 @@ B
                9
                10
                15
-A
+B
 /// 
     What is the parameter of a\n      rectangle with a length\n   of 6cm and a width of 3cm?
             12cm
