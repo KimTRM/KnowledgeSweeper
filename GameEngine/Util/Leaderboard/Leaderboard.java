@@ -2,7 +2,6 @@ package GameEngine.Util.Leaderboard;
 
 import GameEngine.Graphics.AssetManager;
 import GameEngine.States.GameStateManager;
-
 import java.awt.*;
 import java.io.*;
 import java.util.*;
@@ -428,11 +427,11 @@ public class Leaderboard
     void Medals(Player player,Graphics2D g) {
         if (players.indexOf(player) == 0)
         {
-            g.drawImage(assetManager.Medal1, 188, 200, 40, 40, null);
+            g.drawImage(AssetManager.Medal1, 188, 200, 40, 40, null);
         }
         if (players.indexOf(player) == 1)
         {
-            g.drawImage(assetManager.Medal2, 188, 240, 40, 40, null);
+            g.drawImage(AssetManager.Medal2, 188, 240, 40, 40, null);
         }
         if (players.indexOf(player) == 2)
         {

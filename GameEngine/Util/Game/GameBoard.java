@@ -323,7 +323,7 @@ public class GameBoard
     {
         int mx = assetManager.gamePanel.getMX();
 
-        for (int i = paddingX; i < cols; i	++)
+        for (int i = paddingX; i < cols; i++)
         {
             int boxLeft = spacing + i * BoxWidth;
             int boxRight = boxLeft + BoxHeight - spacing;

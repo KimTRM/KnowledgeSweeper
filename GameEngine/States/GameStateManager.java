@@ -26,6 +26,7 @@ public class GameStateManager
     public Leaderboard leaderboard;
     public PlayerName player;
 
+
     // ------ SCENES ------
     public State[] states;
     public static final int STARTING = 0;
